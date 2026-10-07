@@ -111,6 +111,7 @@ export function AnswerInput({ value, onChange, onSubmit, kind, vars, disabled, s
           spellCheck={false}
           disabled={disabled}
           value={value}
+          maxLength={120}
           placeholder={kind === 'roots' ? 'например: 3; -3' : 'например: (x+1)/(x-2)'}
           aria-label="Ответ"
           onChange={(e) => onChange(e.target.value)}

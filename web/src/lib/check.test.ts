@@ -55,6 +55,18 @@ describe('эквивалентность выражений', () => {
   })
 })
 
+describe('мусорный ввод не роняет проверку', () => {
+  const garbage = ['()', '1/0', '2^^3', '😀', 'x=', 'sqrt(-1)', '1e400', '9^9^9^9', 'x/', '/x', ')(', '((((((((((x', 'a'.repeat(300), '1,2,3', ';;;', 'x;y', 'abs(', 'sin(x)', '5!', 'x%2', '[1,2]', '{a:1}', 'x:=3']
+  for (const g of garbage) {
+    it(JSON.stringify(g).slice(0, 30), () => {
+      for (const kind of ['expr', 'roots'] as const) {
+        expect(() => checkAnswer(g, kind === 'expr' ? '(x+1)/x' : '3; -3', kind, { reduce: true })).not.toThrow()
+      }
+      expect(checkAnswer(g, '(x+1)/x', 'expr', { reduce: true }).status).not.toBe('correct')
+    })
+  }
+})
+
 describe('наборы чисел', () => {
   it('разбор', () => {
     expect(parseNumberSet('3; -3')).toEqual([-3, 3])
