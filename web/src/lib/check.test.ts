@@ -13,6 +13,9 @@ describe('normalizeInput', () => {
     expect(normalizeInput('(a−b)÷2')).toBe('(a-b)/2')
     expect(normalizeInput('√2')).toBe('sqrt(2)')
     expect(normalizeInput('0,5x')).toBe('0.5x')
+    expect(normalizeInput('x(y(z))')).toBe('x*(y*(z))')
+    expect(normalizeInput('sqrt(x)(x+1)')).toBe('sqrt(x)*(x+1)')
+    expect(normalizeInput('a(b+c)')).toBe('a*(b+c)')
   })
 })
 

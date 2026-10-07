@@ -34,6 +34,6 @@ export function normalizeInput(raw: string): string {
   })
   // x(x+3) и (a-b)(a+b) — это произведения, а не вызов функции
   s = s.replace(/\)\s*\(/g, ')*(')
-  s = s.replace(/(?<![a-z])([a-z])\s*\(/g, '$1*(')
+  s = s.replace(/(^|[^a-z])([a-z])(?=\s*\()/g, '$1$2*')
   return s
 }

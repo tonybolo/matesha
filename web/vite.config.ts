@@ -42,6 +42,7 @@ export default defineConfig({
       workbox: { globPatterns: ['**/*.{js,css,html,png,woff2}'] },
     }),
   ],
+  build: { target: ['es2020', 'safari14', 'chrome87', 'firefox78'] },
   server: { fs: { allow: ['..'] } },
   test: { environment: 'node', include: ['src/**/*.test.ts'] },
 })
