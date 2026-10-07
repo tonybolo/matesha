@@ -1,0 +1,499 @@
+id: '02-add-sub-fractions'
+order: 2
+title: Сумма и разность дробей
+summary: Складываем и вычитаем дроби с одинаковыми и разными знаменателями, приводим к общему знаменателю.
+passScore: 4
+
+steps:
+  - id: s1
+    title: Одинаковые знаменатели
+    blocks:
+      - type: text
+        text: >-
+          Дроби с одинаковыми знаменателями складывают и вычитают как обыкновенные:
+          **знаменатель оставляем, числители складываем (или вычитаем)**.
+      - type: math
+        tex: '\frac{a}{c}+\frac{b}{c}=\frac{a+b}{c},\qquad \frac{a}{c}-\frac{b}{c}=\frac{a-b}{c}'
+      - type: viz
+        id: bars
+        preset: addSame
+      - type: example
+        title: Сложение
+        steps:
+          - '$\frac{3x}{x+2}+\frac{5}{x+2}=\frac{3x+5}{x+2}$'
+      - type: note
+        kind: warn
+        text: >-
+          При вычитании числитель второй дроби берём **в скобки**: минус относится ко всему числителю,
+          а не только к первому слагаемому.
+      - type: example
+        title: Вычитание
+        steps:
+          - '$\frac{5x-1}{x^2}-\frac{2x-3}{x^2}=\frac{5x-1-(2x-3)}{x^2}$'
+          - 'Раскрываем скобки (меняем знаки): $\frac{5x-1-2x+3}{x^2}=\frac{3x+2}{x^2}$'
+
+  - id: s2
+    title: Не забудь сократить
+    blocks:
+      - type: text
+        text: 'После сложения или вычитания проверь, нельзя ли сократить результат. Часто можно.'
+      - type: example
+        title: Разность с сокращением
+        steps:
+          - '$\frac{x^2}{x-3}-\frac{9}{x-3}=\frac{x^2-9}{x-3}$'
+          - 'Раскладываем числитель: $\frac{(x-3)(x+3)}{x-3}$'
+          - 'Сокращаем на $(x-3)$: $x+3$'
+
+  - id: s3
+    title: Разные знаменатели — идея
+    blocks:
+      - type: text
+        text: >-
+          Если знаменатели разные, дроби нельзя просто сложить: сначала нужно привести их
+          к **общему знаменателю**. Инструмент тот же — основное свойство дроби.
+      - type: example
+        title: Знакомый пример
+        steps:
+          - '$\frac{1}{2}+\frac{1}{3}$ — знаменатели $2$ и $3$ разные.'
+          - 'Общий знаменатель $6$: $\frac{1}{2}=\frac{3}{6}$, $\ \frac{1}{3}=\frac{2}{6}$.'
+          - '$\frac{3}{6}+\frac{2}{6}=\frac{5}{6}$'
+      - type: text
+        text: 'Посмотри, как две дроби «режутся» на одинаковые доли:'
+      - type: viz
+        id: commonDenominator
+        preset: numbers
+
+  - id: s4
+    title: Алгоритм
+    blocks:
+      - type: example
+        title: Как привести дроби к общему знаменателю
+        steps:
+          - 'Разложи знаменатели на множители.'
+          - 'Общий знаменатель — произведение всех **различных** множителей, каждый берём в наибольшей степени.'
+          - 'Для каждой дроби найди **дополнительный множитель**: общий знаменатель делим на её знаменатель.'
+          - 'Умножь числитель каждой дроби на её дополнительный множитель.'
+          - 'Сложи (вычти) числители. Не забудь скобки при вычитании.'
+          - 'Сократи результат, если возможно.'
+      - type: note
+        kind: tip
+        text: 'Выражения в скобках не раскрывай, пока не нашёл общий знаменатель: так легче видеть общие множители.'
+
+  - id: s5
+    title: Примеры
+    blocks:
+      - type: example
+        title: Знаменатели без общих множителей
+        steps:
+          - '$\frac{1}{x}+\frac{1}{y}$: общий знаменатель $xy$.'
+          - 'Дополнительные множители: $y$ и $x$.'
+          - '$\frac{y}{xy}+\frac{x}{xy}=\frac{x+y}{xy}$'
+      - type: example
+        title: Две разные скобки
+        steps:
+          - '$\frac{3}{x-2}-\frac{2}{x+2}$: общий знаменатель $(x-2)(x+2)$.'
+          - '$\frac{3(x+2)-2(x-2)}{(x-2)(x+2)}$'
+          - 'Числитель: $3x+6-2x+4=x+10$. Знаменатель: $x^2-4$.'
+          - 'Ответ: $\frac{x+10}{x^2-4}$'
+      - type: example
+        title: Знаменатель раскладывается
+        steps:
+          - '$\frac{2}{x^2-9}+\frac{1}{x+3}$: разложим $x^2-9=(x-3)(x+3)$.'
+          - 'Общий знаменатель $(x-3)(x+3)$. Дополнительный множитель второй дроби — $(x-3)$.'
+          - '$\frac{2+(x-3)}{(x-3)(x+3)}=\frac{x-1}{x^2-9}$'
+      - type: viz
+        id: commonDenominator
+        preset: algebra
+
+  - id: s6
+    title: Противоположные знаменатели и целая часть
+    blocks:
+      - type: text
+        text: >-
+          Если знаменатели **противоположны** (например, $x-2$ и $2-x$), поменяй знак у одного из них:
+          $\frac{1}{2-x}=-\frac{1}{x-2}$.
+      - type: example
+        title: Противоположные знаменатели
+        steps:
+          - '$\frac{3}{x-2}+\frac{1}{2-x}=\frac{3}{x-2}-\frac{1}{x-2}$'
+          - '$=\frac{3-1}{x-2}=\frac{2}{x-2}$'
+      - type: text
+        text: 'Целое выражение можно представить дробью со знаменателем $1$.'
+      - type: example
+        title: Целое и дробь
+        steps:
+          - '$x-\frac{1}{x}=\frac{x}{1}-\frac{1}{x}=\frac{x\cdot x}{x}-\frac{1}{x}$'
+          - '$=\frac{x^2-1}{x}$'
+
+check:
+  - id: q1
+    kind: input
+    step: 0
+    prompt: 'Сложите дроби: $\dfrac{2a}{7}+\dfrac{3a}{7}$.'
+    answerKind: expr
+    answer: '5a/7'
+    reduce: true
+    explain: 'Знаменатель оставляем, числители складываем: $\frac{2a+3a}{7}=\frac{5a}{7}$.'
+  - id: q2
+    kind: choice
+    step: 0
+    prompt: 'Выполните вычитание: $\dfrac{5}{x}-\dfrac{x+1}{x}$.'
+    options:
+      - '$\dfrac{4-x}{x}$'
+      - '$\dfrac{4+x}{x}$'
+      - '$\dfrac{5-x+1}{x}$'
+      - '$\dfrac{x-4}{x}$'
+    correct: 0
+    explain: 'Числитель второй дроби берём в скобки: $5-(x+1)=5-x-1=4-x$.'
+  - id: q3
+    kind: choice
+    step: 3
+    prompt: 'Какой общий знаменатель удобно взять для дробей $\dfrac{1}{x}$ и $\dfrac{1}{x+1}$?'
+    options:
+      - '$x$'
+      - '$x+1$'
+      - '$x(x+1)$'
+      - '$x+x+1$'
+    correct: 2
+    explain: 'Знаменатели $x$ и $x+1$ не имеют общих множителей, поэтому общий знаменатель — их произведение $x(x+1)$.'
+  - id: q4
+    kind: input
+    step: 2
+    prompt: 'Найдите сумму: $\dfrac{1}{2}+\dfrac{1}{3}$.'
+    answerKind: expr
+    answer: '5/6'
+    explain: 'Общий знаменатель $6$: $\frac{3}{6}+\frac{2}{6}=\frac{5}{6}$.'
+  - id: q5
+    kind: input
+    step: 3
+    prompt: 'Сложите дроби: $\dfrac{1}{x}+\dfrac{1}{3x}$.'
+    answerKind: expr
+    answer: '4/(3x)'
+    reduce: true
+    explain: 'Общий знаменатель $3x$, дополнительный множитель первой дроби $3$: $\frac{3}{3x}+\frac{1}{3x}=\frac{4}{3x}$.'
+
+tasks:
+  # ---------- Уровень 1 ----------
+  - id: t2-01
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '3/x+5/x'
+    answerKind: expr
+    answer: '8/x'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Знаменатели одинаковые: сложи числители.'
+    solution:
+      - '$\frac{3+5}{x}=\frac{8}{x}$'
+  - id: t2-02
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '(2a+1)/(a+3)+(a+5)/(a+3)'
+    answerKind: expr
+    answer: '(3a+6)/(a+3)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Сложи числители, приведи подобные слагаемые.'
+    solution:
+      - '$\frac{2a+1+a+5}{a+3}=\frac{3a+6}{a+3}$'
+  - id: t2-03
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '(5x-1)/x^2-(2x-3)/x^2'
+    answerKind: expr
+    answer: '(3x+2)/x^2'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Второй числитель бери в скобки: минус относится ко всему числителю.'
+    solution:
+      - '$\frac{5x-1-(2x-3)}{x^2}$'
+      - '$=\frac{5x-1-2x+3}{x^2}=\frac{3x+2}{x^2}$'
+  - id: t2-04
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '(7y+2)/(y-1)-(y+8)/(y-1)'
+    answerKind: expr
+    answer: '6'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'После вычитания числитель можно разложить и сократить.'
+    solution:
+      - '$\frac{7y+2-(y+8)}{y-1}=\frac{6y-6}{y-1}$'
+      - '$=\frac{6(y-1)}{y-1}=6$'
+  - id: t2-05
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: 'a/(a-b)-b/(a-b)'
+    answerKind: expr
+    answer: '1'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Вычти числители и посмотри, что получилось.'
+    solution:
+      - '$\frac{a-b}{a-b}=1$'
+  - id: t2-06
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: 'x^2/(x-2)-4/(x-2)'
+    answerKind: expr
+    answer: 'x+2'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Числитель $x^2-4$ — разность квадратов.'
+    solution:
+      - '$\frac{x^2-4}{x-2}=\frac{(x-2)(x+2)}{x-2}=x+2$'
+  - id: t2-07
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '1/x+1/y'
+    answerKind: expr
+    answer: '(x+y)/(xy)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель — произведение знаменателей.'
+    solution:
+      - 'Общий знаменатель $xy$; дополнительные множители $y$ и $x$.'
+      - '$\frac{y}{xy}+\frac{x}{xy}=\frac{x+y}{xy}$'
+  - id: t2-08
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '2/a+3/(2a)'
+    answerKind: expr
+    answer: '7/(2a)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель $2a$. Какой дополнительный множитель у первой дроби?'
+    solution:
+      - 'Дополнительный множитель первой дроби — $2$.'
+      - '$\frac{4}{2a}+\frac{3}{2a}=\frac{7}{2a}$'
+  - id: t2-09
+    level: 1
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: 'x/3+x/6'
+    answerKind: expr
+    answer: 'x/2'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель $6$. Не забудь сократить.'
+    solution:
+      - '$\frac{2x}{6}+\frac{x}{6}=\frac{3x}{6}=\frac{x}{2}$'
+
+  # ---------- Уровень 2 ----------
+  - id: t2-10
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '3/(x-2)-2/(x+2)'
+    answerKind: expr
+    answer: '(x+10)/(x^2-4)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель $(x-2)(x+2)$. Первый числитель умножь на $(x+2)$, второй на $(x-2)$.'
+    solution:
+      - '$\frac{3(x+2)-2(x-2)}{(x-2)(x+2)}$'
+      - '$=\frac{3x+6-2x+4}{x^2-4}=\frac{x+10}{x^2-4}$'
+  - id: t2-11
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '1/(a-1)+1/(a+1)'
+    answerKind: expr
+    answer: '2a/(a^2-1)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель $(a-1)(a+1)=a^2-1$.'
+    solution:
+      - '$\frac{(a+1)+(a-1)}{(a-1)(a+1)}=\frac{2a}{a^2-1}$'
+  - id: t2-12
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '2/(x^2-9)+1/(x+3)'
+    answerKind: expr
+    answer: '(x-1)/(x^2-9)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Разложи $x^2-9$ на множители: общий знаменатель уже есть.'
+    solution:
+      - '$x^2-9=(x-3)(x+3)$'
+      - '$\frac{2+(x-3)}{(x-3)(x+3)}=\frac{x-1}{x^2-9}$'
+  - id: t2-13
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: 'a/(a+b)+b/(a-b)'
+    answerKind: expr
+    answer: '(a^2+b^2)/(a^2-b^2)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель $(a+b)(a-b)$.'
+    solution:
+      - '$\frac{a(a-b)+b(a+b)}{(a+b)(a-b)}$'
+      - '$=\frac{a^2-ab+ab+b^2}{a^2-b^2}=\frac{a^2+b^2}{a^2-b^2}$'
+  - id: t2-14
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '3/(x-2)+1/(2-x)'
+    answerKind: expr
+    answer: '2/(x-2)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Знаменатели противоположны: $\frac{1}{2-x}=-\frac{1}{x-2}$.'
+    solution:
+      - '$\frac{3}{x-2}-\frac{1}{x-2}=\frac{2}{x-2}$'
+  - id: t2-15
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: 'x/(x-y)+y/(y-x)'
+    answerKind: expr
+    answer: '1'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Сделай знаменатели одинаковыми: $y-x=-(x-y)$.'
+    solution:
+      - '$\frac{x}{x-y}-\frac{y}{x-y}=\frac{x-y}{x-y}=1$'
+  - id: t2-16
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '1/(2x)+1/(3x)'
+    answerKind: expr
+    answer: '5/(6x)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель $6x$.'
+    solution:
+      - '$\frac{3}{6x}+\frac{2}{6x}=\frac{5}{6x}$'
+  - id: t2-17
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: 'x-1/x'
+    answerKind: expr
+    answer: '(x^2-1)/x'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Представь $x$ как $\frac{x}{1}$ и приведи к знаменателю $x$.'
+    solution:
+      - '$x=\frac{x\cdot x}{x}=\frac{x^2}{x}$'
+      - '$\frac{x^2}{x}-\frac{1}{x}=\frac{x^2-1}{x}$'
+  - id: t2-18
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '3-(x-1)/(x+1)'
+    answerKind: expr
+    answer: '(2x+4)/(x+1)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Запиши $3$ как дробь со знаменателем $x+1$. Числитель второй дроби — в скобки.'
+    solution:
+      - '$3=\frac{3(x+1)}{x+1}$'
+      - '$\frac{3x+3-(x-1)}{x+1}=\frac{3x+3-x+1}{x+1}=\frac{2x+4}{x+1}$'
+  - id: t2-19
+    level: 2
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: 'a+1/(a-1)'
+    answerKind: expr
+    answer: '(a^2-a+1)/(a-1)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Приведи $a$ к знаменателю $a-1$.'
+    solution:
+      - '$a=\frac{a(a-1)}{a-1}$'
+      - '$\frac{a^2-a+1}{a-1}$'
+
+  # ---------- Уровень 3 ----------
+  - id: t2-20
+    level: 3
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной несократимой дробью: {expr}'
+    expr: '1/(x^2-x)+1/(x^2+x)'
+    answerKind: expr
+    answer: '2/(x^2-1)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Разложи оба знаменателя на множители: $x(x-1)$ и $x(x+1)$.'
+    solution:
+      - '$x^2-x=x(x-1)$, $\ x^2+x=x(x+1)$'
+      - 'Общий знаменатель $x(x-1)(x+1)$'
+      - '$\frac{(x+1)+(x-1)}{x(x-1)(x+1)}=\frac{2x}{x(x-1)(x+1)}$'
+      - 'Сокращаем на $x$: $\frac{2}{x^2-1}$'
+  - id: t2-21
+    level: 3
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной несократимой дробью: {expr}'
+    expr: '(x+1)/(x-1)-(x-1)/(x+1)'
+    answerKind: expr
+    answer: '4x/(x^2-1)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель $(x-1)(x+1)$. В числителе будет разность квадратов двучленов.'
+    solution:
+      - '$\frac{(x+1)^2-(x-1)^2}{(x-1)(x+1)}$'
+      - '$(x+1)^2-(x-1)^2=x^2+2x+1-x^2+2x-1=4x$'
+      - 'Ответ: $\frac{4x}{x^2-1}$'
+  - id: t2-22
+    level: 3
+    source: авторская
+    prompt: 'Упростите выражение: {expr}'
+    expr: '1/(a-b)-1/(a+b)-2b/(a^2-b^2)'
+    answerKind: expr
+    answer: '0'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель всех трёх дробей — $a^2-b^2$.'
+    solution:
+      - '$\frac{(a+b)-(a-b)-2b}{a^2-b^2}$'
+      - '$=\frac{a+b-a+b-2b}{a^2-b^2}=\frac{0}{a^2-b^2}=0$'
+  - id: t2-23
+    level: 3
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '2/(x-3)-(x+3)/(x^2-6x+9)'
+    answerKind: expr
+    answer: '(x-9)/(x-3)^2'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Знаменатель второй дроби — $(x-3)^2$. Он же — общий знаменатель.'
+    solution:
+      - '$\frac{2(x-3)-(x+3)}{(x-3)^2}$'
+      - '$=\frac{2x-6-x-3}{(x-3)^2}=\frac{x-9}{(x-3)^2}$'
+  - id: t2-24
+    level: 3
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: '1/(x-y)+1/(x+y)+2x/(x^2+y^2)'
+    answerKind: expr
+    answer: '4x^3/(x^4-y^4)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Сначала сложи первые две дроби, потом прибавь третью.'
+    solution:
+      - '$\frac{1}{x-y}+\frac{1}{x+y}=\frac{2x}{x^2-y^2}$'
+      - '$\frac{2x}{x^2-y^2}+\frac{2x}{x^2+y^2}=\frac{2x(x^2+y^2)+2x(x^2-y^2)}{(x^2-y^2)(x^2+y^2)}$'
+      - '$=\frac{4x^3}{x^4-y^4}$'
+  - id: t2-25
+    level: 3
+    source: авторская
+    prompt: 'Выполните действие и запишите ответ одной дробью: {expr}'
+    expr: 'a/(a^2-4)-1/(a-2)'
+    answerKind: expr
+    answer: '-2/(a^2-4)'
+    reduce: true
+    verify: {op: simplify}
+    hint: 'Общий знаменатель $a^2-4=(a-2)(a+2)$.'
+    solution:
+      - '$\frac{a-(a+2)}{(a-2)(a+2)}=\frac{-2}{a^2-4}$'
