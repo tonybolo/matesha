@@ -7,7 +7,7 @@ export type Block =
   | { type: 'text'; text: Rich }
   | { type: 'math'; tex: string }
   | { type: 'note'; kind: 'warn' | 'tip'; text: Rich }
-  | { type: 'example'; title?: Rich; steps: Rich[] }
+  | { type: 'example'; title?: Rich; steps: Rich[]; reveal?: boolean }
   | VizBlock
 
 export type Step = { id: string; title: string; blocks: Block[] }
