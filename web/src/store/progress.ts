@@ -17,6 +17,8 @@ export type ExamResult = {
   at: string
   seed: number
   difficulty: 'basic' | 'advanced'
+  /** Формат работы: class, kr3, kr4, kr5 (в старых записях нет). */
+  kind?: string
   score: number
   total: number
   /** Идентификаторы заданий с ошибками. */

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { topics } from '../content/load'
 import { checkAnswer, type CheckResult } from '../lib/check'
-import { buildExam, EXAM_MINUTES, gradeLabel, type Difficulty, type ExamItem, type ExamVariant } from '../lib/exam'
+import { buildExam, formatOf, FORMATS, gradeLabel, type Difficulty, type ExamItem, type ExamKind, type ExamVariant } from '../lib/exam'
 import { hrefTopic } from '../route'
 import { recordExam, type ExamResult } from '../store/progress'
 import { useProgress } from '../store/useProgress'
@@ -15,6 +15,7 @@ type Saved = {
   phase: 'run' | 'result'
   seed: number
   difficulty: Difficulty
+  kind: ExamKind
   timer: boolean
   startedAt: number
   finishedAt?: number
@@ -25,7 +26,9 @@ type Saved = {
 function load(): Saved | null {
   try {
     const raw = localStorage.getItem(KEY)
-    return raw ? (JSON.parse(raw) as Saved) : null
+    if (!raw) return null
+    const s = JSON.parse(raw) as Saved
+    return { ...s, kind: FORMATS.some((f) => f.id === s.kind) ? s.kind : 'class' }
   } catch {
     return null
   }
@@ -58,7 +61,6 @@ function ItemView({ item, value, onChange, onNext }: { item: ExamItem; value: st
     <div className="task">
       <div className="task-head">
         <span className="badge">{item.label})</span>
-        <span className="muted">{item.groupTitle}</span>
       </div>
       <p className="q-prompt">
         <Rich text={taskPrompt(t)} />
@@ -93,7 +95,9 @@ function Result({ exam, saved, onAgain }: { exam: ExamVariant; saved: Saved; onA
         {score} из {items.length}
       </p>
       <p>{gradeLabel(score, items.length)}</p>
-      <p className="muted">Вариант № {exam.seed} · время {mmss(seconds)}</p>
+      <p className="muted">
+        {formatOf(exam.kind).title} · вариант № {exam.seed} · время {mmss(seconds)}
+      </p>
       <ol className="exam-review">
         {graded.map(({ it, res }) => {
           const ok = res.status === 'correct'
@@ -181,11 +185,12 @@ export function Exam() {
   const { update } = useProgress()
   const [saved, setSaved] = useState<Saved | null>(() => load())
   const [difficulty, setDifficulty] = useState<Difficulty>('basic')
+  const [kind, setKind] = useState<ExamKind>('class')
   const [timer, setTimer] = useState(true)
   const [now, setNow] = useState(() => Date.now())
   const recorded = useRef(false)
 
-  const exam = useMemo(() => (saved ? buildExam(topics, saved.seed, saved.difficulty) : null), [saved?.seed, saved?.difficulty]) // eslint-disable-line react-hooks/exhaustive-deps
+  const exam = useMemo(() => (saved ? buildExam(topics, saved.seed, saved.difficulty, saved.kind) : null), [saved?.seed, saved?.difficulty, saved?.kind]) // eslint-disable-line react-hooks/exhaustive-deps
   const items = useMemo(() => exam?.sections.flatMap((s) => s.items) ?? [], [exam])
 
   const persist = useCallback((next: Saved | null) => {
@@ -203,6 +208,7 @@ export function Exam() {
         at: new Date().toISOString(),
         seed: cur.seed,
         difficulty: cur.difficulty,
+        kind: cur.kind,
         score: graded.filter((g) => g.res.status === 'correct').length,
         total: all.length,
         wrong: graded.filter((g) => g.res.status !== 'correct').map((g) => g.it.id),
@@ -225,14 +231,15 @@ export function Exam() {
     return () => window.clearInterval(id)
   }, [running])
 
-  const left = saved?.timer ? EXAM_MINUTES * 60 - Math.floor((now - saved.startedAt) / 1000) : null
+  const minutes = formatOf(saved?.kind ?? kind).minutes
+  const left = saved?.timer ? minutes * 60 - Math.floor((now - saved.startedAt) / 1000) : null
   useEffect(() => {
     if (saved && running && left !== null && left <= 0) finish(saved)
   }, [left, running, saved, finish])
 
   const start = () => {
     recorded.current = false
-    persist({ phase: 'run', seed: 1000 + Math.floor(Math.random() * 9000), difficulty, timer, startedAt: Date.now(), idx: 0, answers: {} })
+    persist({ phase: 'run', seed: 1000 + Math.floor(Math.random() * 9000), difficulty, kind, timer, startedAt: Date.now(), idx: 0, answers: {} })
     setNow(Date.now())
   }
 
@@ -247,21 +254,30 @@ export function Exam() {
           <h1>Контрольная</h1>
         </header>
         <div className="card">
-          <p>
-            Как в классной работе: <strong>3 задания по 2 примера</strong>. Сравнить числа, упростить выражения, решить квадратные уравнения.
-            Подсказок во время работы нет, ответы и разбор ошибок — в конце. Каждый раз новый вариант.
-          </p>
+          <fieldset className="seg formats" aria-label="Формат работы">
+            <legend className="muted">Какую работу писать</legend>
+            {FORMATS.map((f) => (
+              <label key={f.id} className={kind === f.id ? 'on' : ''}>
+                <input type="radio" name="kind" checked={kind === f.id} onChange={() => setKind(f.id)} />
+                <span>
+                  <strong>{f.title}</strong>
+                  <span className="muted">{f.blurb}</span>
+                </span>
+              </label>
+            ))}
+          </fieldset>
+          <p className="muted">Подсказок во время работы нет, ответы и разбор ошибок — в конце. Каждый раз новый вариант.</p>
           <fieldset className="seg" aria-label="Сложность">
             <legend className="muted">Сложность</legend>
             <label className={difficulty === 'basic' ? 'on' : ''}>
-              <input type="radio" name="d" checked={difficulty === 'basic'} onChange={() => setDifficulty('basic')} /> Как в тетради
+              <input type="radio" name="d" checked={difficulty === 'basic'} onChange={() => setDifficulty('basic')} /> Как в тетради и книге
             </label>
             <label className={difficulty === 'advanced' ? 'on' : ''}>
               <input type="radio" name="d" checked={difficulty === 'advanced'} onChange={() => setDifficulty('advanced')} /> Посложнее
             </label>
           </fieldset>
           <label className="check-line">
-            <input type="checkbox" checked={timer} onChange={(e) => setTimer(e.target.checked)} /> С таймером ({EXAM_MINUTES} минут)
+            <input type="checkbox" checked={timer} onChange={(e) => setTimer(e.target.checked)} /> С таймером ({minutes} минут)
           </label>
           <button className="btn primary" onClick={start}>
             Начать контрольную ▸
@@ -305,7 +321,7 @@ export function Exam() {
         ))}
       </div>
       <h2 className="step-title">
-        <span className="step-num">Задание {exam.sections.indexOf(section) + 1}</span>
+        <span className="step-num">{section.kicker}</span>
         {section.title}
       </h2>
       <ItemView

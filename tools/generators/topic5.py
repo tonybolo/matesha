@@ -287,7 +287,7 @@ def g_wrd(rng: random.Random, level: int):
                     str(per), "expr", "Пусть стороны $px$ и $qx$ (в нужном отношении), диагональ найдём по теореме Пифагора.",
                     [f"Пусть стороны ${p}x$ и ${q}x$. По теореме Пифагора $({p}x)^2+({q}x)^2={diag}^2$.", f"${p * p + q * q}x^2={diag * diag}$, $x^2={k * k}$, $x={k}$ (длина положительна).",
                      f"Стороны ${p * k}$ см и ${q * k}$ см, периметр $2({p * k}+{q * k})={per}$. **Ответ: {per}.**"],
-                    ["word-to-equation", "pythagoras", "quad-incomplete"])
+                    ["word-to-equation", "pythagoras", "quad-incomplete"], tag="rect")
     if kind == "peri":
         u, v = rng.randint(6, 25), rng.randint(2, 20)
         if u <= v:
