@@ -182,6 +182,21 @@ describe('удобство ввода', () => {
     expect(checkAnswer('2 1/3', '7/3', 'roots').message).toBe(MESSAGES.mixed)
     expect(checkAnswer('7/3', '7/3', 'expr').status).toBe('correct')
   })
+  it('единицы измерения в конце числового ответа не мешают', () => {
+    expect(checkAnswer('68 см', '68', 'expr').status).toBe('correct')
+    expect(checkAnswer('19 кустов', '19', 'expr').status).toBe('correct')
+    expect(checkAnswer('x = 7 м', '7', 'expr').status).toBe('correct')
+    expect(checkAnswer('69 см', '68', 'expr').status).toBe('wrong')
+  })
+  it('sqrt3 без скобок и ± в корнях', () => {
+    expect(checkAnswer('5sqrt3', '5*sqrt(3)', 'expr').status).toBe('correct')
+    expect(checkAnswer('sqrt 12', '2*sqrt(3)', 'expr').status).toBe('correct')
+    expect(parseNumberSet('±3')).toEqual([-3, 3])
+    expect(parseNumberSet('x = ±2')).toEqual([-2, 2])
+    expect(checkAnswer('±3', '3; -3', 'roots').status).toBe('correct')
+    expect(checkAnswer('(-3±√7)/2', '(-3+sqrt(7))/2; (-3-sqrt(7))/2', 'roots').status).toBe('correct')
+    expect(checkAnswer('x=±3', '3', 'roots').status).toBe('wrong')
+  })
   it('в ответах с буквами метка не отрезается', () => {
     expect(checkAnswer('x+1', 'x+1', 'expr').status).toBe('correct')
     expect(checkAnswer('2x', '2*x', 'expr').status).toBe('correct')

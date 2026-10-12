@@ -39,6 +39,8 @@ const MIXED = /\d+\s+\d+\s*\/\s*\d+/
 const ANSWER_WORD = /^\s*(?:ответ|корни|корень)\s*[:=]?\s*/i
 /** «x = », «x₁ = », «x1 = », «p = » перед числом. */
 const VAR_LABEL = /^\s*[a-zа-я][₁₂₃₄0-9]?\s*(?:=|∈)\s*/i
+/** Единицы в конце числового ответа: «68 см», «19 кустов». */
+const UNITS = /\s*(?:см|дм|мм|км|м|кг|г|мин|ч|шт|кустов|рядов|чисел)\.?\s*$/i
 
 /** Разбор «2; -3» в отсортированный список чисел. null — не разобралось. */
 export function parseNumberSet(raw: string): number[] | null {
@@ -46,7 +48,9 @@ export function parseNumberSet(raw: string): number[] | null {
   s = s.replace(ANSWER_WORD, '').replace(VAR_LABEL, '').replace(/[{}]/g, '')
   if (!s) return null
   if (EMPTY_SET.test(s)) return []
-  const parts = s.includes(';') ? s.split(';') : s.split(/\s*(?:,|\sи\s|\sили\s)\s*/)
+  const rawParts = s.includes(';') ? s.split(';') : s.split(/\s*(?:,|\sи\s|\sили\s)\s*/)
+  // «±3» и «(-3±√7)/2» — это два значения сразу
+  const parts = rawParts.flatMap((p) => (/[±∓]/.test(p) ? [p.replace(/[±∓]/, '+'), p.replace(/[±∓]/, '-')] : [p]))
   const out: number[] = []
   for (const part of parts) {
     const t = part.replace(VAR_LABEL, '').trim()
@@ -137,7 +141,7 @@ export function checkAnswer(input: string, answer: string, kind: AnswerKind, opt
   const ref = tryParse(answer)
   if (!ref) throw new Error(`Некорректный эталонный ответ: ${answer}`)
   // Если ответ — число, «x = 5» и «ответ: 5» принимаем как 5.
-  const text = ref.vars.length === 0 ? input.replace(ANSWER_WORD, '').replace(VAR_LABEL, '') : input
+  const text = ref.vars.length === 0 ? input.replace(ANSWER_WORD, '').replace(VAR_LABEL, '').replace(UNITS, '') : input
   if (MIXED.test(text)) return { status: 'invalid', message: MESSAGES.mixed }
   const user: Parsed | null = tryParse(text)
   if (!user) return { status: 'invalid', message: MESSAGES.invalid }

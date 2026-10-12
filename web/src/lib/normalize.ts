@@ -25,6 +25,8 @@ export function normalizeInput(raw: string): string {
   s = s.replace(/[÷:]/g, '/')
   s = s.replace(/²/g, '^2').replace(/³/g, '^3')
   s = s.replace(/√\s*\(/g, 'sqrt(')
+  // «sqrt3» и «sqrt 3» без скобок
+  s = s.replace(/sqrt\s*(\d+(?:[.,]\d+)?)/g, 'sqrt($1)')
   s = s.replace(/√\s*(\d+(?:\.\d+)?|[a-z])/g, 'sqrt($1)')
   s = s.replace(/(\d),(\d)/g, '$1.$2')
   // ab → a b (слитное умножение), но sqrt/abs остаются функциями
