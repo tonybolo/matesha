@@ -8,6 +8,9 @@ import { BlockView } from './Blocks'
 export function Lesson({ topic, step }: { topic: Topic; step: number }) {
   const { update } = useProgress()
   const last = topic.steps.length - 1
+  // Шаги со звёздочкой в конце урока необязательные: закончить урок можно на последнем обычном шаге.
+  let lastRequired = last
+  while (lastRequired > 0 && topic.steps[lastRequired].title.trim().startsWith('⭐')) lastRequired--
   const idx = Math.min(step, last)
   const cur = topic.steps[idx]
 
@@ -46,11 +49,12 @@ export function Lesson({ topic, step }: { topic: Topic; step: number }) {
         <button className="btn ghost" disabled={idx === 0} onClick={() => toStep(idx - 1)}>
           ◂ Назад
         </button>
-        {idx < last ? (
-          <button className="btn primary" onClick={() => toStep(idx + 1)}>
-            Дальше ▸
+        {idx < last && (
+          <button className={`btn ${idx >= lastRequired ? 'ghost' : 'primary'}`} onClick={() => toStep(idx + 1)}>
+            {idx >= lastRequired ? '⭐ Дальше: со звёздочкой ▸' : 'Дальше ▸'}
           </button>
-        ) : (
+        )}
+        {idx >= lastRequired && (
           <button
             className="btn primary"
             onClick={() => {
