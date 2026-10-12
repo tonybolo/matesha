@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { topics } from '../content/load'
 import { hrefTopic } from '../route'
-import { setName, topicStats } from '../store/progress'
+import { skillInfo } from '../content/skills'
+import { emptyState, setName, topicStats, weakSkills } from '../store/progress'
 import { useProgress } from '../store/useProgress'
 import { Rich } from './Tex'
 
@@ -62,6 +63,8 @@ export function Home() {
           </div>
         </div>
       </header>
+      <ExamCard />
+      <WeakSpots />
       <ul className="topic-list">
         {topics.map((t) => {
           const p = state.topics[t.id]
@@ -100,7 +103,7 @@ export function Home() {
           onClick={() => {
             if (window.confirm('Сбросить имя и весь прогресс на этом устройстве?')) {
               localStorage.removeItem('matesha.v1')
-              update(() => ({ v: 1, name: '', xp: 0, streak: 0, lastDay: null, topics: {} }))
+              update(() => emptyState())
             }
           }}
         >
@@ -108,6 +111,53 @@ export function Home() {
         </button>
       </p>
     </main>
+  )
+}
+
+function ExamCard() {
+  const { state } = useProgress()
+  const last = state.exams[state.exams.length - 1]
+  return (
+    <a className="card exam-card" href="#/exam">
+      <div>
+        <h2>📝 Контрольная</h2>
+        <p className="muted">
+          Как в классной работе: сравнить, упростить, решить. Каждый раз новый вариант.
+          {last && (
+            <>
+              {' '}
+              Последний результат: <strong>{last.score} из {last.total}</strong>.
+            </>
+          )}
+        </p>
+      </div>
+      <span className="cta">Начать ▸</span>
+    </a>
+  )
+}
+
+function WeakSpots() {
+  const { state } = useProgress()
+  const weak = weakSkills(state).filter((w) => skillInfo(w.id))
+  if (weak.length === 0) return null
+  return (
+    <section className="card weak" aria-label="Что стоит повторить">
+      <h2>🎯 Что стоит повторить</h2>
+      <p className="muted">Здесь пока больше ошибок, чем успехов. Короткий урок поможет.</p>
+      <ul className="weak-list">
+        {weak.map((w) => {
+          const info = skillInfo(w.id)!
+          return (
+            <li key={w.id}>
+              <a href={hrefTopic(info.topic, 'learn', info.step)}>{info.title}</a>{' '}
+              <span className="muted">
+                (верно {w.ok}, ошибок {w.bad})
+              </span>
+            </li>
+          )
+        })}
+      </ul>
+    </section>
   )
 }
 

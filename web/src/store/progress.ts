@@ -11,6 +11,19 @@ export type TopicProgress = {
   tasks: Record<string, TaskState>
 }
 
+export type SkillStat = { ok: number; bad: number }
+
+export type ExamResult = {
+  at: string
+  seed: number
+  difficulty: 'basic' | 'advanced'
+  score: number
+  total: number
+  /** Идентификаторы заданий с ошибками. */
+  wrong: string[]
+  seconds: number
+}
+
 export type State = {
   v: 1
   name: string
@@ -18,6 +31,9 @@ export type State = {
   streak: number
   lastDay: string | null
   topics: Record<string, TopicProgress>
+  /** Сколько раз навык получился и не получился (основа поиска пробелов). */
+  skills: Record<string, SkillStat>
+  exams: ExamResult[]
 }
 
 export const emptyTopic = (): TopicProgress => ({
@@ -28,12 +44,12 @@ export const emptyTopic = (): TopicProgress => ({
   tasks: {},
 })
 
-export const emptyState = (): State => ({ v: 1, name: '', xp: 0, streak: 0, lastDay: null, topics: {} })
+export const emptyState = (): State => ({ v: 1, name: '', xp: 0, streak: 0, lastDay: null, topics: {}, skills: {}, exams: [] })
 
 /** Сколько заданий в группе считается «целью» по типу. */
 export const GROUP_GOAL = 8
 
-export const XP = { taskFirstTry: 10, taskLater: 5, checkPassed: 25, explainDone: 10 }
+export const XP = { taskFirstTry: 10, taskLater: 5, checkPassed: 25, explainDone: 10, examItem: 5, examPerfect: 20 }
 
 const dayKey = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 
@@ -78,9 +94,27 @@ export function recordCheck(s: State, topic: string, score: number, passScore: n
   return touchStreak({ ...next, xp: next.xp + (firstPass ? XP.checkPassed : 0) }, now)
 }
 
-export function recordAttempt(s: State, topic: string, taskId: string, correct: boolean, now?: Date): State {
-  const cur = s.topics[topic]?.tasks[taskId] ?? { attempts: 0, solved: false, firstTry: false, revealed: false }
-  if (cur.solved) return s
+function withSkills(s: State, skills: string[] | undefined, correct: boolean): State {
+  if (!skills?.length) return s
+  const next = { ...s.skills }
+  for (const id of skills) {
+    const cur = next[id] ?? { ok: 0, bad: 0 }
+    next[id] = correct ? { ...cur, ok: cur.ok + 1 } : { ...cur, bad: cur.bad + 1 }
+  }
+  return { ...s, skills: next }
+}
+
+export function recordAttempt(
+  s0: State,
+  topic: string,
+  taskId: string,
+  correct: boolean,
+  now?: Date,
+  skills?: string[],
+): State {
+  const cur = s0.topics[topic]?.tasks[taskId] ?? { attempts: 0, solved: false, firstTry: false, revealed: false }
+  const s = withSkills(s0, skills, correct)
+  if (cur.solved) return s0
   const attempts = cur.attempts + 1
   const solved = correct
   const firstTry = correct && attempts === 1 && !cur.revealed
@@ -93,6 +127,25 @@ export function markRevealed(s: State, topic: string, taskId: string): State {
   const cur = s.topics[topic]?.tasks[taskId] ?? { attempts: 0, solved: false, firstTry: false, revealed: false }
   if (cur.revealed || cur.solved) return s
   return withTopic(s, topic, (t) => ({ ...t, tasks: { ...t.tasks, [taskId]: { ...cur, revealed: true } } }))
+}
+
+export type WeakSkill = { id: string; ok: number; bad: number; share: number }
+
+/** Навыки, где ошибок заметно больше, чем успехов (не меньше 2 ошибок): что стоит повторить. */
+export function weakSkills(s: State, limit = 3): WeakSkill[] {
+  return Object.entries(s.skills)
+    .map(([id, v]) => ({ id, ok: v.ok, bad: v.bad, share: v.bad / Math.max(1, v.ok + v.bad) }))
+    .filter((w) => w.bad >= 2 && w.share >= 0.4)
+    .sort((a, b) => b.share - a.share || b.bad - a.bad)
+    .slice(0, limit)
+}
+
+export function recordExam(s: State, result: ExamResult, skillResults: { skills: string[]; correct: boolean }[], now?: Date): State {
+  let next = s
+  for (const r of skillResults) next = withSkills(next, r.skills, r.correct)
+  const gain = result.score * XP.examItem + (result.score === result.total ? XP.examPerfect : 0)
+  next = { ...next, exams: [...next.exams, result].slice(-30), xp: next.xp + gain }
+  return touchStreak(next, now)
 }
 
 export type TopicStats = {

@@ -109,4 +109,10 @@ export type Topic = {
   groups?: TaskGroup[]
 }
 
-export type TaskGroup = { id: string; title: string; hint?: string }
+export type TaskGroup = {
+  id: string
+  title: string
+  hint?: string
+  /** Шаг урока этой темы (с нуля), где объясняется этот тип заданий. */
+  lessonStep?: number
+}

@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 
 export type Tab = 'learn' | 'check' | 'train'
-export type Route = { name: 'home' } | { name: 'topic'; id: string; tab: Tab; step: number }
+export type Route = { name: 'home' } | { name: 'exam' } | { name: 'topic'; id: string; tab: Tab; step: number }
 
 export function parseHash(hash: string): Route {
   const [path, query = ''] = hash.replace(/^#/, '').split('?')
+  if (path === '/exam') return { name: 'exam' }
   const m = path.match(/^\/t\/([^/]+)(?:\/(learn|check|train))?$/)
   if (!m) return { name: 'home' }
   const params = new URLSearchParams(query)

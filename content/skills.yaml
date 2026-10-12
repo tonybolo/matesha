@@ -1,0 +1,30 @@
+# Навыки, которые нужны для задач. По ним приложение замечает слабые места и предлагает, что повторить.
+# topic/step — урок «на пальцах», где навык объясняется (step считается с нуля).
+sqrt-def:        {title: 'Что такое корень', topic: '03-roots-compare', step: 0}
+irrational:      {title: 'Иррациональные числа', topic: '03-roots-compare', step: 1}
+decimals:        {title: 'Корни из десятичных дробей', topic: '03-roots-compare', step: 1}
+compare-roots:   {title: 'Сравнение корней', topic: '03-roots-compare', step: 2}
+square-both:     {title: 'Сравнение через квадраты', topic: '03-roots-compare', step: 2}
+bring-under-root: {title: 'Внести множитель под корень', topic: '03-roots-compare', step: 3}
+negatives:       {title: 'Сравнение отрицательных чисел', topic: '03-roots-compare', step: 4}
+fractions:       {title: 'Действия с дробями', topic: '02-add-sub-fractions', step: 2}
+sqrt-frac:       {title: 'Корень из дроби', topic: '04-roots-simplify', step: 0}
+sqrt-prod:       {title: 'Корень из произведения', topic: '04-roots-simplify', step: 0}
+sqrt-ops:        {title: 'Действия с корнями', topic: '04-roots-simplify', step: 2}
+abs-sqrt:        {title: 'Корень из квадрата: √(a²) = |a|', topic: '04-roots-simplify', step: 1}
+sqrt-extract:    {title: 'Вынести множитель из-под корня', topic: '04-roots-simplify', step: 1}
+like-terms:      {title: 'Приведение подобных слагаемых', topic: '04-roots-simplify', step: 1}
+fsu:             {title: 'Формулы сокращённого умножения', topic: '04-roots-simplify', step: 3}
+rationalize:     {title: 'Избавиться от корня в знаменателе', topic: '04-roots-simplify', step: 4}
+cancel:          {title: 'Сокращение дробей', topic: '01-rational-fractions', step: 3}
+fraction-mult:   {title: 'Умножение и деление дробей', topic: '01-rational-fractions', step: 3}
+fraction-add:    {title: 'Сложение и вычитание дробей', topic: '02-add-sub-fractions', step: 3}
+formula:         {title: 'Выразить переменную из формулы', topic: '02-add-sub-fractions', step: 3}
+fraction-eq:     {title: 'Уравнение с дробью', topic: '05-quadratic', step: 3}
+quad-incomplete: {title: 'Неполные квадратные уравнения', topic: '05-quadratic', step: 0}
+factor-common:   {title: 'Вынесение общего множителя', topic: '05-quadratic', step: 1}
+discriminant:    {title: 'Дискриминант', topic: '05-quadratic', step: 3}
+quad-formula:    {title: 'Формула корней квадратного уравнения', topic: '05-quadratic', step: 3}
+word-to-equation: {title: 'Составить уравнение по задаче', topic: '05-quadratic', step: 5}
+pythagoras:      {title: 'Теорема Пифагора', topic: '05-quadratic', step: 5}
+vieta:           {title: 'Сумма и произведение корней', topic: '05-quadratic', step: 3}

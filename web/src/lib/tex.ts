@@ -20,6 +20,17 @@ function isNumberLike(n: MathNode): boolean {
   return false
 }
 
+function isRoot(n: MathNode): boolean {
+  const u = n as N
+  return u.type === 'FunctionNode' && ((u.fn as { name: string })?.name === 'sqrt' || (u.fn as { name: string })?.name === 'abs')
+}
+
+/** Последний множитель цепочки умножения. */
+function lastFactor(n: MathNode): MathNode {
+  const u = n as N
+  return u.type === 'OperatorNode' && u.fn === 'multiply' && u.args ? lastFactor(u.args[1]) : n
+}
+
 /** Собственный генератор TeX: дроби, степени, корни как в учебнике (mathjs.toTex выдаёт лишнее). */
 export function nodeToTex(node: MathNode): string {
   const n = node as N
@@ -49,7 +60,8 @@ export function nodeToTex(node: MathNode): string {
         case 'unaryPlus':
           return `+${nodeToTex(args[0])}`
         case 'multiply': {
-          const sep = isNumberLike(args[1]) ? '\\cdot ' : ''
+          // между числами и между двумя корнями ставим точку (√36·√81), иначе пишем слитно (3√2, ab)
+          const sep = isNumberLike(args[1]) || (isRoot(lastFactor(args[0])) && isRoot(args[1])) ? '\\cdot ' : ''
           return `${nodeToTex(args[0])}${sep}${nodeToTex(args[1])}`
         }
         case 'divide':

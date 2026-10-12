@@ -56,9 +56,13 @@ type Props = {
   items?: string[]
   /** Подсказка в пустом поле. */
   placeholder?: string
+  /** Не показывать кнопку отправки (режим контрольной: ответы сохраняются сразу). */
+  hideSubmit?: boolean
 }
 
-function CompareInput({ value, onChange, onSubmit, disabled, submitLabel }: Pick<Props, 'value' | 'onChange' | 'onSubmit' | 'disabled' | 'submitLabel'>) {
+type Sub = Pick<Props, 'value' | 'onChange' | 'onSubmit' | 'disabled' | 'submitLabel' | 'hideSubmit'>
+
+function CompareInput({ value, onChange, onSubmit, disabled, submitLabel, hideSubmit }: Sub) {
   return (
     <div className="answer-input">
       <div className="compare-row" role="group" aria-label="Знак сравнения">
@@ -68,14 +72,16 @@ function CompareInput({ value, onChange, onSubmit, disabled, submitLabel }: Pick
           </button>
         ))}
       </div>
-      <button className="btn primary" disabled={disabled || !value} onClick={onSubmit}>
-        {submitLabel}
-      </button>
+      {!hideSubmit && (
+        <button className="btn primary" disabled={disabled || !value} onClick={onSubmit}>
+          {submitLabel}
+        </button>
+      )}
     </div>
   )
 }
 
-function ChoiceInput({ value, onChange, onSubmit, disabled, submitLabel, options = [] }: Pick<Props, 'value' | 'onChange' | 'onSubmit' | 'disabled' | 'submitLabel' | 'options'>) {
+function ChoiceInput({ value, onChange, onSubmit, disabled, submitLabel, hideSubmit, options = [] }: Sub & Pick<Props, 'options'>) {
   return (
     <div className="answer-input">
       <div className="options">
@@ -85,14 +91,16 @@ function ChoiceInput({ value, onChange, onSubmit, disabled, submitLabel, options
           </button>
         ))}
       </div>
-      <button className="btn primary" disabled={disabled || value === ''} onClick={onSubmit}>
-        {submitLabel}
-      </button>
+      {!hideSubmit && (
+        <button className="btn primary" disabled={disabled || value === ''} onClick={onSubmit}>
+          {submitLabel}
+        </button>
+      )}
     </div>
   )
 }
 
-function OrderInput({ value, onChange, onSubmit, disabled, submitLabel, items = [] }: Pick<Props, 'value' | 'onChange' | 'onSubmit' | 'disabled' | 'submitLabel' | 'items'>) {
+function OrderInput({ value, onChange, onSubmit, disabled, submitLabel, hideSubmit, items = [] }: Sub & Pick<Props, 'items'>) {
   const chosen = value ? value.split(',').map(Number) : []
   const left = items.map((_, i) => i).filter((i) => !chosen.includes(i))
   const tex = (i: number) => toTex(items[i]) ?? items[i]
@@ -121,9 +129,11 @@ function OrderInput({ value, onChange, onSubmit, disabled, submitLabel, items = 
         <button className="btn ghost" disabled={disabled || chosen.length === 0} onClick={() => onChange('')}>
           Сбросить
         </button>
-        <button className="btn primary" disabled={disabled || chosen.length < items.length} onClick={onSubmit}>
-          {submitLabel}
-        </button>
+        {!hideSubmit && (
+          <button className="btn primary" disabled={disabled || chosen.length < items.length} onClick={onSubmit}>
+            {submitLabel}
+          </button>
+        )}
       </div>
     </div>
   )
@@ -136,7 +146,7 @@ export function AnswerInput(props: Props) {
   return <TextInput {...props} />
 }
 
-function TextInput({ value, onChange, onSubmit, kind, vars, disabled, submitLabel = 'Проверить', sqrtKey = false, placeholder }: Props) {
+function TextInput({ value, onChange, onSubmit, kind, vars, disabled, submitLabel = 'Проверить', sqrtKey = false, placeholder, hideSubmit }: Props) {
   const ref = useRef<HTMLInputElement>(null)
   const caret = useRef<number | null>(null)
 
@@ -209,9 +219,11 @@ function TextInput({ value, onChange, onSubmit, kind, vars, disabled, submitLabe
             if (e.key === 'Enter') onSubmit()
           }}
         />
-        <button className="btn primary" disabled={disabled || !value.trim()} onClick={onSubmit}>
-          {submitLabel}
-        </button>
+        {!hideSubmit && (
+          <button className="btn primary" disabled={disabled || !value.trim()} onClick={onSubmit}>
+            {submitLabel}
+          </button>
+        )}
       </div>
       <div className="keypad" aria-label="Клавиши для ввода">
         {keysFor(kind, vars, sqrtKey).map((k) => (

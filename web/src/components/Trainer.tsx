@@ -52,8 +52,8 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
     if (solved) return
     const r = checkAnswer(value, task.answer, task.answerKind, { reduce: task.reduce, radical: task.radical, items: task.items })
     setRes(r)
-    if (r.status === 'correct') update((s) => recordAttempt(s, topic.id, task.id, true))
-    else if (r.status === 'wrong') update((s) => recordAttempt(s, topic.id, task.id, false))
+    if (r.status === 'correct') update((s) => recordAttempt(s, topic.id, task.id, true, undefined, task.skills))
+    else if (r.status === 'wrong') update((s) => recordAttempt(s, topic.id, task.id, false, undefined, task.skills))
   }
 
   const showSolution = () => {

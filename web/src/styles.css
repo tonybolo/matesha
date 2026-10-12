@@ -281,6 +281,36 @@ input[type='text'], .input-row input, .welcome input {
 .num-table { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 6px; }
 .num-cell { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 4px 8px; text-align: center; }
 
+/* главная: контрольная и слабые места */
+.exam-card { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 12px; text-decoration: none; color: inherit; border-color: var(--accent); }
+.exam-card h2 { margin: 0 0 4px; }
+.exam-card p { margin: 0; }
+.exam-card:hover { background: var(--accent-soft); }
+.weak { margin-bottom: 12px; background: var(--warn-soft); border-color: transparent; }
+.weak h2 { margin-bottom: 4px; }
+.weak p { margin-bottom: 4px; }
+
+/* контрольная */
+.exam-bar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; gap: 8px; align-items: center; background: var(--bg); padding: 8px 0; margin-bottom: 6px; border-bottom: 1px solid var(--line); font-size: 0.92rem; }
+.timer { font-weight: 800; font-variant-numeric: tabular-nums; padding: 2px 10px; border-radius: 999px; background: var(--accent-soft); }
+.timer.low { background: var(--bad-soft); color: var(--bad); }
+.seg { border: 0; padding: 0; margin: 12px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.seg legend { padding: 0; margin-bottom: 6px; }
+.seg label { border: 2px solid var(--line); border-radius: 12px; padding: 10px 12px; cursor: pointer; background: var(--card); }
+.seg label.on { border-color: var(--accent); background: var(--accent-soft); }
+.seg input, .check-line input { margin-right: 6px; accent-color: var(--accent); }
+.check-line { display: block; margin: 8px 0 14px; }
+.exam-review { list-style: none; padding: 0; margin: 14px 0; text-align: left; display: grid; gap: 10px; }
+.review { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: var(--card); }
+.review.ok { border-color: var(--ok); }
+.review.bad { border-color: var(--bad); }
+.review-head { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
+.mark { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 800; flex: none; }
+.mark.ok { background: var(--ok); }
+.mark.bad { background: var(--bad); }
+.weak-list { margin: 6px 0 0; padding-left: 1.2em; text-align: left; }
+details summary { cursor: pointer; color: var(--accent); margin: 6px 0; }
+
 /* визуализации корней и парабол */
 .rug { width: 100%; max-width: 360px; height: auto; display: block; margin: 8px auto; color: var(--text); }
 .grid { stroke: var(--line); stroke-width: 1; }
