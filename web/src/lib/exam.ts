@@ -43,7 +43,10 @@ export const FORMATS: ExamFormat[] = [
         title: 'Сравните числа',
         slots: [
           { label: '1а', sources: [src(T3, 'cmp', [1], [2])] },
-          { label: '1б', sources: [src(T3, 'cmp', [2], [3]), src(T3, 'ord', [1, 2], [2, 3]), src(T3, 'rootnum', [2], [3])] },
+          {
+            label: '1б',
+            sources: [src(T3, 'cmp', [2], [3]), src(T3, 'ord', [1, 2], [2, 3]), src(T3, 'rootnum', [2], [3]), src(T3, 'o3dif', [], [3]), src(T3, 'o3int', [], [3]), src(T3, 'o3btw', [], [3])],
+          },
         ],
       },
       {
@@ -51,7 +54,10 @@ export const FORMATS: ExamFormat[] = [
         title: 'Упростите выражение',
         slots: [
           { label: '2а', sources: [src(T4, 'dec', [1], [2]), src(T4, 'val2', [1, 2], [2, 3]), src(T4, 'out', [1, 2], [2, 3])] },
-          { label: '2б', sources: [src(T4, 'dec', [2], [3]), src(T4, 'val', [1, 2], [2, 3]), src(T4, 'rat', [1, 2], [2, 3]), src(T4, 'sq', [1, 2], [2, 3])] },
+          {
+            label: '2б',
+            sources: [src(T4, 'dec', [2], [3]), src(T4, 'val', [1, 2], [2, 3]), src(T4, 'rat', [1, 2], [2, 3]), src(T4, 'sq', [1, 2], [2, 3]), src(T4, 'o4nest', [], [3]), src(T4, 'o4sum', [], [3]), src(T4, 'o4inv', [], [3])],
+          },
         ],
       },
       {
@@ -59,7 +65,10 @@ export const FORMATS: ExamFormat[] = [
         title: 'Решите квадратное уравнение',
         slots: [
           { label: '3а', sources: [src(T5, 'dsc', [2], [3]), src(T5, 'dsc', [1], [2])] },
-          { label: '3б', sources: [src(T5, 'dsc', [2], [3]), src(T5, 'brk', [1, 2], [2, 3]), src(T5, 'nbx', [2], [3]), src(T5, 'inc', [2], [3])] },
+          {
+            label: '3б',
+            sources: [src(T5, 'dsc', [2], [3]), src(T5, 'brk', [1, 2], [2, 3]), src(T5, 'nbx', [2], [3]), src(T5, 'inc', [2], [3]), src(T5, 'o5vie', [], [3]), src(T5, 'o5par', [], [3]), src(T5, 'o5bq', [], [3]), src(T5, 'o5two', [], [3])],
+          },
         ],
       },
     ],
@@ -84,8 +93,8 @@ export const FORMATS: ExamFormat[] = [
         kicker: 'Часть С',
         title: 'Задания посложнее',
         slots: [
-          { label: 'С1', sources: [src(T3, 'ord', [1], [2, 3])] },
-          { label: 'С2', sources: [src(T3, 'gsq', [1, 2], [2, 3])] },
+          { label: 'С1', sources: [src(T3, 'ord', [1], [2, 3]), src(T3, 'o3dif', [], [3])] },
+          { label: 'С2', sources: [src(T3, 'gsq', [1, 2], [2, 3]), src(T3, 'o3int', [], [3]), src(T3, 'o3btw', [], [3])] },
         ],
       },
     ],
@@ -105,13 +114,13 @@ export const FORMATS: ExamFormat[] = [
           { label: 'А3', sources: [src(T3, 'arg', [1], [2, 3])] },
         ],
       },
-      { kicker: 'Часть В', title: 'Упростите выражение', slots: [{ label: 'В1', sources: [src(T4, 'sq', [1], [2, 3])] }] },
+      { kicker: 'Часть В', title: 'Упростите выражение', slots: [{ label: 'В1', sources: [src(T4, 'sq', [1], [2, 3]), src(T4, 'o4nest', [], [3])] }] },
       {
         kicker: 'Часть С',
         title: 'Задания посложнее',
         slots: [
-          { label: 'С1', sources: [src(T4, 'conj', [1, 2], [2, 3])] },
-          { label: 'С2', sources: [src(T4, 'rat', [2, 3], [3])] },
+          { label: 'С1', sources: [src(T4, 'conj', [1, 2], [2, 3]), src(T4, 'o4inv', [], [3])] },
+          { label: 'С2', sources: [src(T4, 'rat', [2, 3], [3]), src(T4, 'o4sum', [], [3]), src(T4, 'o4tel', [], [3])] },
         ],
       },
     ],
@@ -131,13 +140,13 @@ export const FORMATS: ExamFormat[] = [
           { label: 'А3', sources: [src(T5, 'mk', [1, 2], [2, 3])] },
         ],
       },
-      { kicker: 'Часть В', title: 'Решите уравнение', slots: [{ label: 'В1', sources: [src(T5, 'dsc', [2], [3])] }] },
+      { kicker: 'Часть В', title: 'Решите уравнение', slots: [{ label: 'В1', sources: [src(T5, 'dsc', [2], [3]), src(T5, 'o5bq', [], [3])] }] },
       {
         kicker: 'Часть С',
         title: 'Задания посложнее',
         slots: [
-          { label: 'С1', sources: [src(T5, 'brk', [2], [3])] },
-          { label: 'С2', sources: [src(T5, 'wrd', [2], [], 'rect'), src(T5, 'wrd', [], [3])] },
+          { label: 'С1', sources: [src(T5, 'brk', [2], [3]), src(T5, 'o5vie', [], [3])] },
+          { label: 'С2', sources: [src(T5, 'wrd', [2], [], 'rect'), src(T5, 'wrd', [], [3]), src(T5, 'o5par', [], [3]), src(T5, 'o5two', [], [3])] },
         ],
       },
     ],

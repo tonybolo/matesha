@@ -351,6 +351,8 @@ details summary { cursor: pointer; color: var(--accent); margin: 6px 0; }
 .order-item { display: inline-flex; align-items: center; gap: 6px; }
 .lt { font-size: 1.3rem; font-weight: 700; color: var(--muted); }
 .groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin-bottom: 12px; }
+.groups-label { grid-column: 1 / -1; margin: 8px 0 0; font-weight: 600; color: var(--muted); }
+.group-lesson { margin: 0 0 10px; }
 .group { font: inherit; text-align: left; display: flex; flex-direction: column; justify-content: space-between; gap: 0; padding: 6px 10px; min-height: 48px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; font-size: 0.88rem; }
 .group.on { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
 .group.done { background: var(--ok-soft); border-color: var(--ok); }

@@ -162,12 +162,14 @@ export function topicStats(topic: Topic, p: TopicProgress | undefined): TopicSta
   let total = topic.tasks.length
   let solved = p ? topic.tasks.filter((t) => isSolved(t.id)).length : 0
   if (topic.groups?.length) {
-    // сгенерированные группы: цель — GROUP_GOAL заданий в каждой; решённые вне цели не накручивают процент
+    // сгенерированные группы: цель — GROUP_GOAL заданий в каждой; решённые вне цели не накручивают процент.
+    // Олимпиадные группы — бонус: в процент не входят.
     const own = topic.tasks.filter((t) => !t.group)
-    total = own.length + topic.groups.length * GROUP_GOAL
+    const regular = topic.groups.filter((g) => !g.star)
+    total = own.length + regular.length * GROUP_GOAL
     solved =
       own.filter((t) => isSolved(t.id)).length +
-      topic.groups.reduce((acc, g) => acc + Math.min(GROUP_GOAL, topic.tasks.filter((t) => t.group === g.id && isSolved(t.id)).length), 0)
+      regular.reduce((acc, g) => acc + Math.min(GROUP_GOAL, topic.tasks.filter((t) => t.group === g.id && isSolved(t.id)).length), 0)
   }
   // Шкала: объяснение 15%, проверка 15%, тренировка 70%
   const percent = Math.round(

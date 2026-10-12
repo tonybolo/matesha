@@ -106,7 +106,8 @@ describe('контент', () => {
           for (const g of topic.groups) {
             const ts = topic.tasks.filter((t) => t.group === g.id)
             expect(ts.length, g.id).toBeGreaterThanOrEqual(10)
-            for (const level of [1, 2, 3]) expect(ts.some((t) => t.level === level), `${g.id} ур.${level}`).toBe(true)
+            // олимпиадные группы целиком третьего уровня
+            for (const level of g.star ? [3] : [1, 2, 3]) expect(ts.some((t) => t.level === level), `${g.id} ур.${level}`).toBe(true)
           }
         } else {
           for (const level of [1, 2, 3]) expect(topic.tasks.filter((t) => t.level === level).length).toBeGreaterThan(3)

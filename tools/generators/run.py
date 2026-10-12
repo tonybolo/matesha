@@ -18,6 +18,14 @@ for name, topic_id in [("topic3", "03-roots-compare"), ("topic4", "04-roots-simp
     except ModuleNotFoundError:
         pass
 
+# олимпиадные группы («со звёздочкой»): все задания третьего уровня, в тренажёре идут после обычных групп
+OLYMPIAD = {}
+for name, topic_id in [("olymp3", "03-roots-compare"), ("olymp4", "04-roots-simplify"), ("olymp5", "05-quadratic")]:
+    try:
+        OLYMPIAD[topic_id] = __import__(name)
+    except ModuleNotFoundError:
+        pass
+
 
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
@@ -27,6 +35,11 @@ def main() -> None:
             rng = random.Random(f"{topic_id}/{gid}")
             groups.append({"id": gid, "title": title, "lessonStep": lesson})
             tasks += build_group(gen, rng, gid)
+        if topic_id in OLYMPIAD:
+            for gid, title, gen, lesson in OLYMPIAD[topic_id].OLYMPIAD:
+                rng = random.Random(f"{topic_id}/{gid}")
+                groups.append({"id": gid, "title": title, "lessonStep": lesson, "star": True})
+                tasks += build_group(gen, rng, gid, pattern=[3], label="⭐ Олимпиада")
         (OUT / f"{topic_id}.json").write_text(
             json.dumps({"topic": topic_id, "groups": groups, "tasks": tasks}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
         )

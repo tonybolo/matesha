@@ -273,7 +273,7 @@ export function Exam() {
               <input type="radio" name="d" checked={difficulty === 'basic'} onChange={() => setDifficulty('basic')} /> Как в тетради и книге
             </label>
             <label className={difficulty === 'advanced' ? 'on' : ''}>
-              <input type="radio" name="d" checked={difficulty === 'advanced'} onChange={() => setDifficulty('advanced')} /> Посложнее
+              <input type="radio" name="d" checked={difficulty === 'advanced'} onChange={() => setDifficulty('advanced')} /> Посложнее (с олимпиадными)
             </label>
           </fieldset>
           <label className="check-line">

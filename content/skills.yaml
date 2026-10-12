@@ -27,4 +27,8 @@ discriminant:    {title: 'Дискриминант', topic: '05-quadratic', step
 quad-formula:    {title: 'Формула корней квадратного уравнения', topic: '05-quadratic', step: 3}
 word-to-equation: {title: 'Составить уравнение по задаче', topic: '05-quadratic', step: 5}
 pythagoras:      {title: 'Теорема Пифагора', topic: '05-quadratic', step: 5}
-vieta:           {title: 'Сумма и произведение корней', topic: '05-quadratic', step: 3}
+vieta:           {title: 'Теорема Виета', topic: '05-quadratic', step: 6}
+sqrt-domain:     {title: 'Когда корень существует', topic: '03-roots-compare', step: 5}
+function-value:  {title: 'Значение функции y = √x', topic: '03-roots-compare', step: 6}
+sqrt-graph:      {title: 'График y = √x', topic: '03-roots-compare', step: 6}
+linear-function: {title: 'График линейной функции', topic: '03-roots-compare', step: 6}

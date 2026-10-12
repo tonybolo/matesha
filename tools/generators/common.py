@@ -199,12 +199,13 @@ def task(prompt, answer, kind, hint, solution, skills, **extra):
     return d
 
 
-def build_group(gen, rng: random.Random, group_id: str, limit: int = N_PER_GROUP):
-    """24 заданий группы: уровни идут по LEVEL_PATTERN, повторов по условию нет."""
+def build_group(gen, rng: random.Random, group_id: str, limit: int = N_PER_GROUP, pattern=None, label=None):
+    """24 заданий группы: уровни идут по LEVEL_PATTERN (или по pattern), повторов по условию нет."""
+    pattern = pattern or LEVEL_PATTERN
     out, seen, attempts = [], set(), 0
     while len(out) < limit and attempts < limit * 400:
         attempts += 1
-        level = LEVEL_PATTERN[len(out) % len(LEVEL_PATTERN)]
+        level = pattern[len(out) % len(pattern)]
         t = gen(rng, level)
         if t is None:
             continue
@@ -214,6 +215,8 @@ def build_group(gen, rng: random.Random, group_id: str, limit: int = N_PER_GROUP
         seen.add(key)
         t["group"] = group_id
         t["level"] = level
+        if label:
+            t["num"] = label
         t["id"] = f"g-{group_id}-{len(out) + 1:02d}"
         t["source"] = "генератор"
         out.append(t)

@@ -1,8 +1,9 @@
-import { useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import { renderPrompt } from '../content/prompt'
 import type { Task, Topic } from '../content/types'
 import { checkAnswer, expectedOrder, type CheckResult } from '../lib/check'
 import { toTex } from '../lib/expr'
+import { hrefTopic } from '../route'
 import { GROUP_GOAL, markRevealed, recordAttempt } from '../store/progress'
 import { useProgress } from '../store/useProgress'
 import { AnswerInput, varsOf } from './AnswerInput'
@@ -153,6 +154,7 @@ function GroupTrainer({ topic }: { topic: Topic }) {
   const groups = topic.groups ?? []
   const [gid, setGid] = useState(groups[0]?.id ?? '')
   const list = useMemo(() => topic.tasks.filter((t) => t.group === gid), [topic, gid])
+  const current = groups.find((g) => g.id === gid)
   const firstOpen = (l: Task[]) => {
     const i = l.findIndex((t) => !progress?.tasks[t.id]?.solved)
     return i < 0 ? 0 : i
@@ -171,27 +173,36 @@ function GroupTrainer({ topic }: { topic: Topic }) {
   return (
     <section className="trainer">
       <div className="groups" role="tablist" aria-label="Типы заданий">
-        {groups.map((g) => {
+        {groups.map((g, i) => {
           const done = Math.min(GROUP_GOAL, groupSolved(g.id))
           return (
-            <button
-              key={g.id}
-              role="tab"
-              aria-selected={gid === g.id}
-              className={`group ${gid === g.id ? 'on' : ''} ${done >= GROUP_GOAL ? 'done' : ''}`}
-              onClick={() => {
-                setGid(g.id)
-                setPos(firstOpen(topic.tasks.filter((t) => t.group === g.id)))
-              }}
-            >
-              <strong>{g.title}</strong>
-              <span className="muted">
-                {done} / {GROUP_GOAL}
-              </span>
-            </button>
+            <Fragment key={g.id}>
+              {g.star && !groups[i - 1]?.star && <p className="groups-label">⭐ Олимпиада: задачи посложнее учебных</p>}
+              <button
+                role="tab"
+                aria-selected={gid === g.id}
+                className={`group ${gid === g.id ? 'on' : ''} ${done >= GROUP_GOAL ? 'done' : ''}`}
+                onClick={() => {
+                  setGid(g.id)
+                  setPos(firstOpen(topic.tasks.filter((t) => t.group === g.id)))
+                }}
+              >
+                <strong>{g.title}</strong>
+                <span className="muted">
+                  {done} / {GROUP_GOAL}
+                </span>
+              </button>
+            </Fragment>
           )
         })}
       </div>
+      {current?.lessonStep !== undefined && (
+        <p className="group-lesson">
+          <a className="link" href={hrefTopic(topic.id, 'learn', current.lessonStep)}>
+            📖 Как решать этот тип: открыть объяснение
+          </a>
+        </p>
+      )}
       {doneAll && <p className="feedback ok">Цель по этому типу выполнена ({GROUP_GOAL} решено). Можно идти дальше или потренироваться ещё.</p>}
       {task && <TaskPanel key={task.id} topic={topic} task={task} onNext={goNext} />}
     </section>

@@ -69,6 +69,70 @@ sections:
         lhs: 'a/b+c/d'
         rhs: '(a d+b c)/(b d)'
 
+  - title: Корни
+    items:
+      - name: Корень существует, если число под корнем ≥ 0
+        tex: '\sqrt{A}:\ A\ge 0'
+      - name: Квадрат корня (a ≥ 0)
+        tex: '(\sqrt{a})^2=a'
+        lhs: 'sqrt(a)^2'
+        rhs: 'a'
+      - name: Корень из квадрата
+        tex: '\sqrt{a^2}=|a|'
+      - name: Корень из произведения (a ≥ 0, b ≥ 0)
+        tex: '\sqrt{ab}=\sqrt{a}\cdot\sqrt{b}'
+        lhs: 'sqrt(a*b)'
+        rhs: 'sqrt(a)*sqrt(b)'
+      - name: Корень из дроби (a ≥ 0, b > 0)
+        tex: '\sqrt{\dfrac{a}{b}}=\dfrac{\sqrt{a}}{\sqrt{b}}'
+        lhs: 'sqrt(a/b)'
+        rhs: 'sqrt(a)/sqrt(b)'
+      - name: Внести множитель под корень (a ≥ 0)
+        tex: 'a\sqrt{b}=\sqrt{a^2b}'
+      - name: Вынести множитель из-под корня (a ≥ 0)
+        tex: '\sqrt{a^2b}=a\sqrt{b}'
+      - name: Сравнение корней (0 ≤ a < b)
+        tex: '\sqrt{a}<\sqrt{b}'
+      - name: Сопряжённые выражения
+        tex: '(\sqrt{a}+\sqrt{b})(\sqrt{a}-\sqrt{b})=a-b'
+        lhs: '(sqrt(a)+sqrt(b))*(sqrt(a)-sqrt(b))'
+        rhs: 'a-b'
+      - name: Избавиться от корня в знаменателе
+        tex: '\dfrac{1}{\sqrt{a}}=\dfrac{\sqrt{a}}{a}'
+        lhs: '1/sqrt(a)'
+        rhs: 'sqrt(a)/a'
+      - name: 'Избавиться от корня: сумма в знаменателе'
+        tex: '\dfrac{1}{\sqrt{a}+\sqrt{b}}=\dfrac{\sqrt{a}-\sqrt{b}}{a-b}'
+        lhs: '1/(sqrt(a)+sqrt(b))'
+        rhs: '(sqrt(a)-sqrt(b))/(a-b)'
+
+  - title: Квадратные уравнения
+    items:
+      - name: Вид уравнения (a ≠ 0)
+        tex: 'ax^2+bx+c=0'
+      - name: Дискриминант
+        tex: 'D=b^2-4ac'
+      - name: D > 0 — два корня
+        tex: 'x_{1,2}=\dfrac{-b\pm\sqrt{D}}{2a}'
+      - name: D = 0 — один корень
+        tex: 'x=-\dfrac{b}{2a}'
+      - name: D < 0 — корней нет
+        tex: 'x\in\varnothing'
+      - name: Если b чётное (b = 2k)
+        tex: 'D_1=k^2-ac,\quad x_{1,2}=\dfrac{-k\pm\sqrt{D_1}}{a}'
+      - name: Неполное уравнение, b = 0
+        tex: 'ax^2+c=0\ \Rightarrow\ x^2=-\dfrac{c}{a}'
+      - name: Неполное уравнение, c = 0
+        tex: 'ax^2+bx=0\ \Rightarrow\ x(ax+b)=0'
+      - name: Теорема Виета
+        tex: 'x_1+x_2=-\dfrac{b}{a},\quad x_1x_2=\dfrac{c}{a}'
+      - name: Сумма квадратов корней
+        tex: 'x_1^2+x_2^2=(x_1+x_2)^2-2x_1x_2'
+      - name: Разложение на множители
+        tex: 'ax^2+bx+c=a(x-x_1)(x-x_2)'
+      - name: Биквадратное уравнение
+        tex: 'ax^4+bx^2+c=0:\ t=x^2,\ t\ge 0'
+
   - title: Степени
     items:
       - name: Произведение степеней

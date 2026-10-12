@@ -345,8 +345,14 @@ def g_rat(rng: random.Random, level: int):
 PELL = [(2, 3, 2), (3, 7, 4), (5, 9, 4), (6, 5, 2), (7, 8, 3), (8, 3, 1), (10, 19, 6), (11, 10, 3), (12, 7, 2), (15, 4, 1), (24, 5, 1), (35, 6, 1)]
 
 
+def pell_simple(a: int, q: int, p: int):
+    """q² − p²a = 1; приводим p√a к виду с корнем из числа без квадратных множителей: (8, 3, 1) → (2, 3, 2)."""
+    s = max(d for d in range(1, math.isqrt(a) + 1) if a % (d * d) == 0)
+    return a // (s * s), q, p * s
+
+
 def g_conj(rng: random.Random, level: int):
-    a, q, p = rng.choice(PELL)
+    a, q, p = pell_simple(*rng.choice(PELL))
     inverse = level == 1 or rng.random() < 0.5
     r = f"{p}\\sqrt{{{a}}}" if p != 1 else f"\\sqrt{{{a}}}"
     x = (f"{r}-{q}", f"{p}*sqrt({a})-{q}")

@@ -4,6 +4,7 @@
 Пересчитывает ответ из условия через SymPy и сравнивает с записанным в JSON.
 """
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -27,6 +28,80 @@ def sgn(a: float, b: float) -> str:
     return "<" if a < b - 1e-12 else (">" if a > b + 1e-12 else "=")
 
 
+def check_olympiad(t: dict) -> str | None:
+    o = t["olyCheck"]
+    kind = o["kind"]
+    if kind == "irrCount":
+        got = sum(1 for n in range(o["a"], o["b"] + 1) if math.isqrt(n) ** 2 != n)
+    elif kind == "ratCount":
+        got = sum(1 for n in range(o["a"], o["b"] + 1) if math.isqrt(n) ** 2 == n)
+    elif kind == "intBetween":
+        p, q = math.isqrt(o["lo"]), math.isqrt(o["hi"])
+        got = sum(1 for n in range(0, o["hi"] + 2) if p < math.sqrt(n) < q)
+    elif kind == "intBetweenExpr":
+        lo, hi = sp.N(exact(o["lo"]), 50), sp.N(exact(o["hi"]), 50)
+        got = sum(1 for n in range(0, 400) if lo < n < hi)
+    elif kind == "floor":
+        got = int(sp.floor(sp.N(exact(o["expr"]), 60)))
+    elif kind == "telsum":
+        total = sum(sp.N(1 / (sp.sqrt(k) + sp.sqrt(k + 1)), 60) for k in range(o["a"], o["N"]))
+        return None if abs(total - sp.Integer(t["answer"])) < 1e-40 else f"сумма {total}, в ответе {t['answer']}"
+    else:
+        return f"неизвестная проверка {kind}"
+    return None if got == int(t["answer"]) else f"{kind}: пересчёт даёт {got}, в ответе {t['answer']}"
+
+
+def check_param(t: dict) -> str | None:
+    pc = t["paramCheck"]
+    kind = pc["kind"]
+    x, kk = SYMS["x"], SYMS["k"]
+    if kind in ("subs", "other"):
+        param = SYMS[pc["param"]]
+        eq = exact(pc["eq"])
+        vals = sp.solve(eq.subs(x, pc["x0"]), param)
+        if len(vals) != 1:
+            return f"значений параметра {len(vals)}"
+        if kind == "subs":
+            want = vals[0]
+        else:
+            roots = sp.solve(eq.subs(param, vals[0]), x)
+            others = [r for r in roots if r != pc["x0"]]
+            want = others[0] if others else sp.Integer(pc["x0"])
+        return None if sp.simplify(want - exact(t["answer"])) == 0 else f"пересчёт даёт {want}, в ответе {t['answer']}"
+    if kind == "D0":
+        a, b, c = (exact(pc[i]) for i in "abc")
+        sols = [r for r in sp.solve(b * b - 4 * a * c, kk) if not (pc["a"] == "k" and r == 0)]
+        want = sorted(exact(r.strip()) for r in t["answer"].split(";"))
+        return None if sorted(sols) == want else f"D=0 при k={sorted(sols)}, в ответе {want}"
+    if kind == "Dgt":
+        vals = []
+        for kv in range(-300, 301):
+            aa, bb, cc = (exact(pc[i]).subs(kk, kv) for i in "abc")
+            D = bb * bb - 4 * aa * cc
+            if (D > 0) if pc["cmp"] == ">" else (D < 0):
+                vals.append(kv)
+        if not vals:
+            return "нет подходящих k"
+        got = {"max": max(vals), "min": min(vals), "count": len(vals)}[pc["ask"]]
+        return None if got == int(t["answer"]) else f"перебор даёт {got}, в ответе {t['answer']}"
+    return f"неизвестная проверка {kind}"
+
+
+def check_two(t: dict) -> str | None:
+    c = t["twoCheck"]
+    pairs = []
+    for u in range(-80, 81):
+        for v in range(u, 81):
+            if c["kind"] == "sumprod" and u + v == c["S"] and u * v == c["P"]:
+                pairs.append((u, v))
+            elif c["kind"] == "sumsq" and u + v == c["S"] and u * u + v * v == c["Q"]:
+                pairs.append((u, v))
+            elif c["kind"] == "diffprod" and u >= 1 and v - u == c["d"] and u * v == c["P"]:
+                pairs.append((u, v))
+    want = sorted(int(x) for x in t["answer"].split(";"))
+    return None if pairs == [tuple(want)] else f"пары {pairs}, в ответе {want}"
+
+
 def check(t: dict) -> str | None:
     k = t["answerKind"]
     if k == "compare":
@@ -36,6 +111,23 @@ def check(t: dict) -> str | None:
         vals = [num(i) for i in t["items"]]
         want = ",".join(map(str, sorted(range(len(vals)), key=lambda i: vals[i])))
         return None if want == t["answer"] else f"порядок {want}, в ответе {t['answer']}"
+    if t.get("olyCheck"):
+        return check_olympiad(t)
+    if t.get("vieta"):
+        v = t["vieta"]
+        a, b, c = v["abc"]
+        x = SYMS["x"]
+        roots = sp.solve(a * x**2 + b * x + c, x)
+        if len(roots) != 2:
+            return f"корней {len(roots)}"
+        x1, x2 = sp.symbols("x1 x2")
+        value = sp.sympify(v["f"], locals={"x1": x1, "x2": x2}).subs({x1: roots[0], x2: roots[1]})
+        d = sp.simplify(value - exact(t["answer"]))
+        return None if d == 0 else f"выражение {v['f']} равно {sp.simplify(value)}, в ответе {t['answer']}"
+    if t.get("paramCheck"):
+        return check_param(t)
+    if t.get("twoCheck"):
+        return check_two(t)
     if k == "choice" and t.get("optExprs"):
         irr = [i for i, e in enumerate(t["optExprs"]) if not sp.simplify(exact(e)).is_rational]
         return None if irr == [int(t["answer"])] else f"иррациональные варианты {irr}, в ответе {t['answer']}"
