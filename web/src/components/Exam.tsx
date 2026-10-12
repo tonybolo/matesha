@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { topics } from '../content/load'
 import { checkAnswer, type CheckResult } from '../lib/check'
+import { toTex } from '../lib/expr'
 import { buildExam, formatOf, FORMATS, gradeLabel, type Difficulty, type ExamItem, type ExamKind, type ExamVariant } from '../lib/exam'
 import { hrefTopic } from '../route'
 import { recordExam, type ExamResult } from '../store/progress'
@@ -173,7 +174,7 @@ function AnswerShown({ item, answer }: { item: ExamItem; answer: string }) {
       <Rich
         text={answer
           .split(',')
-          .map((i) => '$' + (t.items?.[Number(i)] ? t.items[Number(i)].replace(/sqrt\(([^)]*)\)/g, '\\sqrt{$1}') : i) + '$')
+          .map((i) => '$' + (t.items?.[Number(i)] ? (toTex(t.items[Number(i)]) ?? t.items[Number(i)]) : i) + '$')
           .join(' < ')}
       />
     )
