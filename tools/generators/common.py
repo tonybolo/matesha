@@ -104,6 +104,37 @@ def poly_expr(a, b, c, v="x") -> str:
     return "".join(parts) or "0"
 
 
+def par(v) -> str:
+    """Число в скобках, если оно отрицательное: 5 → 5, -5 → (-5)."""
+    return str(v) if v >= 0 else f"({v})"
+
+
+def sgn_term(v, first: bool = False) -> str:
+    """Слагаемое со знаком для TeX: +3, -2 (для первого слагаемого плюс не пишем)."""
+    return (str(v) if v < 0 else (str(v) if first else f"+{v}"))
+
+
+def lin_rad_tex(e) -> str:
+    """Сумма «число + число·корень» в порядке «сначала число»: 19+8\\sqrt{3}."""
+    e = sp.expand(e)
+    const, rest = e.as_coeff_Add()
+    if rest == 0:
+        return sp.latex(const)
+    r = sp.latex(rest)
+    if const == 0:
+        return r
+    return f"{sp.latex(const)}{r if r.startswith('-') else '+' + r}"
+
+
+def disc_steps(a: int, b: int, c: int) -> list[str]:
+    """Аккуратная запись D = b² − 4ac без двойных минусов."""
+    D = b * b - 4 * a * c
+    ac4 = 4 * a * c
+    mid = f"{b * b}+{-ac4}" if ac4 < 0 else f"{b * b}-{ac4}"
+    first = f"$D=b^2-4ac={par(b)}^2-4\\cdot{par(a)}\\cdot{par(c)}={mid}={D}$."
+    return [f"$a={a}$, $b={b}$, $c={c}$.", first]
+
+
 def sym_to_app(e) -> str:
     """Выражение SymPy → запись приложения."""
     return str(e).replace("**", "^")

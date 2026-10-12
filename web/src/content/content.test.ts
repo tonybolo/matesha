@@ -73,7 +73,7 @@ describe('контент', () => {
 
       it('задачи: формулы, эталонный ответ принимается', () => {
         for (const t of topic.tasks) {
-          const prompt = renderPrompt(t.prompt, t.expr, { expr2: t.expr2, items: t.items })
+          const prompt = renderPrompt(t.prompt, t.expr, { expr2: t.expr2, items: t.items, tex: t.tex })
           expect(/\{(expr|expr2|items)\}/.test(prompt), t.id).toBe(false)
           if (t.answerKind === 'choice') {
             expect(t.options?.length, `${t.id}: options`).toBeGreaterThanOrEqual(2)

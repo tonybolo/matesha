@@ -17,6 +17,7 @@ const LEVELS: { level: 1 | 2 | 3; title: string; hint: string }[] = [
 const LEVEL_NAMES = { 1: 'как в учебнике', 2: 'посложнее', 3: 'с подвохом' } as const
 
 export function answerText(task: Task): string {
+  if (task.answerTex) return '$' + task.answerTex + '$'
   switch (task.answerKind) {
     case 'roots':
       return '$' + task.answer.split(';').map((p) => toTex(p.trim()) ?? p).join(';\\ ') + '$'
@@ -35,7 +36,7 @@ export function answerText(task: Task): string {
 }
 
 export function taskPrompt(task: Task): string {
-  return renderPrompt(task.prompt, task.expr, { expr2: task.expr2, items: task.items })
+  return renderPrompt(task.prompt, task.expr, { expr2: task.expr2, items: task.items, tex: task.tex })
 }
 
 function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: () => void }) {

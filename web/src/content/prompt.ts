@@ -1,6 +1,6 @@
 import { toTex } from '../lib/expr'
 
-type Extra = { expr2?: string; items?: string[] }
+type Extra = { expr2?: string; items?: string[]; tex?: string }
 
 function texOrThrow(expr: string): string {
   const tex = toTex(expr)
@@ -13,7 +13,8 @@ export function renderPrompt(prompt: string, expr?: string, extra: Extra = {}): 
   let out = prompt
   const inline = prompt.includes('{expr2}') || prompt.includes('{items}')
   if (expr && out.includes('{expr}')) {
-    out = out.replace('{expr}', inline ? `$${texOrThrow(expr)}$` : `$\\displaystyle ${texOrThrow(expr)}$`)
+    const tex = extra.tex ?? texOrThrow(expr)
+    out = out.replace('{expr}', inline ? `$${tex}$` : `$\\displaystyle ${tex}$`)
   }
   if (extra.expr2 && out.includes('{expr2}')) out = out.replace('{expr2}', `$${texOrThrow(extra.expr2)}$`)
   if (extra.items && out.includes('{items}')) {

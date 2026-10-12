@@ -23,9 +23,9 @@ def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for topic_id, mod in TOPICS.items():
         groups, tasks = [], []
-        for gid, title, gen in mod.GROUPS:
+        for gid, title, gen, lesson in mod.GROUPS:
             rng = random.Random(f"{topic_id}/{gid}")
-            groups.append({"id": gid, "title": title})
+            groups.append({"id": gid, "title": title, "lessonStep": lesson})
             tasks += build_group(gen, rng, gid)
         (OUT / f"{topic_id}.json").write_text(
             json.dumps({"topic": topic_id, "groups": groups, "tasks": tasks}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"

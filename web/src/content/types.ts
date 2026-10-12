@@ -60,6 +60,8 @@ export type Task = {
   /** В prompt подставляется {expr} — формула из поля expr. */
   prompt: Rich
   expr?: string
+  /** Готовая запись {expr} в TeX (если нужна запись как в книге, например с «:» между дробями). */
+  tex?: string
   /** Вторая формула для {expr2} (сравнение двух чисел). */
   expr2?: string
   /** Для answerKind order: формулы-плитки (подставляются в {items}). */
@@ -67,6 +69,8 @@ export type Task = {
   /** Для answerKind choice: варианты ответа; answer — номер верного (с нуля). */
   options?: Rich[]
   answer: string
+  /** Красивая запись ответа для показа (TeX), если запись `answer` для компьютера выглядит некрасиво. */
+  answerTex?: string
   answerKind: AnswerKind
   /** Ответ обязан быть одной несократимой дробью. */
   reduce?: boolean
