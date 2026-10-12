@@ -149,10 +149,28 @@ def g_cmp(rng: random.Random, level: int):
                     "Внеси число перед корнем под корень: $a\\sqrt{b}=\\sqrt{a^2\\cdot b}$, потом сравни числа под корнем.", sol,
                     ["compare-roots", "bring-under-root"], expr=f"{a}*sqrt({b})", expr2=f"{c}*sqrt({d})")
     if level == 2:
-        kind = rng.choice(["neg", "mixed", "int"])
+        kind = rng.choice(["neg", "mixed", "int", "prod"])
         a, c = rng.randint(2, 7), rng.randint(2, 7)
         b, d = rng.choice(SQF), rng.choice(SQF)
         A, B = a * a * b, c * c * d
+        if kind == "prod":
+            # число под корнем против произведения двух корней (как в классной работе: √11 и √5·√2)
+            u, v = rng.sample(SQF, 2)
+            P = u * v
+            R = P + rng.choice([-2, -1, 1, 2])
+            if R < 2 or R == P:
+                return None
+            swap = rng.random() < 0.5
+            sgn = _sign(R, P)
+            shown = f"{sq_tex(u)}\\cdot {sq_tex(v)}"
+            final = f"{sq_tex(R)}\\ {sgn}\\ {shown}" if not swap else f"{shown}\\ {_flip(sgn)}\\ {sq_tex(R)}"
+            sol = [f"Перемножим корни: ${shown}=\\sqrt{{{u}\\cdot {v}}}={sq_tex(P)}$.",
+                   f"Теперь сравниваем числа под корнем: ${R}$ и ${P}$.",
+                   f"${R}\\ {sgn}\\ {P}$, значит ${final}$."]
+            e1, e2 = (f"sqrt({R})", f"sqrt({u})*sqrt({v})") if not swap else (f"sqrt({u})*sqrt({v})", f"sqrt({R})")
+            return task("Сравните числа {expr} и {expr2}.", sgn if not swap else _flip(sgn), "compare",
+                        "Перемножь корни: $\\sqrt{a}\\cdot\\sqrt{b}=\\sqrt{ab}$, и сравни числа под корнем.", sol,
+                        ["compare-roots", "sqrt-prod"], expr=e1, expr2=e2)
         if A == B:
             return None
         if kind == "neg":
