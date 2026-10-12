@@ -30,6 +30,9 @@ export const emptyTopic = (): TopicProgress => ({
 
 export const emptyState = (): State => ({ v: 1, name: '', xp: 0, streak: 0, lastDay: null, topics: {} })
 
+/** Сколько заданий в группе считается «целью» по типу. */
+export const GROUP_GOAL = 8
+
 export const XP = { taskFirstTry: 10, taskLater: 5, checkPassed: 25, explainDone: 10 }
 
 const dayKey = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
@@ -100,8 +103,17 @@ export type TopicStats = {
 }
 
 export function topicStats(topic: Topic, p: TopicProgress | undefined): TopicStats {
-  const total = topic.tasks.length
-  const solved = p ? topic.tasks.filter((t) => p.tasks[t.id]?.solved).length : 0
+  const isSolved = (id: string) => !!p?.tasks[id]?.solved
+  let total = topic.tasks.length
+  let solved = p ? topic.tasks.filter((t) => isSolved(t.id)).length : 0
+  if (topic.groups?.length) {
+    // сгенерированные группы: цель — GROUP_GOAL заданий в каждой; решённые вне цели не накручивают процент
+    const own = topic.tasks.filter((t) => !t.group)
+    total = own.length + topic.groups.length * GROUP_GOAL
+    solved =
+      own.filter((t) => isSolved(t.id)).length +
+      topic.groups.reduce((acc, g) => acc + Math.min(GROUP_GOAL, topic.tasks.filter((t) => t.group === g.id && isSolved(t.id)).length), 0)
+  }
   // Шкала: объяснение 15%, проверка 15%, тренировка 70%
   const percent = Math.round(
     (p?.explainDone ? 15 : 0) + (p?.checkPassed ? 15 : 0) + (total ? (solved / total) * 70 : 0),

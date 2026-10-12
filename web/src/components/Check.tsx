@@ -24,7 +24,7 @@ function QuestionView({
 
   const submitInput = () => {
     if (q.kind !== 'input' || result) return
-    const res = checkAnswer(value, q.answer, q.answerKind, { reduce: q.reduce })
+    const res = checkAnswer(value, q.answer, q.answerKind, { reduce: q.reduce, radical: q.radical })
     if (res.status === 'correct') setResult({ correct: true })
     else if (res.status === 'wrong') setResult({ correct: false })
     else setSoft(res.message)
@@ -65,6 +65,7 @@ function QuestionView({
             onSubmit={submitInput}
             kind={q.answerKind}
             vars={varsOf(q.answer)}
+            sqrtKey={q.prompt.includes('sqrt') || q.prompt.includes('√') || q.prompt.includes('\\sqrt')}
             disabled={result !== null}
           />
           {soft && <p className="soft-msg">{soft}</p>}

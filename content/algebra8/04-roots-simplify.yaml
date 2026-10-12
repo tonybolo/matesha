@@ -1,0 +1,151 @@
+id: '04-roots-simplify'
+order: 4
+title: 'Упрощаем выражения с корнями'
+summary: Корень из произведения и дроби, пары выходят из-под корня, корень в знаменателе.
+passScore: 4
+
+steps:
+  - id: s1
+    title: 'Корень из произведения (на пальцах)'
+    blocks:
+      - type: text
+        text: >-
+          Прямоугольный ковёр $4\times 9$ плиток. Его можно разрезать на квадраты: корень из произведения равен
+          произведению корней.
+      - type: math
+        tex: '\sqrt{a\cdot b}=\sqrt{a}\cdot\sqrt{b}\qquad \sqrt{\dfrac{a}{b}}=\dfrac{\sqrt{a}}{\sqrt{b}}'
+      - type: example
+        title: 'Пример из классной работы'
+        steps:
+          - '$\dfrac{\sqrt{2500\cdot 1600}}{\sqrt{144}\cdot\sqrt{225}}$'
+          - 'Корень из произведения: $\sqrt{2500}\cdot\sqrt{1600}=50\cdot 40=2000$.'
+          - 'Знаменатель: $12\cdot 15=180$.'
+          - '$\dfrac{2000}{180}=\dfrac{100}{9}=11\dfrac{1}{9}$'
+      - type: example
+        title: 'Десятичные'
+        steps:
+          - '$\dfrac{\sqrt{0{,}25}\cdot\sqrt{0{,}0016}}{\sqrt{100}\cdot\sqrt{1{,}21}}=\dfrac{0{,}5\cdot 0{,}04}{10\cdot 1{,}1}$'
+          - '$=\dfrac{0{,}02}{11}=\dfrac{1}{550}$'
+      - type: note
+        kind: tip
+        text: 'Если под корнем число, которое не видно сразу, разложи его на множители. Выгодно искать точные квадраты: 4, 9, 16, 25, 36, 49, 64, 81, 100.'
+
+  - id: s2
+    title: 'Пары выходят из-под корня'
+    blocks:
+      - type: text
+        text: >-
+          Корень — как дом: из него выходят **парами**. Две одинаковые «жильца» под корнем выходят наружу одним числом.
+          Разложи число на простые множители и ищи пары.
+      - type: viz
+        id: pairs
+      - type: example
+        title: '$\sqrt{72}$'
+        steps:
+          - '$72=2\cdot 2\cdot 2\cdot 3\cdot 3$'
+          - 'Пара двоек выходит как одна двойка, пара троек — как одна тройка. Одна двойка остаётся под корнем.'
+          - '$\sqrt{72}=2\cdot 3\cdot\sqrt{2}=6\sqrt{2}$'
+      - type: note
+        kind: warn
+        text: >-
+          Корень не бывает отрицательным: $\sqrt{(-3)^2}=\sqrt{9}=3$, а не $-3$. Всегда: $\sqrt{a^2}=|a|$.
+
+  - id: s3
+    title: 'Значение выражения с корнями'
+    blocks:
+      - type: example
+        title: 'Корень из дроби'
+        steps:
+          - '$5\sqrt{\dfrac{16}{225}}-\sqrt{\dfrac{49}{9}}$'
+          - '$\sqrt{\dfrac{16}{225}}=\dfrac{4}{15}$, $\sqrt{\dfrac{49}{9}}=\dfrac{7}{3}$.'
+          - '$5\cdot\dfrac{4}{15}-\dfrac{7}{3}=\dfrac{4}{3}-\dfrac{7}{3}=-1$'
+      - type: example
+        title: 'Всё вместе'
+        steps:
+          - '$\sqrt{81\cdot 16}-\dfrac{\sqrt{125}}{\sqrt{5}}+2\sqrt{(-3)^2}$'
+          - '$\sqrt{81\cdot 16}=9\cdot 4=36$.'
+          - '$\dfrac{\sqrt{125}}{\sqrt{5}}=\sqrt{25}=5$.'
+          - '$2\sqrt{(-3)^2}=2\cdot 3=6$.'
+          - '$36-5+6=37$'
+
+  - id: s4
+    title: 'Квадрат суммы и корни'
+    blocks:
+      - type: text
+        text: >-
+          Формулы сокращённого умножения работают и с корнями. Главное, помнить: $(\sqrt{a})^2=a$.
+      - type: example
+        title: '$\dfrac{(\sqrt{11}-2)^2-11}{\sqrt{11}-1}$'
+        steps:
+          - 'Раскроем квадрат разности: $(\sqrt{11}-2)^2=11-4\sqrt{11}+4=15-4\sqrt{11}$.'
+          - 'Числитель: $15-4\sqrt{11}-11=4-4\sqrt{11}=-4(\sqrt{11}-1)$.'
+          - 'Сокращаем на $(\sqrt{11}-1)$: получаем $-4$.'
+      - type: example
+        title: 'Разность квадратов'
+        steps:
+          - '$(\sqrt{7}-3)(\sqrt{7}+3)=(\sqrt{7})^2-3^2=7-9=-2$'
+
+  - id: s5
+    title: 'Корень в знаменателе'
+    blocks:
+      - type: text
+        text: >-
+          В хорошем ответе в знаменателе корня нет. Избавляемся от него так же, как приводим дроби: умножаем верх и низ на одно
+          и то же выражение. Для $\sqrt{2}+3$ берём «двойника» $\sqrt{2}-3$: произведение даст разность квадратов, и корень исчезнет.
+      - type: example
+        title: '$\dfrac{7}{\sqrt{2}+3}$'
+        steps:
+          - '$\dfrac{7}{\sqrt{2}+3}=\dfrac{7(\sqrt{2}-3)}{(\sqrt{2}+3)(\sqrt{2}-3)}$'
+          - 'Знаменатель: $2-9=-7$.'
+          - '$\dfrac{7(\sqrt{2}-3)}{-7}=3-\sqrt{2}$'
+      - type: note
+        kind: tip
+        text: 'Если знаменатель просто $\sqrt{a}$, умножь верх и низ на $\sqrt{a}$: $\dfrac{1}{\sqrt{2}}=\dfrac{\sqrt{2}}{2}$.'
+
+check:
+  - id: q1
+    kind: choice
+    step: 1
+    prompt: 'Вынеси множитель из-под корня: $\sqrt{72}$.'
+    options:
+      - '$2\sqrt{18}$'
+      - '$6\sqrt{2}$'
+      - '$3\sqrt{8}$'
+      - '$36\sqrt{2}$'
+    correct: 1
+    explain: '$72=2\cdot 2\cdot 2\cdot 3\cdot 3$. Пары двоек и троек выходят: $2\cdot 3=6$, под корнем остаётся одна двойка. $6\sqrt{2}$.'
+  - id: q2
+    kind: input
+    step: 2
+    prompt: 'Найди значение: $5\sqrt{\dfrac{16}{225}}$'
+    answerKind: expr
+    answer: '4/3'
+    explain: '$\sqrt{\dfrac{16}{225}}=\dfrac{4}{15}$, $5\cdot\dfrac{4}{15}=\dfrac{4}{3}$.'
+  - id: q3
+    kind: input
+    step: 1
+    prompt: 'Упрости: $\sqrt{50}$. Корень запиши как sqrt(…) или значком √.'
+    answerKind: expr
+    answer: '5*sqrt(2)'
+    radical: true
+    explain: '$50=2\cdot 5\cdot 5$, пара пятёрок выходит: $5\sqrt{2}$.'
+  - id: q4
+    kind: input
+    step: 3
+    prompt: 'Найди значение: $(\sqrt{7}-3)(\sqrt{7}+3)$'
+    answerKind: expr
+    answer: '-2'
+    explain: 'Разность квадратов: $7-9=-2$.'
+  - id: q5
+    kind: choice
+    step: 1
+    prompt: 'Чему равно $\sqrt{(-3)^2}$?'
+    options:
+      - '$-3$'
+      - '$3$'
+      - '$9$'
+      - 'Не имеет смысла'
+    correct: 1
+    explain: '$(-3)^2=9$, $\sqrt{9}=3$. Корень не бывает отрицательным: $\sqrt{a^2}=|a|$.'
+
+tasks: []

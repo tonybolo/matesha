@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 import { renderPrompt } from '../content/prompt'
 import type { Task, Topic } from '../content/types'
-import { checkAnswer, type CheckResult } from '../lib/check'
+import { checkAnswer, expectedOrder, type CheckResult } from '../lib/check'
 import { toTex } from '../lib/expr'
-import { markRevealed, recordAttempt } from '../store/progress'
+import { GROUP_GOAL, markRevealed, recordAttempt } from '../store/progress'
 import { useProgress } from '../store/useProgress'
 import { AnswerInput, varsOf } from './AnswerInput'
 import { Rich } from './Tex'
@@ -13,6 +13,30 @@ const LEVELS: { level: 1 | 2 | 3; title: string; hint: string }[] = [
   { level: 2, title: 'Уровень 2', hint: 'посложнее' },
   { level: 3, title: 'Уровень 3', hint: 'с подвохом' },
 ]
+
+const LEVEL_NAMES = { 1: 'как в учебнике', 2: 'посложнее', 3: 'с подвохом' } as const
+
+export function answerText(task: Task): string {
+  switch (task.answerKind) {
+    case 'roots':
+      return '$' + task.answer.split(';').map((p) => toTex(p.trim()) ?? p).join(';\\ ') + '$'
+    case 'compare':
+      return `«${task.answer === '<' ? '<' : task.answer === '>' ? '>' : '='}»`
+    case 'choice':
+      return task.options?.[Number(task.answer)] ?? task.answer
+    case 'order': {
+      const order = task.items ? expectedOrder(task.items) : null
+      if (!order || !task.items) return task.answer
+      return order.map((i) => '$' + (toTex(task.items![i]) ?? task.items![i]) + '$').join(' < ')
+    }
+    default:
+      return '$' + (toTex(task.answer) ?? task.answer) + '$'
+  }
+}
+
+export function taskPrompt(task: Task): string {
+  return renderPrompt(task.prompt, task.expr, { expr2: task.expr2, items: task.items })
+}
 
 function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: () => void }) {
   const { state, update } = useProgress()
@@ -25,7 +49,7 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
 
   const submit = () => {
     if (solved) return
-    const r = checkAnswer(value, task.answer, task.answerKind, { reduce: task.reduce })
+    const r = checkAnswer(value, task.answer, task.answerKind, { reduce: task.reduce, radical: task.radical, items: task.items })
     setRes(r)
     if (r.status === 'correct') update((s) => recordAttempt(s, topic.id, task.id, true))
     else if (r.status === 'wrong') update((s) => recordAttempt(s, topic.id, task.id, false))
@@ -37,17 +61,19 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
   }
 
   const vars = useMemo(() => varsOf(task.expr, task.answer), [task])
+  const sqrtKey = useMemo(() => [task.expr, task.expr2, task.answer, task.prompt].some((t) => t?.includes('sqrt') || t?.includes('√')), [task])
   const attempts = st?.attempts ?? 0
+  const label = task.num ?? (task.group ? `Ур. ${task.level}` : `№ ${task.id.split('-')[1]}`)
 
   return (
     <div className="task">
       <div className="task-head">
-        <span className="badge">№ {task.id.split('-')[1]}</span>
-        <span className="muted">{task.source}</span>
+        <span className="badge">{label}</span>
+        <span className="muted">{task.group ? LEVEL_NAMES[task.level] : task.source}</span>
         {solved && <span className="badge ok">решено{st?.firstTry ? ' с первой попытки' : ''}</span>}
       </div>
       <p className="q-prompt">
-        <Rich text={renderPrompt(task.prompt, task.expr)} />
+        <Rich text={taskPrompt(task)} />
       </p>
       <AnswerInput
         value={value}
@@ -58,6 +84,10 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
         onSubmit={submit}
         kind={task.answerKind}
         vars={vars}
+        sqrtKey={sqrtKey}
+        placeholder={/^-?\d+([./]\d+)?$/.test(task.answer) && task.answerKind === 'expr' ? 'ответ числом, например 7 или 3/4' : undefined}
+        options={task.options}
+        items={task.items}
         disabled={solved}
       />
       {res && (
@@ -107,7 +137,7 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
             ))}
           </ol>
           <p className="muted">
-            Ответ: <Rich text={'$' + (task.answerKind === 'roots' ? task.answer.replace(/;/g, ';\\ ') : (toTex(task.answer) ?? task.answer)) + '$'} />
+            Ответ: <Rich text={answerText(task)} />
           </p>
         </div>
       )}
@@ -115,7 +145,64 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
   )
 }
 
+/** Тренажёр с группами типов (сгенерированные задания): внутри группы идём по порядку, уровни растут. */
+function GroupTrainer({ topic }: { topic: Topic }) {
+  const { state } = useProgress()
+  const progress = state.topics[topic.id]
+  const groups = topic.groups ?? []
+  const [gid, setGid] = useState(groups[0]?.id ?? '')
+  const list = useMemo(() => topic.tasks.filter((t) => t.group === gid), [topic, gid])
+  const firstOpen = (l: Task[]) => {
+    const i = l.findIndex((t) => !progress?.tasks[t.id]?.solved)
+    return i < 0 ? 0 : i
+  }
+  const [pos, setPos] = useState(() => firstOpen(topic.tasks.filter((t) => t.group === groups[0]?.id)))
+  const idx = Math.min(pos, Math.max(0, list.length - 1))
+  const task = list[idx]
+  const groupSolved = (id: string) => topic.tasks.filter((t) => t.group === id && progress?.tasks[t.id]?.solved).length
+  const doneAll = list.length > 0 && groupSolved(gid) >= Math.min(GROUP_GOAL, list.length)
+
+  const goNext = () => {
+    const nextOpen = list.findIndex((t, i) => i > idx && !progress?.tasks[t.id]?.solved)
+    setPos(nextOpen >= 0 ? nextOpen : (idx + 1) % list.length)
+  }
+
+  return (
+    <section className="trainer">
+      <div className="groups" role="tablist" aria-label="Типы заданий">
+        {groups.map((g) => {
+          const done = Math.min(GROUP_GOAL, groupSolved(g.id))
+          return (
+            <button
+              key={g.id}
+              role="tab"
+              aria-selected={gid === g.id}
+              className={`group ${gid === g.id ? 'on' : ''} ${done >= GROUP_GOAL ? 'done' : ''}`}
+              onClick={() => {
+                setGid(g.id)
+                setPos(firstOpen(topic.tasks.filter((t) => t.group === g.id)))
+              }}
+            >
+              <strong>{g.title}</strong>
+              <span className="muted">
+                {done} / {GROUP_GOAL}
+              </span>
+            </button>
+          )
+        })}
+      </div>
+      {doneAll && <p className="feedback ok">Цель по этому типу выполнена ({GROUP_GOAL} решено). Можно идти дальше или потренироваться ещё.</p>}
+      {task && <TaskPanel key={task.id} topic={topic} task={task} onNext={goNext} />}
+    </section>
+  )
+}
+
 export function Trainer({ topic }: { topic: Topic }) {
+  if (topic.groups?.length) return <GroupTrainer topic={topic} />
+  return <LevelTrainer topic={topic} />
+}
+
+function LevelTrainer({ topic }: { topic: Topic }) {
   const { state } = useProgress()
   const progress = state.topics[topic.id]
   const tasksOf = (lv: number) => topic.tasks.filter((t) => t.level === lv)

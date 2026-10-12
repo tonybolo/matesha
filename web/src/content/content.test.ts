@@ -4,7 +4,7 @@ import { cheatsheet, cubes, squares } from './cheatsheet'
 import { equivalent } from '../lib/equivalence'
 import { checkAnswer } from '../lib/check'
 import { tryParse } from '../lib/expr'
-import { mathOf } from '../lib/rich'
+import { mathOf, parseRich } from '../lib/rich'
 import { topics } from './load'
 import { renderPrompt } from './prompt'
 import type { Block, Rich } from './types'
@@ -18,6 +18,13 @@ function richOfBlock(b: Block): Rich[] {
       return [...(b.title ? [b.title] : []), ...b.steps]
     default:
       return []
+  }
+}
+
+/** Вне $…$ не должно быть обратных слэшей (иначе на экране появится «сырой» TeX). */
+function noStray(rich: Rich, where: string) {
+  for (const seg of parseRich(rich)) {
+    if (seg.kind !== 'math') expect(/\\/.test(seg.kind === 'text' ? seg.text : seg.text), `${where}: «${rich.slice(0, 60)}»`).toBe(false)
   }
 }
 
@@ -59,26 +66,51 @@ describe('контент', () => {
             expect(q.correct).toBeLessThan(q.options.length)
             for (const o of q.options) for (const tex of mathOf(o)) texOk(tex, q.id)
           } else {
-            expect(checkAnswer(q.answer, q.answer, q.answerKind, { reduce: q.reduce }).status, q.id).toBe('correct')
+            expect(checkAnswer(q.answer, q.answer, q.answerKind, { reduce: q.reduce, radical: q.radical }).status, q.id).toBe('correct')
           }
         }
       })
 
       it('задачи: формулы, эталонный ответ принимается', () => {
         for (const t of topic.tasks) {
-          const prompt = renderPrompt(t.prompt, t.expr)
-          expect(prompt.includes('{expr}'), t.id).toBe(false)
+          const prompt = renderPrompt(t.prompt, t.expr, { expr2: t.expr2, items: t.items })
+          expect(/\{(expr|expr2|items)\}/.test(prompt), t.id).toBe(false)
+          if (t.answerKind === 'choice') {
+            expect(t.options?.length, `${t.id}: options`).toBeGreaterThanOrEqual(2)
+            expect(Number(t.answer)).toBeLessThan(t.options!.length)
+            for (const o of t.options!) for (const tex of mathOf(o)) texOk(tex, t.id)
+          }
+          if (t.answerKind === 'order') expect(t.items?.length, `${t.id}: items`).toBeGreaterThanOrEqual(2)
+          if (t.group) expect(topic.groups?.some((g) => g.id === t.group), `${t.id}: group`).toBe(true)
           for (const tex of mathOf(prompt)) texOk(tex, t.id)
           for (const tex of mathOf(t.hint)) texOk(tex, t.id)
           for (const s of t.solution) for (const tex of mathOf(s)) texOk(tex, t.id)
+          for (const r of [prompt, t.hint, ...t.solution, ...(t.options ?? [])]) noStray(r, t.id)
           if (t.expr) expect(tryParse(t.expr), `${t.id}: expr`).not.toBeNull()
-          const res = checkAnswer(t.answer, t.answer, t.answerKind, { reduce: t.reduce })
+          if (t.verify?.op === 'self') {
+            // независимая от Python проверка: ответ равен значению выражения из условия
+            expect(equivalent(tryParse(t.expr!)!, tryParse(t.answer)!), `${t.id}: ${t.expr} ≠ ${t.answer}`).toBe(true)
+          }
+          if (t.answerKind === 'compare') {
+            const l = tryParse(t.expr!)!.fn({})!
+            const r = tryParse(t.expr2!)!.fn({})!
+            expect(l < r - 1e-12 ? '<' : l > r + 1e-12 ? '>' : '=', `${t.id} знак`).toBe(t.answer)
+          }
+          const res = checkAnswer(t.answer, t.answer, t.answerKind, { reduce: t.reduce, radical: t.radical, items: t.items })
           expect(res.status, `${t.id}: ${t.answer}`).toBe('correct')
         }
       })
 
       it('в каждом уровне есть задачи', () => {
-        for (const level of [1, 2, 3]) expect(topic.tasks.filter((t) => t.level === level).length).toBeGreaterThan(3)
+        if (topic.groups?.length) {
+          for (const g of topic.groups) {
+            const ts = topic.tasks.filter((t) => t.group === g.id)
+            expect(ts.length, g.id).toBeGreaterThanOrEqual(10)
+            for (const level of [1, 2, 3]) expect(ts.some((t) => t.level === level), `${g.id} ур.${level}`).toBe(true)
+          }
+        } else {
+          for (const level of [1, 2, 3]) expect(topic.tasks.filter((t) => t.level === level).length).toBeGreaterThan(3)
+        }
       })
     })
   }

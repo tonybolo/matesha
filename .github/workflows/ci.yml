@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install sympy pyyaml && python tools/verify_answers.py
+      - run: pip install sympy pyyaml && python tools/verify_answers.py && python tools/generators/verify_generated.py
       - working-directory: web
         run: |
           npm ci

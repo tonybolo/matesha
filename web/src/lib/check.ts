@@ -2,9 +2,18 @@ import { equivalent } from './equivalence'
 import { fractionShape, fractionSize } from './fraction'
 import { normalizeInput } from './normalize'
 import { tryParse, type Parsed } from './expr'
+import { radicalIssue } from './radical'
 import type { AnswerKind } from '../content/types'
 
-export type CheckStatus = 'correct' | 'wrong' | 'invalid' | 'notReduced' | 'notSingle' | 'approx' | 'empty'
+export type CheckStatus =
+  | 'correct'
+  | 'wrong'
+  | 'invalid'
+  | 'notReduced'
+  | 'notSingle'
+  | 'notSimplified'
+  | 'approx'
+  | 'empty'
 export type CheckResult = { status: CheckStatus; message: string }
 
 export const MESSAGES = {
@@ -17,6 +26,10 @@ export const MESSAGES = {
   approx: 'Это приблизительное значение. Запиши точный ответ обыкновенной дробью, например 2/3.',
   inverted: 'Похоже, дробь перевёрнута: проверь, что у тебя в числителе, а что в знаменателе.',
   correct: 'Верно!',
+  rootsMissing: 'Найденные значения верные, но это не все корни. Проверь, нет ли ещё одного (например, у x² = число два корня: плюс и минус).',
+  rootsExtra: 'Среди ответов есть лишнее значение: проверь каждое подстановкой в уравнение.',
+  rootsNone: 'На самом деле корней нет: проверь дискриминант (D меньше нуля) или знак числа справа.',
+  rootsHave: 'Корни есть: проверь дискриминант (D больше или равен нулю) и реши ещё раз.',
 }
 
 const EMPTY_SET = /^(нет|нет корней|нет таких|нет таких значений|пусто|∅|none|-)$/
@@ -63,21 +76,57 @@ function diagnoseNumbers(input: string, user: Parsed, ref: Parsed): CheckResult 
   return null
 }
 
-export function checkAnswer(
-  input: string,
-  answer: string,
-  kind: AnswerKind,
-  opts: { reduce?: boolean } = {},
-): CheckResult {
+export type CheckOpts = { reduce?: boolean; radical?: boolean; items?: string[] }
+
+/** Верный порядок плиток по возрастанию значения (номера с нуля). */
+export function expectedOrder(items: string[]): number[] | null {
+  const vals = items.map((it) => tryParse(it)?.fn({}) ?? null)
+  if (vals.some((v) => v === null)) return null
+  return vals
+    .map((v, i) => ({ v: v as number, i }))
+    .sort((a, b) => a.v - b.v)
+    .map((x) => x.i)
+}
+
+export function checkAnswer(input: string, answer: string, kind: AnswerKind, opts: CheckOpts = {}): CheckResult {
   if (!input.trim()) return { status: 'empty', message: MESSAGES.empty }
+
+  if (kind === 'compare') {
+    const t = input.trim()
+    if (!['<', '>', '='].includes(t)) return { status: 'invalid', message: 'Выбери знак: <, = или >.' }
+    return t === answer
+      ? { status: 'correct', message: MESSAGES.correct }
+      : { status: 'wrong', message: 'Не то. Сравни квадраты чисел: у кого площадь больше, у того и число больше.' }
+  }
+
+  if (kind === 'choice') {
+    return input.trim() === answer.trim()
+      ? { status: 'correct', message: MESSAGES.correct }
+      : { status: 'wrong', message: MESSAGES.wrong }
+  }
+
+  if (kind === 'order') {
+    const got = input.split(',').map((x) => x.trim())
+    const want = opts.items ? expectedOrder(opts.items) : answer.split(',').map(Number)
+    if (!want) throw new Error(`Не удалось вычислить порядок: ${opts.items?.join('; ')}`)
+    if (got.length !== want.length) return { status: 'invalid', message: 'Расставь все числа по порядку.' }
+    return got.every((g, i) => Number(g) === want[i])
+      ? { status: 'correct', message: MESSAGES.correct }
+      : { status: 'wrong', message: 'Порядок не тот. Подсказка: сравни квадраты чисел.' }
+  }
 
   if (kind === 'roots') {
     const user = parseNumberSet(input)
     if (!user) return { status: 'invalid', message: MESSAGES.invalid }
     const ref = parseNumberSet(answer) ?? []
-    return sameSet(user, ref)
-      ? { status: 'correct', message: MESSAGES.correct }
-      : { status: 'wrong', message: MESSAGES.wrong }
+    if (sameSet(user, ref)) return { status: 'correct', message: MESSAGES.correct }
+    const has = (list: number[], v: number) => list.some((r) => Math.abs(r - v) <= 1e-9 * Math.max(1, Math.abs(v)))
+    if (user.length > 0 && user.every((v) => has(ref, v)) && user.length < ref.length)
+      return { status: 'wrong', message: MESSAGES.rootsMissing }
+    if (user.length > ref.length && ref.every((v) => has(user, v))) return { status: 'wrong', message: MESSAGES.rootsExtra }
+    if (user.length > 0 && ref.length === 0) return { status: 'wrong', message: MESSAGES.rootsNone }
+    if (user.length === 0 && ref.length > 0) return { status: 'wrong', message: MESSAGES.rootsHave }
+    return { status: 'wrong', message: MESSAGES.wrong }
   }
 
   const user: Parsed | null = tryParse(input)
@@ -85,6 +134,11 @@ export function checkAnswer(
   const ref = tryParse(answer)
   if (!ref) throw new Error(`Некорректный эталонный ответ: ${answer}`)
   if (!equivalent(user, ref)) return diagnoseNumbers(input, user, ref) ?? { status: 'wrong', message: MESSAGES.wrong }
+
+  if (opts.radical) {
+    const issue = radicalIssue(user.node)
+    if (issue) return { status: 'notSimplified', message: `Значение верное, но запись не упрощена. ${issue}` }
+  }
 
   if (opts.reduce) {
     if (!fractionShape(user.node).single) return { status: 'notSingle', message: MESSAGES.notSingle }

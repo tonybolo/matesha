@@ -31,6 +31,7 @@ jobs:
         run: |
           pip install sympy pyyaml
           python tools/verify_answers.py
+          python tools/generators/verify_generated.py
       - name: Установка зависимостей
         working-directory: web
         run: npm ci

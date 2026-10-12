@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { checkAnswer, MESSAGES, parseNumberSet } from './check'
 import { toTex } from './expr'
 import { normalizeInput } from './normalize'
+import { radicalIssue } from './radical'
+import { tryParse } from './expr'
 
 const ok = (input: string, answer: string, reduce = false) =>
   checkAnswer(input, answer, 'expr', { reduce }).status
@@ -81,6 +83,47 @@ describe('числовые подсказки', () => {
   })
 })
 
+describe('сравнение, выбор и порядок', () => {
+  it('знак сравнения', () => {
+    expect(checkAnswer('<', '<', 'compare').status).toBe('correct')
+    expect(checkAnswer('>', '<', 'compare').status).toBe('wrong')
+    expect(checkAnswer('', '<', 'compare').status).toBe('empty')
+    expect(checkAnswer('меньше', '<', 'compare').status).toBe('invalid')
+  })
+  it('выбор варианта', () => {
+    expect(checkAnswer('2', '2', 'choice').status).toBe('correct')
+    expect(checkAnswer('1', '2', 'choice').status).toBe('wrong')
+  })
+  it('порядок плиток', () => {
+    const items = ['sqrt(51)', '7', 'sqrt(101/2)']
+    expect(checkAnswer('1,2,0', '1,2,0', 'order', { items }).status).toBe('correct')
+    expect(checkAnswer('0,1,2', '1,2,0', 'order', { items }).status).toBe('wrong')
+    expect(checkAnswer('1,2', '1,2,0', 'order', { items }).status).toBe('invalid')
+  })
+})
+
+describe('простейший вид с корнями', () => {
+  const issue = (s: string) => radicalIssue(tryParse(s)!.node)
+  it('допустимое', () => {
+    expect(issue('6*sqrt(2)')).toBeNull()
+    expect(issue('3+2*sqrt(5)')).toBeNull()
+    expect(issue('(sqrt(2)+1)/2')).toBeNull()
+    expect(issue('-4')).toBeNull()
+  })
+  it('недопустимое', () => {
+    expect(issue('sqrt(72)')).toContain('множители')
+    expect(issue('sqrt(16)')).toContain('нацело')
+    expect(issue('1/sqrt(2)')).toContain('знаменателе')
+    expect(issue('sqrt(1/2)')).toContain('дроби')
+    expect(issue('sqrt(0.25)')).toContain('дроби')
+  })
+  it('проверка ответа требует упрощения', () => {
+    expect(checkAnswer('sqrt(72)', '6*sqrt(2)', 'expr', { radical: true }).status).toBe('notSimplified')
+    expect(checkAnswer('6sqrt(2)', '6*sqrt(2)', 'expr', { radical: true }).status).toBe('correct')
+    expect(checkAnswer('√72', '6*sqrt(2)', 'expr').status).toBe('correct')
+  })
+})
+
 describe('мусорный ввод не роняет проверку', () => {
   const garbage = ['()', '1/0', '2^^3', '😀', 'x=', 'sqrt(-1)', '1e400', '9^9^9^9', 'x/', '/x', ')(', '((((((((((x', 'a'.repeat(300), '1,2,3', ';;;', 'x;y', 'abs(', 'sin(x)', '5!', 'x%2', '[1,2]', '{a:1}', 'x:=3']
   for (const g of garbage) {
@@ -101,6 +144,14 @@ describe('наборы чисел', () => {
     expect(parseNumberSet('1/2; 0,25')).toEqual([0.25, 0.5])
     expect(parseNumberSet('4, -4')).toEqual([-4, 4])
     expect(parseNumberSet('два')).toBeNull()
+  })
+  it('подсказки: не все корни, лишние, корней нет', () => {
+    expect(checkAnswer('3', '3; -3', 'roots').message).toBe(MESSAGES.rootsMissing)
+    expect(checkAnswer('3; -3; 5', '3; -3', 'roots').message).toBe(MESSAGES.rootsExtra)
+    expect(checkAnswer('2', 'нет', 'roots').message).toBe(MESSAGES.rootsNone)
+    expect(checkAnswer('нет', '2; 5', 'roots').message).toBe(MESSAGES.rootsHave)
+    expect(checkAnswer('7; 9', '3; -3', 'roots').message).toBe(MESSAGES.wrong)
+    for (const m of Object.values(MESSAGES)) expect(m.includes('$')).toBe(false)
   })
   it('проверка', () => {
     expect(checkAnswer('-3;3', '3; -3', 'roots').status).toBe('correct')

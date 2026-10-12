@@ -1,0 +1,5467 @@
+{
+ "topic": "04-roots-simplify",
+ "groups": [
+  {
+   "id": "val",
+   "title": "Значение: корни из дробей"
+  },
+  {
+   "id": "val2",
+   "title": "Значение с корнями"
+  },
+  {
+   "id": "dec",
+   "title": "Корни из больших и десятичных"
+  },
+  {
+   "id": "out",
+   "title": "Вынеси множитель"
+  },
+  {
+   "id": "sq",
+   "title": "Квадрат суммы с корнем"
+  },
+  {
+   "id": "rat",
+   "title": "Корень в знаменателе"
+  },
+  {
+   "id": "conj",
+   "title": "Пара чисел"
+  },
+  {
+   "id": "prd",
+   "title": "Дроби: умножить и делить"
+  },
+  {
+   "id": "frm",
+   "title": "Выразить из формулы"
+  }
+ ],
+ "tasks": [
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "76/55",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{64}{121}}=\\frac{8}{11}$",
+    "$\\sqrt{\\frac{16}{25}}=\\frac{4}{5}$",
+    "$3\\cdot\\frac{8}{11}-\\frac{4}{5}=\\frac{76}{55}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "3*sqrt(64/121) - sqrt(16/25)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "21/8",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{25}{16}}=\\frac{5}{4}$",
+    "$\\sqrt{\\frac{81}{64}}=\\frac{9}{8}$",
+    "$3\\cdot\\frac{5}{4}-\\frac{9}{8}=\\frac{21}{8}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "3*sqrt(25/16) - sqrt(81/64)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "1291/819",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{36}{169}}=\\frac{6}{13}$",
+    "$\\sqrt{\\frac{1}{196}}=\\frac{1}{14}$",
+    "$\\sqrt{\\frac{25}{81}}=\\frac{5}{9}$",
+    "Подставляем и считаем: $4\\cdot\\frac{6}{13}+4\\cdot\\frac{1}{14}-\\frac{5}{9}=\\frac{1291}{819}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "4*sqrt(36/169) + 4*sqrt(1/196) - sqrt(25/81)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "19/12",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{81}{64}}=\\frac{9}{8}$",
+    "$\\sqrt{\\frac{4}{9}}=\\frac{2}{3}$",
+    "$2\\cdot\\frac{9}{8}-\\frac{2}{3}=\\frac{19}{12}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "2*sqrt(81/64) - sqrt(4/9)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "-16/35",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{49}{100}}=\\frac{7}{10}$",
+    "$\\sqrt{\\frac{9}{196}}=\\frac{3}{14}$",
+    "$\\sqrt{\\frac{25}{4}}=\\frac{5}{2}$",
+    "Подставляем и считаем: $2\\cdot\\frac{7}{10}+3\\cdot\\frac{3}{14}-\\frac{5}{2}=-\\frac{16}{35}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "2*sqrt(49/100) + 3*sqrt(9/196) - sqrt(25/4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "151/16",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{49}{36}}=\\frac{7}{6}$",
+    "$\\sqrt{\\frac{9}{64}}=\\frac{3}{8}$",
+    "$\\sqrt{81}=9$.",
+    "$\\frac{7}{6}\\cdot\\frac{3}{8}+9=\\frac{151}{16}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "sqrt(49/36)*sqrt(9/64) + sqrt(81)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 3,
+   "id": "g-val-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "-1/15",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{49}{25}}=\\frac{7}{5}$",
+    "$\\sqrt{\\frac{81}{64}}=\\frac{9}{8}$",
+    "$\\sqrt{\\frac{49}{36}}=\\frac{7}{6}$",
+    "Подставляем и считаем: $4\\cdot\\frac{7}{5}-4\\cdot\\frac{9}{8}-\\frac{7}{6}=-\\frac{1}{15}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "4*sqrt(49/25) - 4*sqrt(81/64) - sqrt(49/36)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "90/7",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{16}{49}}=\\frac{4}{7}$",
+    "$\\sqrt{\\frac{9}{4}}=\\frac{3}{2}$",
+    "$\\sqrt{144}=12$.",
+    "$\\frac{4}{7}\\cdot\\frac{3}{2}+12=\\frac{90}{7}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "sqrt(16/49)*sqrt(9/4) + sqrt(144)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 3,
+   "id": "g-val-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "-31/15",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{1}{225}}=\\frac{1}{15}$",
+    "$\\sqrt{\\frac{49}{9}}=\\frac{7}{3}$",
+    "$4\\cdot\\frac{1}{15}-\\frac{7}{3}=-\\frac{31}{15}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "4*sqrt(1/225) - sqrt(49/9)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "17/5",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{16}{25}}=\\frac{4}{5}$",
+    "$\\sqrt{\\frac{9}{25}}=\\frac{3}{5}$",
+    "$5\\cdot\\frac{4}{5}-\\frac{3}{5}=\\frac{17}{5}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "5*sqrt(16/25) - sqrt(9/25)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "533/140",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{81}{64}}=\\frac{9}{8}$",
+    "$\\sqrt{\\frac{81}{100}}=\\frac{9}{10}$",
+    "$\\sqrt{\\frac{64}{49}}=\\frac{8}{7}$",
+    "Подставляем и считаем: $2\\cdot\\frac{9}{8}+3\\cdot\\frac{9}{10}-\\frac{8}{7}=\\frac{533}{140}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "2*sqrt(81/64) + 3*sqrt(81/100) - sqrt(64/49)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "-3/28",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{1}{16}}=\\frac{1}{4}$",
+    "$\\sqrt{\\frac{36}{49}}=\\frac{6}{7}$",
+    "$3\\cdot\\frac{1}{4}-\\frac{6}{7}=-\\frac{3}{28}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "3*sqrt(1/16) - sqrt(36/49)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "-1721/1287",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{49}{169}}=\\frac{7}{13}$",
+    "$\\sqrt{\\frac{36}{121}}=\\frac{6}{11}$",
+    "$\\sqrt{\\frac{49}{81}}=\\frac{7}{9}$",
+    "Подставляем и считаем: $2\\cdot\\frac{7}{13}-3\\cdot\\frac{6}{11}-\\frac{7}{9}=-\\frac{1721}{1287}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "2*sqrt(49/169) - 3*sqrt(36/121) - sqrt(49/81)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "166/27",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{4}{81}}=\\frac{2}{9}$",
+    "$\\sqrt{\\frac{4}{9}}=\\frac{2}{3}$",
+    "$\\sqrt{36}=6$.",
+    "$\\frac{2}{9}\\cdot\\frac{2}{3}+6=\\frac{166}{27}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "sqrt(4/81)*sqrt(4/9) + sqrt(36)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 3,
+   "id": "g-val-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "659/168",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{16}{49}}=\\frac{4}{7}$",
+    "$\\sqrt{\\frac{81}{64}}=\\frac{9}{8}$",
+    "$\\sqrt{\\frac{49}{36}}=\\frac{7}{6}$",
+    "Подставляем и считаем: $3\\cdot\\frac{4}{7}+3\\cdot\\frac{9}{8}-\\frac{7}{6}=\\frac{659}{168}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "3*sqrt(16/49) + 3*sqrt(81/64) - sqrt(49/36)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "149/18",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{25}{64}}=\\frac{5}{8}$",
+    "$\\sqrt{\\frac{16}{81}}=\\frac{4}{9}$",
+    "$\\sqrt{64}=8$.",
+    "$\\frac{5}{8}\\cdot\\frac{4}{9}+8=\\frac{149}{18}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "sqrt(25/64)*sqrt(16/81) + sqrt(64)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 3,
+   "id": "g-val-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "-62/45",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{1}{81}}=\\frac{1}{9}$",
+    "$\\sqrt{\\frac{64}{25}}=\\frac{8}{5}$",
+    "$2\\cdot\\frac{1}{9}-\\frac{8}{5}=-\\frac{62}{45}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "2*sqrt(1/81) - sqrt(64/25)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "219/65",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{81}{25}}=\\frac{9}{5}$",
+    "$\\sqrt{\\frac{9}{169}}=\\frac{3}{13}$",
+    "$2\\cdot\\frac{9}{5}-\\frac{3}{13}=\\frac{219}{65}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "2*sqrt(81/25) - sqrt(9/169)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "-32/117",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{16}{81}}=\\frac{4}{9}$",
+    "$\\sqrt{\\frac{25}{36}}=\\frac{5}{6}$",
+    "$\\sqrt{\\frac{25}{169}}=\\frac{5}{13}$",
+    "Подставляем и считаем: $4\\cdot\\frac{4}{9}-2\\cdot\\frac{5}{6}-\\frac{5}{13}=-\\frac{32}{117}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "4*sqrt(16/81) - 2*sqrt(25/36) - sqrt(25/169)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "2",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{16}{49}}=\\frac{4}{7}$",
+    "$\\sqrt{\\frac{4}{49}}=\\frac{2}{7}$",
+    "$4\\cdot\\frac{4}{7}-\\frac{2}{7}=2$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "4*sqrt(16/49) - sqrt(4/49)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 1,
+   "id": "g-val-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "1049/455",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{81}{169}}=\\frac{9}{13}$",
+    "$\\sqrt{\\frac{25}{49}}=\\frac{5}{7}$",
+    "$\\sqrt{\\frac{36}{25}}=\\frac{6}{5}$",
+    "Подставляем и считаем: $3\\cdot\\frac{9}{13}+2\\cdot\\frac{5}{7}-\\frac{6}{5}=\\frac{1049}{455}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "3*sqrt(81/169) + 2*sqrt(25/49) - sqrt(36/25)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "197/49",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{1}{49}}=\\frac{1}{7}$",
+    "$\\sqrt{\\frac{1}{49}}=\\frac{1}{7}$",
+    "$\\sqrt{16}=4$.",
+    "$\\frac{1}{7}\\cdot\\frac{1}{7}+4=\\frac{197}{49}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "sqrt(1/49)*sqrt(1/49) + sqrt(16)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 3,
+   "id": "g-val-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "-1",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{81}{64}}=\\frac{9}{8}$",
+    "$\\sqrt{\\frac{9}{16}}=\\frac{3}{4}$",
+    "$\\sqrt{\\frac{25}{4}}=\\frac{5}{2}$",
+    "Подставляем и считаем: $4\\cdot\\frac{9}{8}-4\\cdot\\frac{3}{4}-\\frac{5}{2}=-1$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "4*sqrt(81/64) - 4*sqrt(9/16) - sqrt(25/4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 2,
+   "id": "g-val-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "37/16",
+   "answerKind": "expr",
+   "hint": "Найди значение каждого корня отдельно: $\\sqrt{\\frac{a^2}{b^2}}=\\frac{a}{b}$, потом выполни действия с дробями.",
+   "solution": [
+    "$\\sqrt{\\frac{1}{4}}=\\frac{1}{2}$",
+    "$\\sqrt{\\frac{25}{64}}=\\frac{5}{8}$",
+    "$\\sqrt{4}=2$.",
+    "$\\frac{1}{2}\\cdot\\frac{5}{8}+2=\\frac{37}{16}$."
+   ],
+   "skills": [
+    "sqrt-frac",
+    "fractions"
+   ],
+   "expr": "sqrt(1/4)*sqrt(25/64) + sqrt(4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val",
+   "level": 3,
+   "id": "g-val-24",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "5",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{25\\cdot4}=\\sqrt{25}\\cdot\\sqrt{4}=5\\cdot2=10$.",
+    "$\\dfrac{\\sqrt{175}}{\\sqrt{7}}=\\sqrt{25}=5$.",
+    "$10-5=5$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(25*4) - sqrt(175)/sqrt(7)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "36",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{16\\cdot100}=\\sqrt{16}\\cdot\\sqrt{100}=4\\cdot10=40$.",
+    "$\\dfrac{\\sqrt{48}}{\\sqrt{3}}=\\sqrt{16}=4$.",
+    "$40-4=36$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(16*100) - sqrt(48)/sqrt(3)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "41",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{49\\cdot36}=\\sqrt{49}\\cdot\\sqrt{36}=7\\cdot6=42$.",
+    "$\\dfrac{\\sqrt{175}}{\\sqrt{7}}=\\sqrt{25}=5$.",
+    "$2\\sqrt{(-2)^2}=2\\cdot2=4$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$42-5+4=41$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(49*36) - sqrt(175)/sqrt(7) + 2*sqrt((-2)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "85",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{81\\cdot100}=\\sqrt{81}\\cdot\\sqrt{100}=9\\cdot10=90$.",
+    "$\\dfrac{\\sqrt{50}}{\\sqrt{2}}=\\sqrt{25}=5$.",
+    "$90-5=85$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(81*100) - sqrt(50)/sqrt(2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "43",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{49\\cdot36}=\\sqrt{49}\\cdot\\sqrt{36}=7\\cdot6=42$.",
+    "$\\dfrac{\\sqrt{150}}{\\sqrt{6}}=\\sqrt{25}=5$.",
+    "$2\\sqrt{(-3)^2}=2\\cdot3=6$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$42-5+6=43$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(49*36) - sqrt(150)/sqrt(6) + 2*sqrt((-3)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "11",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{25\\cdot16}=\\sqrt{25}\\cdot\\sqrt{16}=5\\cdot4=20$.",
+    "$\\dfrac{\\sqrt{216}}{\\sqrt{6}}=\\sqrt{36}=6$.",
+    "$3\\sqrt{(-2)^2}=3\\cdot2=6$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$3\\sqrt{9}=3\\cdot3=9$.",
+    "$20-6+6-9=11$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(25*16) - sqrt(216)/sqrt(6) + 3*sqrt((-2)^2) - 3*sqrt(9)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 3,
+   "id": "g-val2-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "45",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{100\\cdot16}=\\sqrt{100}\\cdot\\sqrt{16}=10\\cdot4=40$.",
+    "$\\dfrac{\\sqrt{63}}{\\sqrt{7}}=\\sqrt{9}=3$.",
+    "$2\\sqrt{(-4)^2}=2\\cdot4=8$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$40-3+8=45$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(100*16) - sqrt(63)/sqrt(7) + 2*sqrt((-4)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "32",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{16\\cdot49}=\\sqrt{16}\\cdot\\sqrt{49}=4\\cdot7=28$.",
+    "$\\dfrac{\\sqrt{45}}{\\sqrt{5}}=\\sqrt{9}=3$.",
+    "$3\\sqrt{(-5)^2}=3\\cdot5=15$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$4\\sqrt{4}=4\\cdot2=8$.",
+    "$28-3+15-8=32$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(16*49) - sqrt(45)/sqrt(5) + 3*sqrt((-5)^2) - 4*sqrt(4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 3,
+   "id": "g-val2-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "46",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{36\\cdot64}=\\sqrt{36}\\cdot\\sqrt{64}=6\\cdot8=48$.",
+    "$\\dfrac{\\sqrt{12}}{\\sqrt{3}}=\\sqrt{4}=2$.",
+    "$48-2=46$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(36*64) - sqrt(12)/sqrt(3)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "10",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{64\\cdot4}=\\sqrt{64}\\cdot\\sqrt{4}=8\\cdot2=16$.",
+    "$\\dfrac{\\sqrt{252}}{\\sqrt{7}}=\\sqrt{36}=6$.",
+    "$16-6=10$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(64*4) - sqrt(252)/sqrt(7)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "41",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{16\\cdot36}=\\sqrt{16}\\cdot\\sqrt{36}=4\\cdot6=24$.",
+    "$\\dfrac{\\sqrt{63}}{\\sqrt{7}}=\\sqrt{9}=3$.",
+    "$4\\sqrt{(-5)^2}=4\\cdot5=20$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$24-3+20=41$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(16*36) - sqrt(63)/sqrt(7) + 4*sqrt((-5)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "33",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{25\\cdot49}=\\sqrt{25}\\cdot\\sqrt{49}=5\\cdot7=35$.",
+    "$\\dfrac{\\sqrt{12}}{\\sqrt{3}}=\\sqrt{4}=2$.",
+    "$35-2=33$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(25*49) - sqrt(12)/sqrt(3)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "21",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{9\\cdot25}=\\sqrt{9}\\cdot\\sqrt{25}=3\\cdot5=15$.",
+    "$\\dfrac{\\sqrt{180}}{\\sqrt{5}}=\\sqrt{36}=6$.",
+    "$3\\sqrt{(-4)^2}=3\\cdot4=12$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$15-6+12=21$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(9*25) - sqrt(180)/sqrt(5) + 3*sqrt((-4)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "15",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{16\\cdot64}=\\sqrt{16}\\cdot\\sqrt{64}=4\\cdot8=32$.",
+    "$\\dfrac{\\sqrt{32}}{\\sqrt{2}}=\\sqrt{16}=4$.",
+    "$4\\sqrt{(-3)^2}=4\\cdot3=12$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$5\\sqrt{25}=5\\cdot5=25$.",
+    "$32-4+12-25=15$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(16*64) - sqrt(32)/sqrt(2) + 4*sqrt((-3)^2) - 5*sqrt(25)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 3,
+   "id": "g-val2-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "49",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{64\\cdot36}=\\sqrt{64}\\cdot\\sqrt{36}=8\\cdot6=48$.",
+    "$\\dfrac{\\sqrt{50}}{\\sqrt{2}}=\\sqrt{25}=5$.",
+    "$2\\sqrt{(-3)^2}=2\\cdot3=6$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$48-5+6=49$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(64*36) - sqrt(50)/sqrt(2) + 2*sqrt((-3)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "24",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{100\\cdot9}=\\sqrt{100}\\cdot\\sqrt{9}=10\\cdot3=30$.",
+    "$\\dfrac{\\sqrt{12}}{\\sqrt{3}}=\\sqrt{4}=2$.",
+    "$4\\sqrt{(-3)^2}=4\\cdot3=12$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$4\\sqrt{16}=4\\cdot4=16$.",
+    "$30-2+12-16=24$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(100*9) - sqrt(12)/sqrt(3) + 4*sqrt((-3)^2) - 4*sqrt(16)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 3,
+   "id": "g-val2-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "29",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{25\\cdot49}=\\sqrt{25}\\cdot\\sqrt{49}=5\\cdot7=35$.",
+    "$\\dfrac{\\sqrt{108}}{\\sqrt{3}}=\\sqrt{36}=6$.",
+    "$35-6=29$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(25*49) - sqrt(108)/sqrt(3)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "86",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{100\\cdot81}=\\sqrt{100}\\cdot\\sqrt{81}=10\\cdot9=90$.",
+    "$\\dfrac{\\sqrt{32}}{\\sqrt{2}}=\\sqrt{16}=4$.",
+    "$90-4=86$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(100*81) - sqrt(32)/sqrt(2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "26",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{36\\cdot9}=\\sqrt{36}\\cdot\\sqrt{9}=6\\cdot3=18$.",
+    "$\\dfrac{\\sqrt{80}}{\\sqrt{5}}=\\sqrt{16}=4$.",
+    "$4\\sqrt{(-3)^2}=4\\cdot3=12$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$18-4+12=26$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(36*9) - sqrt(80)/sqrt(5) + 4*sqrt((-3)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "25",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{81\\cdot9}=\\sqrt{81}\\cdot\\sqrt{9}=9\\cdot3=27$.",
+    "$\\dfrac{\\sqrt{24}}{\\sqrt{6}}=\\sqrt{4}=2$.",
+    "$27-2=25$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(81*9) - sqrt(24)/sqrt(6)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 1,
+   "id": "g-val2-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "67",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{36\\cdot100}=\\sqrt{36}\\cdot\\sqrt{100}=6\\cdot10=60$.",
+    "$\\dfrac{\\sqrt{20}}{\\sqrt{5}}=\\sqrt{4}=2$.",
+    "$3\\sqrt{(-3)^2}=3\\cdot3=9$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$60-2+9=67$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(36*100) - sqrt(20)/sqrt(5) + 3*sqrt((-3)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "68",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{81\\cdot49}=\\sqrt{81}\\cdot\\sqrt{49}=9\\cdot7=63$.",
+    "$\\dfrac{\\sqrt{50}}{\\sqrt{2}}=\\sqrt{25}=5$.",
+    "$4\\sqrt{(-4)^2}=4\\cdot4=16$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$2\\sqrt{9}=2\\cdot3=6$.",
+    "$63-5+16-6=68$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(81*49) - sqrt(50)/sqrt(2) + 4*sqrt((-4)^2) - 2*sqrt(9)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 3,
+   "id": "g-val2-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "54",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{36\\cdot81}=\\sqrt{36}\\cdot\\sqrt{81}=6\\cdot9=54$.",
+    "$\\dfrac{\\sqrt{252}}{\\sqrt{7}}=\\sqrt{36}=6$.",
+    "$2\\sqrt{(-3)^2}=2\\cdot3=6$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$54-6+6=54$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(36*81) - sqrt(252)/sqrt(7) + 2*sqrt((-3)^2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 2,
+   "id": "g-val2-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "46",
+   "answerKind": "expr",
+   "hint": "Вычисли каждое слагаемое отдельно: корень из произведения, корень из дроби, корень из квадрата.",
+   "solution": [
+    "$\\sqrt{64\\cdot25}=\\sqrt{64}\\cdot\\sqrt{25}=8\\cdot5=40$.",
+    "$\\dfrac{\\sqrt{50}}{\\sqrt{2}}=\\sqrt{25}=5$.",
+    "$3\\sqrt{(-5)^2}=3\\cdot5=15$ (корень не бывает отрицательным: $\\sqrt{a^2}=|a|$).",
+    "$2\\sqrt{4}=2\\cdot2=4$.",
+    "$40-5+15-4=46$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "sqrt-ops",
+    "abs-sqrt"
+   ],
+   "expr": "sqrt(64*25) - sqrt(50)/sqrt(2) + 3*sqrt((-5)^2) - 2*sqrt(4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "val2",
+   "level": 3,
+   "id": "g-val2-24",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "100/9",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{400\\cdot1600}=\\sqrt{400}\\cdot\\sqrt{1600}=20\\cdot40=800$.",
+    "$\\sqrt{64}\\cdot\\sqrt{81}=8\\cdot9=72$.",
+    "$\\dfrac{800}{72}=\\frac{100}{9}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(400*1600)/(sqrt(64)*sqrt(81))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "50/3",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{2500\\cdot900}=\\sqrt{2500}\\cdot\\sqrt{900}=50\\cdot30=1500$.",
+    "$\\sqrt{225}\\cdot\\sqrt{36}=15\\cdot6=90$.",
+    "$\\dfrac{1500}{90}=\\frac{50}{3}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(2500*900)/(sqrt(225)*sqrt(36))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "3/200",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{0{,}0036}=0{,}06$, $\\sqrt{0{,}0625}=0{,}25$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{16}=4$, $\\sqrt{0{,}0625}=0{,}25$.",
+    "$\\dfrac{0{,}06\\cdot0{,}25}{4\\cdot0{,}25}=\\frac{3}{200}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(0.0036)*sqrt(0.0625)/(sqrt(16)*sqrt(0.0625))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "10",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{400\\cdot3600}=\\sqrt{400}\\cdot\\sqrt{3600}=20\\cdot60=1200$.",
+    "$\\sqrt{400}\\cdot\\sqrt{36}=20\\cdot6=120$.",
+    "$\\dfrac{1200}{120}=10$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(400*3600)/(sqrt(400)*sqrt(36))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "125/2",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{225}=15$, $\\sqrt{6{,}25}=2{,}5$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}0144}=0{,}12$, $\\sqrt{25}=5$.",
+    "$\\dfrac{15\\cdot2{,}5}{0{,}12\\cdot5}=\\frac{125}{2}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(225)*sqrt(6.25)/(sqrt(0.0144)*sqrt(25))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "9",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{81}=9$, $\\sqrt{0{,}0144}=0{,}12$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}09}=0{,}3$, $\\sqrt{0{,}16}=0{,}4$.",
+    "$\\dfrac{9\\cdot0{,}12}{0{,}3\\cdot0{,}4}=9$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(81*0.0144)/(sqrt(0.09)*sqrt(0.16))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 3,
+   "id": "g-dec-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "5",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{9}=3$, $\\sqrt{0{,}49}=0{,}7$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{36}=6$, $\\sqrt{0{,}0049}=0{,}07$.",
+    "$\\dfrac{3\\cdot0{,}7}{6\\cdot0{,}07}=5$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(9)*sqrt(0.49)/(sqrt(36)*sqrt(0.0049))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "11/625",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{0{,}0121}=0{,}11$, $\\sqrt{0{,}0144}=0{,}12$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{625}=25$, $\\sqrt{0{,}0009}=0{,}03$.",
+    "$\\dfrac{0{,}11\\cdot0{,}12}{25\\cdot0{,}03}=\\frac{11}{625}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(0.0121*0.0144)/(sqrt(625)*sqrt(0.0009))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 3,
+   "id": "g-dec-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "25/4",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{400\\cdot2500}=\\sqrt{400}\\cdot\\sqrt{2500}=20\\cdot50=1000$.",
+    "$\\sqrt{64}\\cdot\\sqrt{400}=8\\cdot20=160$.",
+    "$\\dfrac{1000}{160}=\\frac{25}{4}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(400*2500)/(sqrt(64)*sqrt(400))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "625/96",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{625\\cdot2500}=\\sqrt{625}\\cdot\\sqrt{2500}=25\\cdot50=1250$.",
+    "$\\sqrt{576}\\cdot\\sqrt{64}=24\\cdot8=192$.",
+    "$\\dfrac{1250}{192}=\\frac{625}{96}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(625*2500)/(sqrt(576)*sqrt(64))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "500",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{625}=25$, $\\sqrt{0{,}49}=0{,}7$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}25}=0{,}5$, $\\sqrt{0{,}0049}=0{,}07$.",
+    "$\\dfrac{25\\cdot0{,}7}{0{,}5\\cdot0{,}07}=500$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(625)*sqrt(0.49)/(sqrt(0.25)*sqrt(0.0049))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "25/36",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{100\\cdot625}=\\sqrt{100}\\cdot\\sqrt{625}=10\\cdot25=250$.",
+    "$\\sqrt{576}\\cdot\\sqrt{225}=24\\cdot15=360$.",
+    "$\\dfrac{250}{360}=\\frac{25}{36}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(100*625)/(sqrt(576)*sqrt(225))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "1/18",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{0{,}0004}=0{,}02$, $\\sqrt{0{,}0025}=0{,}05$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}09}=0{,}3$, $\\sqrt{0{,}0036}=0{,}06$.",
+    "$\\dfrac{0{,}02\\cdot0{,}05}{0{,}3\\cdot0{,}06}=\\frac{1}{18}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(0.0004)*sqrt(0.0025)/(sqrt(0.09)*sqrt(0.0036))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "375/8",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{625}=25$, $\\sqrt{9}=3$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}64}=0{,}8$, $\\sqrt{4}=2$.",
+    "$\\dfrac{25\\cdot3}{0{,}8\\cdot2}=\\frac{375}{8}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(625*9)/(sqrt(0.64)*sqrt(4))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 3,
+   "id": "g-dec-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "5/4",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{2{,}25}=1{,}5$, $\\sqrt{0{,}16}=0{,}4$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{64}=8$, $\\sqrt{0{,}0036}=0{,}06$.",
+    "$\\dfrac{1{,}5\\cdot0{,}4}{8\\cdot0{,}06}=\\frac{5}{4}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(2.25)*sqrt(0.16)/(sqrt(64)*sqrt(0.0036))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "44/25",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{1{,}44}=1{,}2$, $\\sqrt{0{,}0121}=0{,}11$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}0225}=0{,}15$, $\\sqrt{0{,}25}=0{,}5$.",
+    "$\\dfrac{1{,}2\\cdot0{,}11}{0{,}15\\cdot0{,}5}=\\frac{44}{25}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(1.44*0.0121)/(sqrt(0.0225)*sqrt(0.25))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 3,
+   "id": "g-dec-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "3",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{400\\cdot900}=\\sqrt{400}\\cdot\\sqrt{900}=20\\cdot30=600$.",
+    "$\\sqrt{64}\\cdot\\sqrt{625}=8\\cdot25=200$.",
+    "$\\dfrac{600}{200}=3$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(400*900)/(sqrt(64)*sqrt(625))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "8",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{1600\\cdot3600}=\\sqrt{1600}\\cdot\\sqrt{3600}=40\\cdot60=2400$.",
+    "$\\sqrt{625}\\cdot\\sqrt{144}=25\\cdot12=300$.",
+    "$\\dfrac{2400}{300}=8$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(1600*3600)/(sqrt(625)*sqrt(144))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "99/1000",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{0{,}81}=0{,}9$, $\\sqrt{1{,}21}=1{,}1$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{625}=25$, $\\sqrt{0{,}16}=0{,}4$.",
+    "$\\dfrac{0{,}9\\cdot1{,}1}{25\\cdot0{,}4}=\\frac{99}{1000}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(0.81)*sqrt(1.21)/(sqrt(625)*sqrt(0.16))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "200/27",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{1600\\cdot100}=\\sqrt{1600}\\cdot\\sqrt{100}=40\\cdot10=400$.",
+    "$\\sqrt{81}\\cdot\\sqrt{36}=9\\cdot6=54$.",
+    "$\\dfrac{400}{54}=\\frac{200}{27}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(1600*100)/(sqrt(81)*sqrt(36))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 1,
+   "id": "g-dec-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "9/4",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{0{,}0225}=0{,}15$, $\\sqrt{0{,}81}=0{,}9$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{9}=3$, $\\sqrt{0{,}0004}=0{,}02$.",
+    "$\\dfrac{0{,}15\\cdot0{,}9}{3\\cdot0{,}02}=\\frac{9}{4}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(0.0225)*sqrt(0.81)/(sqrt(9)*sqrt(0.0004))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "24/35",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{0{,}04}=0{,}2$, $\\sqrt{36}=6$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}49}=0{,}7$, $\\sqrt{6{,}25}=2{,}5$.",
+    "$\\dfrac{0{,}2\\cdot6}{0{,}7\\cdot2{,}5}=\\frac{24}{35}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(0.04*36)/(sqrt(0.49)*sqrt(6.25))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 3,
+   "id": "g-dec-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "48/125",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{0{,}0016}=0{,}04$, $\\sqrt{36}=6$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}0625}=0{,}25$, $\\sqrt{6{,}25}=2{,}5$.",
+    "$\\dfrac{0{,}04\\cdot6}{0{,}25\\cdot2{,}5}=\\frac{48}{125}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(0.0016)*sqrt(36)/(sqrt(0.0625)*sqrt(6.25))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 2,
+   "id": "g-dec-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Найдите значение выражения {expr}.",
+   "answer": "40/7",
+   "answerKind": "expr",
+   "hint": "Извлеки каждый корень отдельно (корень из произведения — произведение корней), потом посчитай дробь.",
+   "solution": [
+    "$\\sqrt{0{,}36}=0{,}6$, $\\sqrt{0{,}0016}=0{,}04$ (сдвигаем запятую: два знака под корнем — один в ответе).",
+    "$\\sqrt{0{,}0036}=0{,}06$, $\\sqrt{0{,}0049}=0{,}07$.",
+    "$\\dfrac{0{,}6\\cdot0{,}04}{0{,}06\\cdot0{,}07}=\\frac{40}{7}$."
+   ],
+   "skills": [
+    "sqrt-prod",
+    "decimals",
+    "fractions"
+   ],
+   "expr": "sqrt(0.36*0.0016)/(sqrt(0.0036)*sqrt(0.0049))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "dec",
+   "level": 3,
+   "id": "g-dec-24",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "4*sqrt(2)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$32=2\\cdot 2\\cdot 2\\cdot 2\\cdot 2$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $4 \\sqrt{2}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(32)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "6*sqrt(11)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$396=2\\cdot 2\\cdot 3\\cdot 3\\cdot 11$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $6 \\sqrt{11}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(396)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "6*sqrt(2)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{50}=5\\sqrt{2}$, $\\sqrt{2}=1\\sqrt{2}$, $\\sqrt{2}=1\\sqrt{2}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $6 \\sqrt{2}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "2*sqrt(50) - 2*sqrt(2) - 2*sqrt(2)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "9*sqrt(10)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$810=2\\cdot 3\\cdot 3\\cdot 3\\cdot 3\\cdot 5$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $9 \\sqrt{10}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(810)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "4*sqrt(3)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{27}=3\\sqrt{3}$, $\\sqrt{48}=4\\sqrt{3}$, $\\sqrt{3}=1\\sqrt{3}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $4 \\sqrt{3}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "sqrt(27) + sqrt(48) - 3*sqrt(3)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "8*sqrt(3) + 19",
+   "answerKind": "expr",
+   "hint": "Квадрат суммы: $(a+b)^2=a^2+2ab+b^2$, помни $(\\sqrt{m})^2=m$.",
+   "solution": [
+    "$(\\sqrt{3}+4)^2=(3)+2\\cdot4\\sqrt{3}+16$ (квадрат суммы).",
+    "Ответ: $8 \\sqrt{3} + 19$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops"
+   ],
+   "expr": "(sqrt(3)+4)^2",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 3,
+   "id": "g-out-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "3*sqrt(3)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{3}=1\\sqrt{3}$, $\\sqrt{27}=3\\sqrt{3}$, $\\sqrt{27}=3\\sqrt{3}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $3 \\sqrt{3}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "3*sqrt(3) + 2*sqrt(27) - 2*sqrt(27)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(11) + 12",
+   "answerKind": "expr",
+   "hint": "Квадрат суммы: $(a+b)^2=a^2+2ab+b^2$, помни $(\\sqrt{m})^2=m$.",
+   "solution": [
+    "$(\\sqrt{11}+1)^2=(11)+2\\cdot1\\sqrt{11}+1$ (квадрат суммы).",
+    "Ответ: $2 \\sqrt{11} + 12$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops"
+   ],
+   "expr": "(sqrt(11)+1)^2",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 3,
+   "id": "g-out-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "3*sqrt(3)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$27=3\\cdot 3\\cdot 3$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $3 \\sqrt{3}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(27)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(5)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$20=2\\cdot 2\\cdot 5$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $2 \\sqrt{5}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(20)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "19*sqrt(5)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{5}=1\\sqrt{5}$, $\\sqrt{20}=2\\sqrt{5}$, $\\sqrt{80}=4\\sqrt{5}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $19 \\sqrt{5}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "3*sqrt(5) + 2*sqrt(20) + 3*sqrt(80)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "4*sqrt(10)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$160=2\\cdot 2\\cdot 2\\cdot 2\\cdot 2\\cdot 5$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $4 \\sqrt{10}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(160)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "19*sqrt(2)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{32}=4\\sqrt{2}$, $\\sqrt{32}=4\\sqrt{2}$, $\\sqrt{50}=5\\sqrt{2}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $19 \\sqrt{2}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "2*sqrt(32) - sqrt(32) + 3*sqrt(50)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "6*sqrt(10) + 19",
+   "answerKind": "expr",
+   "hint": "Квадрат суммы: $(a+b)^2=a^2+2ab+b^2$, помни $(\\sqrt{m})^2=m$.",
+   "solution": [
+    "$(\\sqrt{10}+3)^2=(10)+2\\cdot3\\sqrt{10}+9$ (квадрат суммы).",
+    "Ответ: $6 \\sqrt{10} + 19$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops"
+   ],
+   "expr": "(sqrt(10)+3)^2",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 3,
+   "id": "g-out-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-19*sqrt(5)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{20}=2\\sqrt{5}$, $\\sqrt{125}=5\\sqrt{5}$, $\\sqrt{45}=3\\sqrt{5}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $- 19 \\sqrt{5}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "sqrt(20) - 3*sqrt(125) - 2*sqrt(45)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-9",
+   "answerKind": "expr",
+   "hint": "Разность квадратов: $(a+b)(a-b)=a^2-b^2$.",
+   "solution": [
+    "$(\\sqrt{7}+4)(\\sqrt{7}-4)=(7)-16$ (разность квадратов).",
+    "Ответ: $-9$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops"
+   ],
+   "expr": "(sqrt(7)+4)*(sqrt(7)-4)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 3,
+   "id": "g-out-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "6*sqrt(2)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$72=2\\cdot 2\\cdot 2\\cdot 3\\cdot 3$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $6 \\sqrt{2}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(72)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(11)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$44=2\\cdot 2\\cdot 11$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $2 \\sqrt{11}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(44)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-16*sqrt(3)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{12}=2\\sqrt{3}$, $\\sqrt{48}=4\\sqrt{3}$, $\\sqrt{48}=4\\sqrt{3}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $- 16 \\sqrt{3}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "2*sqrt(12) - 2*sqrt(48) - 3*sqrt(48)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "6*sqrt(10)",
+   "answerKind": "expr",
+   "hint": "Разложи число под корнем на множители и найди пары одинаковых.",
+   "solution": [
+    "$360=2\\cdot 2\\cdot 2\\cdot 3\\cdot 3\\cdot 5$, пары одинаковых множителей выходят из-под корня.",
+    "Ответ: $6 \\sqrt{10}$."
+   ],
+   "skills": [
+    "sqrt-extract"
+   ],
+   "expr": "sqrt(360)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 1,
+   "id": "g-out-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-13*sqrt(5)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{5}=1\\sqrt{5}$, $\\sqrt{45}=3\\sqrt{5}$, $\\sqrt{80}=4\\sqrt{5}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $- 13 \\sqrt{5}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "2*sqrt(5) - sqrt(45) - 3*sqrt(80)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(3) + 4",
+   "answerKind": "expr",
+   "hint": "Квадрат суммы: $(a+b)^2=a^2+2ab+b^2$, помни $(\\sqrt{m})^2=m$.",
+   "solution": [
+    "$(\\sqrt{3}+1)^2=(3)+2\\cdot1\\sqrt{3}+1$ (квадрат суммы).",
+    "Ответ: $2 \\sqrt{3} + 4$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops"
+   ],
+   "expr": "(sqrt(3)+1)^2",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 3,
+   "id": "g-out-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "10*sqrt(3)",
+   "answerKind": "expr",
+   "hint": "Сначала упрости каждый корень, потом приведи подобные слагаемые.",
+   "solution": [
+    "Вынесем множители из-под каждого корня: $\\sqrt{3}=1\\sqrt{3}$, $\\sqrt{48}=4\\sqrt{3}$, $\\sqrt{48}=4\\sqrt{3}$.",
+    "Теперь у всех слагаемых одинаковый корень, складываем и вычитаем «как подобные».",
+    "Ответ: $10 \\sqrt{3}$."
+   ],
+   "skills": [
+    "sqrt-extract",
+    "like-terms"
+   ],
+   "expr": "2*sqrt(3) - sqrt(48) + 3*sqrt(48)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 2,
+   "id": "g-out-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(6) + 7",
+   "answerKind": "expr",
+   "hint": "Квадрат суммы: $(a+b)^2=a^2+2ab+b^2$, помни $(\\sqrt{m})^2=m$.",
+   "solution": [
+    "$(\\sqrt{6}+1)^2=(6)+2\\cdot1\\sqrt{6}+1$ (квадрат суммы).",
+    "Ответ: $2 \\sqrt{6} + 7$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops"
+   ],
+   "expr": "(sqrt(6)+1)^2",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "out",
+   "level": 3,
+   "id": "g-out-24",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "8",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{5}+4)^2=5+8\\sqrt{5}+16$.",
+    "Числитель: $5+8\\sqrt{5}+16-5=16+8\\sqrt{5}=8(\\sqrt{5}+2)$.",
+    "Сокращаем на $(\\sqrt{5}+2)$: получаем $8$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(5)+4)^2-5)/(sqrt(5)+2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-16",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{14}-8)^2=14-16\\sqrt{14}+64$.",
+    "Числитель: $14-16\\sqrt{14}+64-14=64-16\\sqrt{14}=-16(\\sqrt{14}-4)$.",
+    "Сокращаем на $(\\sqrt{14}-4)$: получаем $-16$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(14)-8)^2-14)/(sqrt(14)-4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{15}+\\sqrt{6})^2=15+6+2\\sqrt{90}$.",
+    "Числитель равен $2\\sqrt{90}$, знаменатель $\\sqrt{90}$. Ответ $2$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(15)+sqrt(6))^2-15-6)/sqrt(15*6)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "4",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{5}+2)^2=5+4\\sqrt{5}+4$.",
+    "Числитель: $5+4\\sqrt{5}+4-5=4+4\\sqrt{5}=4(\\sqrt{5}+1)$.",
+    "Сокращаем на $(\\sqrt{5}+1)$: получаем $4$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(5)+2)^2-5)/(sqrt(5)+1)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "12",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{14}+3)^2-(\\sqrt{14}-3)^2=4\\cdot3\\sqrt{14}$ (разность квадратов или раскрытие скобок).",
+    "Делим на $\\sqrt{14}$: $12$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(14)+3)^2-(sqrt(14)-3)^2)/sqrt(14)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(5)",
+   "answerKind": "expr",
+   "hint": "Числитель — разность квадратов: $a-q^2=(\\sqrt{a}-q)(\\sqrt{a}+q)$.",
+   "solution": [
+    "$\\dfrac{5-4}{\\sqrt{5}+2}$: числитель $=5-4=(\\sqrt{5}-2)(\\sqrt{5}+2)$ (разность квадратов), сокращаем: $\\sqrt{5}-2$.",
+    "Аналогично второе слагаемое равно $\\sqrt{5}+2$.",
+    "Сумма: $(\\sqrt{5}-2)+(\\sqrt{5}+2)=2\\sqrt{5}$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "(5-4)/(sqrt(5)+2)+(5-4)/(sqrt(5)-2)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 3,
+   "id": "g-sq-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "16",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{10}+4)^2-(\\sqrt{10}-4)^2=4\\cdot4\\sqrt{10}$ (разность квадратов или раскрытие скобок).",
+    "Делим на $\\sqrt{10}$: $16$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(10)+4)^2-(sqrt(10)-4)^2)/sqrt(10)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "4*sqrt(2)",
+   "answerKind": "expr",
+   "hint": "Числитель — разность квадратов: $a-q^2=(\\sqrt{a}-q)(\\sqrt{a}+q)$.",
+   "solution": [
+    "$\\dfrac{8-16}{\\sqrt{8}+4}$: числитель $=8-16=(\\sqrt{8}-4)(\\sqrt{8}+4)$ (разность квадратов), сокращаем: $\\sqrt{8}-4$.",
+    "Аналогично второе слагаемое равно $\\sqrt{8}+4$.",
+    "Сумма: $(\\sqrt{8}-4)+(\\sqrt{8}+4)=2\\sqrt{8}$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "(8-16)/(sqrt(8)+4)+(8-16)/(sqrt(8)-4)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 3,
+   "id": "g-sq-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-16",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{18}-8)^2=18-16\\sqrt{18}+64$.",
+    "Числитель: $18-16\\sqrt{18}+64-18=64-16\\sqrt{18}=-16(\\sqrt{18}-4)$.",
+    "Сокращаем на $(\\sqrt{18}-4)$: получаем $-16$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(18)-8)^2-18)/(sqrt(18)-4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "4",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{19}+2)^2=19+4\\sqrt{19}+4$.",
+    "Числитель: $19+4\\sqrt{19}+4-19=4+4\\sqrt{19}=4(\\sqrt{19}+1)$.",
+    "Сокращаем на $(\\sqrt{19}+1)$: получаем $4$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(19)+2)^2-19)/(sqrt(19)+1)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "4",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{14}+1)^2-(\\sqrt{14}-1)^2=4\\cdot1\\sqrt{14}$ (разность квадратов или раскрытие скобок).",
+    "Делим на $\\sqrt{14}$: $4$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(14)+1)^2-(sqrt(14)-1)^2)/sqrt(14)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-12",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{12}-6)^2=12-12\\sqrt{12}+36$.",
+    "Числитель: $12-12\\sqrt{12}+36-12=36-12\\sqrt{12}=-12(\\sqrt{12}-3)$.",
+    "Сокращаем на $(\\sqrt{12}-3)$: получаем $-12$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(12)-6)^2-12)/(sqrt(12)-3)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{13}+\\sqrt{11})^2=13+11+2\\sqrt{143}$.",
+    "Числитель равен $2\\sqrt{143}$, знаменатель $\\sqrt{143}$. Ответ $2$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(13)+sqrt(11))^2-13-11)/sqrt(13*11)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(7)",
+   "answerKind": "expr",
+   "hint": "Числитель — разность квадратов: $a-q^2=(\\sqrt{a}-q)(\\sqrt{a}+q)$.",
+   "solution": [
+    "$\\dfrac{7-16}{\\sqrt{7}+4}$: числитель $=7-16=(\\sqrt{7}-4)(\\sqrt{7}+4)$ (разность квадратов), сокращаем: $\\sqrt{7}-4$.",
+    "Аналогично второе слагаемое равно $\\sqrt{7}+4$.",
+    "Сумма: $(\\sqrt{7}-4)+(\\sqrt{7}+4)=2\\sqrt{7}$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "(7-16)/(sqrt(7)+4)+(7-16)/(sqrt(7)-4)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 3,
+   "id": "g-sq-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{17}+\\sqrt{15})^2=17+15+2\\sqrt{255}$.",
+    "Числитель равен $2\\sqrt{255}$, знаменатель $\\sqrt{255}$. Ответ $2$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(17)+sqrt(15))^2-17-15)/sqrt(17*15)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "4*sqrt(3)",
+   "answerKind": "expr",
+   "hint": "Числитель — разность квадратов: $a-q^2=(\\sqrt{a}-q)(\\sqrt{a}+q)$.",
+   "solution": [
+    "$\\dfrac{12-1}{\\sqrt{12}+1}$: числитель $=12-1=(\\sqrt{12}-1)(\\sqrt{12}+1)$ (разность квадратов), сокращаем: $\\sqrt{12}-1$.",
+    "Аналогично второе слагаемое равно $\\sqrt{12}+1$.",
+    "Сумма: $(\\sqrt{12}-1)+(\\sqrt{12}+1)=2\\sqrt{12}$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "(12-1)/(sqrt(12)+1)+(12-1)/(sqrt(12)-1)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 3,
+   "id": "g-sq-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "16",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{17}+8)^2=17+16\\sqrt{17}+64$.",
+    "Числитель: $17+16\\sqrt{17}+64-17=64+16\\sqrt{17}=16(\\sqrt{17}+4)$.",
+    "Сокращаем на $(\\sqrt{17}+4)$: получаем $16$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(17)+8)^2-17)/(sqrt(17)+4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-4",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{14}-2)^2=14-4\\sqrt{14}+4$.",
+    "Числитель: $14-4\\sqrt{14}+4-14=4-4\\sqrt{14}=-4(\\sqrt{14}-1)$.",
+    "Сокращаем на $(\\sqrt{14}-1)$: получаем $-4$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(14)-2)^2-14)/(sqrt(14)-1)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{6}+\\sqrt{5})^2=6+5+2\\sqrt{30}$.",
+    "Числитель равен $2\\sqrt{30}$, знаменатель $\\sqrt{30}$. Ответ $2$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(6)+sqrt(5))^2-6-5)/sqrt(6*5)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-12",
+   "answerKind": "expr",
+   "hint": "Раскрой квадрат в числителе, вынеси общий множитель и сократи на скобку из знаменателя.",
+   "solution": [
+    "$(\\sqrt{5}-6)^2=5-12\\sqrt{5}+36$.",
+    "Числитель: $5-12\\sqrt{5}+36-5=36-12\\sqrt{5}=-12(\\sqrt{5}-3)$.",
+    "Сокращаем на $(\\sqrt{5}-3)$: получаем $-12$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(5)-6)^2-5)/(sqrt(5)-3)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 1,
+   "id": "g-sq-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{12}+\\sqrt{14})^2=12+14+2\\sqrt{168}$.",
+    "Числитель равен $2\\sqrt{168}$, знаменатель $\\sqrt{168}$. Ответ $2$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(12)+sqrt(14))^2-12-14)/sqrt(12*14)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(15)",
+   "answerKind": "expr",
+   "hint": "Числитель — разность квадратов: $a-q^2=(\\sqrt{a}-q)(\\sqrt{a}+q)$.",
+   "solution": [
+    "$\\dfrac{15-16}{\\sqrt{15}+4}$: числитель $=15-16=(\\sqrt{15}-4)(\\sqrt{15}+4)$ (разность квадратов), сокращаем: $\\sqrt{15}-4$.",
+    "Аналогично второе слагаемое равно $\\sqrt{15}+4$.",
+    "Сумма: $(\\sqrt{15}-4)+(\\sqrt{15}+4)=2\\sqrt{15}$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "(15-16)/(sqrt(15)+4)+(15-16)/(sqrt(15)-4)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 3,
+   "id": "g-sq-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "16",
+   "answerKind": "expr",
+   "hint": "Раскрой скобки по формуле квадрата суммы и приведи подобные.",
+   "solution": [
+    "$(\\sqrt{13}+4)^2-(\\sqrt{13}-4)^2=4\\cdot4\\sqrt{13}$ (разность квадратов или раскрытие скобок).",
+    "Делим на $\\sqrt{13}$: $16$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "((sqrt(13)+4)^2-(sqrt(13)-4)^2)/sqrt(13)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 2,
+   "id": "g-sq-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*sqrt(11)",
+   "answerKind": "expr",
+   "hint": "Числитель — разность квадратов: $a-q^2=(\\sqrt{a}-q)(\\sqrt{a}+q)$.",
+   "solution": [
+    "$\\dfrac{11-16}{\\sqrt{11}+4}$: числитель $=11-16=(\\sqrt{11}-4)(\\sqrt{11}+4)$ (разность квадратов), сокращаем: $\\sqrt{11}-4$.",
+    "Аналогично второе слагаемое равно $\\sqrt{11}+4$.",
+    "Сумма: $(\\sqrt{11}-4)+(\\sqrt{11}+4)=2\\sqrt{11}$."
+   ],
+   "skills": [
+    "fsu",
+    "sqrt-ops",
+    "cancel"
+   ],
+   "expr": "(11-16)/(sqrt(11)+4)+(11-16)/(sqrt(11)-4)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "sq",
+   "level": 3,
+   "id": "g-sq-24",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "4 - sqrt(10)",
+   "answerKind": "expr",
+   "hint": "Умножь верх и низ на «двойника» $\\sqrt{a}-t$: в знаменателе получится разность квадратов.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{10}-4$.",
+    "Знаменатель: $(\\sqrt{10}+4)(\\sqrt{10}-4)=10-16=-6$.",
+    "$6(\\sqrt{10}-4)/-6=4 - \\sqrt{10}$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "6/(sqrt(10)+4)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "3*sqrt(2)",
+   "answerKind": "expr",
+   "hint": "Умножь числитель и знаменатель на $\\sqrt{a}$: тогда в знаменателе получится $a$.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{2}$: $\\dfrac{6\\sqrt{2}}{\\sqrt{2}\\cdot\\sqrt{2}}=\\dfrac{6\\sqrt{2}}{2}=3\\sqrt{2}$."
+   ],
+   "skills": [
+    "rationalize"
+   ],
+   "expr": "6/sqrt(2)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "3",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{5}$ взаимно уничтожаются. Остаётся $3$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "33/(4-sqrt(5)) - 12/(3-sqrt(5))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "6*sqrt(2)",
+   "answerKind": "expr",
+   "hint": "Умножь числитель и знаменатель на $\\sqrt{a}$: тогда в знаменателе получится $a$.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{2}$: $\\dfrac{12\\sqrt{2}}{\\sqrt{2}\\cdot\\sqrt{2}}=\\dfrac{12\\sqrt{2}}{2}=6\\sqrt{2}$."
+   ],
+   "skills": [
+    "rationalize"
+   ],
+   "expr": "12/sqrt(2)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-10",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{10}$ взаимно уничтожаются. Остаётся $-10$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "-2/(-3-sqrt(10)) - 12/(sqrt(10)-2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "16",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{11}$ взаимно уничтожаются. Остаётся $16$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "5/(sqrt(11)+4) + 21/(sqrt(11)-2) + 4/(-3-sqrt(11))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 3,
+   "id": "g-rat-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{2}$ взаимно уничтожаются. Остаётся $2$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "14/(sqrt(2)+3) - 4/(sqrt(2)+2)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-19",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{10}$ взаимно уничтожаются. Остаётся $-19$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "6/(sqrt(10)-4) + 2/(3-sqrt(10)) - 3/(-3-sqrt(10))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 3,
+   "id": "g-rat-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "4*sqrt(6)",
+   "answerKind": "expr",
+   "hint": "Умножь числитель и знаменатель на $\\sqrt{a}$: тогда в знаменателе получится $a$.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{6}$: $\\dfrac{24\\sqrt{6}}{\\sqrt{6}\\cdot\\sqrt{6}}=\\dfrac{24\\sqrt{6}}{6}=4\\sqrt{6}$."
+   ],
+   "skills": [
+    "rationalize"
+   ],
+   "expr": "24/sqrt(6)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "8 - 2*sqrt(10)",
+   "answerKind": "expr",
+   "hint": "Умножь верх и низ на «двойника» $\\sqrt{a}-t$: в знаменателе получится разность квадратов.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{10}-4$.",
+    "Знаменатель: $(\\sqrt{10}+4)(\\sqrt{10}-4)=10-16=-6$.",
+    "$12(\\sqrt{10}-4)/-6=8 - 2 \\sqrt{10}$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "12/(sqrt(10)+4)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "12",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{3}$ взаимно уничтожаются. Остаётся $12$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "-6/(1-sqrt(3)) - 18/(-3-sqrt(3))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "6*sqrt(5)",
+   "answerKind": "expr",
+   "hint": "Умножь числитель и знаменатель на $\\sqrt{a}$: тогда в знаменателе получится $a$.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{5}$: $\\dfrac{30\\sqrt{5}}{\\sqrt{5}\\cdot\\sqrt{5}}=\\dfrac{30\\sqrt{5}}{5}=6\\sqrt{5}$."
+   ],
+   "skills": [
+    "rationalize"
+   ],
+   "expr": "30/sqrt(5)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-10",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{11}$ взаимно уничтожаются. Остаётся $-10$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "-10/(4-sqrt(11)) - 20/(-1-sqrt(11))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-3",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{2}$ взаимно уничтожаются. Остаётся $-3$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "-4/(2-sqrt(2)) - 3/(-1-sqrt(2)) - 14/(-4-sqrt(2))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 3,
+   "id": "g-rat-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "3",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{3}$ взаимно уничтожаются. Остаётся $3$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "2/(sqrt(3)-1) - 1/(-2-sqrt(3))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "0",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{2}$ взаимно уничтожаются. Остаётся $0$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "21/(sqrt(2)+3) - 1/(-1-sqrt(2)) - 28/(sqrt(2)+4)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 3,
+   "id": "g-rat-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "-6 + 2*sqrt(11)",
+   "answerKind": "expr",
+   "hint": "Умножь верх и низ на «двойника» $\\sqrt{a}-t$: в знаменателе получится разность квадратов.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{11}-3$.",
+    "Знаменатель: $(\\sqrt{11}+3)(\\sqrt{11}-3)=11-9=2$.",
+    "$4(\\sqrt{11}-3)/2=-6 + 2 \\sqrt{11}$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "4/(sqrt(11)+3)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "4*sqrt(5)",
+   "answerKind": "expr",
+   "hint": "Умножь числитель и знаменатель на $\\sqrt{a}$: тогда в знаменателе получится $a$.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{5}$: $\\dfrac{20\\sqrt{5}}{\\sqrt{5}\\cdot\\sqrt{5}}=\\dfrac{20\\sqrt{5}}{5}=4\\sqrt{5}$."
+   ],
+   "skills": [
+    "rationalize"
+   ],
+   "expr": "20/sqrt(5)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "0",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{2}$ взаимно уничтожаются. Остаётся $0$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "14/(-3-sqrt(2)) - 14/(-3-sqrt(2))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Избавьтесь от корня в знаменателе: {expr}.",
+   "answer": "5*sqrt(11)",
+   "answerKind": "expr",
+   "hint": "Умножь числитель и знаменатель на $\\sqrt{a}$: тогда в знаменателе получится $a$.",
+   "solution": [
+    "Умножаем верх и низ на $\\sqrt{11}$: $\\dfrac{55\\sqrt{11}}{\\sqrt{11}\\cdot\\sqrt{11}}=\\dfrac{55\\sqrt{11}}{11}=5\\sqrt{11}$."
+   ],
+   "skills": [
+    "rationalize"
+   ],
+   "expr": "55/sqrt(11)",
+   "radical": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 1,
+   "id": "g-rat-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-2",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{2}$ взаимно уничтожаются. Остаётся $-2$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "7/(-3-sqrt(2)) - 1/(sqrt(2)+1)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "7",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{7}$ взаимно уничтожаются. Остаётся $7$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "9/(sqrt(7)-4) - 12/(sqrt(7)+1) - 6/(sqrt(7)-3)",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 3,
+   "id": "g-rat-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "24",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{11}$ взаимно уничтожаются. Остаётся $24$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "15/(4-sqrt(11)) - 15/(-4-sqrt(11))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 2,
+   "id": "g-rat-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "-4",
+   "answerKind": "expr",
+   "hint": "У каждой дроби умножь числитель и знаменатель на выражение, которое даёт в знаменателе разность квадратов.",
+   "solution": [
+    "Избавимся от корня в знаменателе у каждой дроби: умножаем верх и низ на «двойника» знаменателя (меняем знак перед одним слагаемым).",
+    "Разность квадратов в знаменателе даёт целое число, дроби сокращаются.",
+    "Слагаемые с $\\sqrt{10}$ взаимно уничтожаются. Остаётся $-4$."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "expr": "-18/(sqrt(10)-2) + 18/(sqrt(10)+1) + 6/(4-sqrt(10))",
+   "verify": {
+    "op": "self"
+   },
+   "group": "rat",
+   "level": 3,
+   "id": "g-rat-24",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $-2\\sqrt{2}-3$;  $\\dfrac{1}{2\\sqrt{2}+3}$;  $2\\sqrt{2}-3$ найдите пару взаимно обратных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(2\\sqrt{2}-3)(-2\\sqrt{2}-3)=(3)^2-(2\\sqrt{2})^2=9-8=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$-2\\sqrt{2}-3$ и $\\dfrac{1}{2\\sqrt{2}+3}$",
+    "$-2\\sqrt{2}-3$ и $2\\sqrt{2}-3$",
+    "$\\dfrac{1}{2\\sqrt{2}+3}$ и $2\\sqrt{2}-3$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "-2*sqrt(2)-3",
+     "1/(2*sqrt(2)+3)",
+     "2*sqrt(2)-3"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $-4\\sqrt{5}-9$;  $4\\sqrt{5}-9$;  $\\dfrac{1}{4\\sqrt{5}+9}$ найдите пару взаимно обратных чисел.",
+   "answer": "0",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(4\\sqrt{5}-9)(-4\\sqrt{5}-9)=(9)^2-(4\\sqrt{5})^2=81-80=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$-4\\sqrt{5}-9$ и $4\\sqrt{5}-9$",
+    "$-4\\sqrt{5}-9$ и $\\dfrac{1}{4\\sqrt{5}+9}$",
+    "$4\\sqrt{5}-9$ и $\\dfrac{1}{4\\sqrt{5}+9}$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "-4*sqrt(5)-9",
+     "4*sqrt(5)-9",
+     "1/(4*sqrt(5)+9)"
+    ],
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{2\\sqrt{6}+5}$;  $2\\sqrt{6}+5$;  $2\\sqrt{6}-5$ найдите пару противоположных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{6}\\cdot2+5)(2\\sqrt{6}-5)=24-25=-1$, поэтому $\\dfrac{1}{2\\sqrt{6}+5}=-(2\\sqrt{6}-5)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{2\\sqrt{6}+5}$ и $2\\sqrt{6}+5$",
+    "$\\dfrac{1}{2\\sqrt{6}+5}$ и $2\\sqrt{6}-5$",
+    "$2\\sqrt{6}+5$ и $2\\sqrt{6}-5$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "1/(2*sqrt(6)+5)",
+     "2*sqrt(6)+5",
+     "2*sqrt(6)-5"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $2\\sqrt{2}-3$;  $\\dfrac{1}{2\\sqrt{2}+3}$;  $-2\\sqrt{2}-3$ найдите пару взаимно обратных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(2\\sqrt{2}-3)(-2\\sqrt{2}-3)=(3)^2-(2\\sqrt{2})^2=9-8=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$2\\sqrt{2}-3$ и $\\dfrac{1}{2\\sqrt{2}+3}$",
+    "$2\\sqrt{2}-3$ и $-2\\sqrt{2}-3$",
+    "$\\dfrac{1}{2\\sqrt{2}+3}$ и $-2\\sqrt{2}-3$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "2*sqrt(2)-3",
+     "1/(2*sqrt(2)+3)",
+     "-2*sqrt(2)-3"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{4\\sqrt{5}+9}$;  $4\\sqrt{5}+9$;  $4\\sqrt{5}-9$ найдите пару противоположных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{5}\\cdot4+9)(4\\sqrt{5}-9)=80-81=-1$, поэтому $\\dfrac{1}{4\\sqrt{5}+9}=-(4\\sqrt{5}-9)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{4\\sqrt{5}+9}$ и $4\\sqrt{5}+9$",
+    "$\\dfrac{1}{4\\sqrt{5}+9}$ и $4\\sqrt{5}-9$",
+    "$4\\sqrt{5}+9$ и $4\\sqrt{5}-9$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "1/(4*sqrt(5)+9)",
+     "4*sqrt(5)+9",
+     "4*sqrt(5)-9"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{2\\sqrt{2}+3}$;  $-2\\sqrt{2}-3$;  $2\\sqrt{2}-3$ найдите пару взаимно обратных чисел.",
+   "answer": "2",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(2\\sqrt{2}-3)(-2\\sqrt{2}-3)=(3)^2-(2\\sqrt{2})^2=9-8=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{2\\sqrt{2}+3}$ и $-2\\sqrt{2}-3$",
+    "$\\dfrac{1}{2\\sqrt{2}+3}$ и $2\\sqrt{2}-3$",
+    "$-2\\sqrt{2}-3$ и $2\\sqrt{2}-3$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "1/(2*sqrt(2)+3)",
+     "-2*sqrt(2)-3",
+     "2*sqrt(2)-3"
+    ],
+    "pair": [
+     1,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 3,
+   "id": "g-conj-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{\\sqrt{35}+6}$;  $-\\sqrt{35}-6$;  $\\sqrt{35}-6$ найдите пару взаимно обратных чисел.",
+   "answer": "2",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(\\sqrt{35}-6)(-\\sqrt{35}-6)=(6)^2-(1\\sqrt{35})^2=36-35=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{\\sqrt{35}+6}$ и $-\\sqrt{35}-6$",
+    "$\\dfrac{1}{\\sqrt{35}+6}$ и $\\sqrt{35}-6$",
+    "$-\\sqrt{35}-6$ и $\\sqrt{35}-6$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "1/(1*sqrt(35)+6)",
+     "-1*sqrt(35)-6",
+     "1*sqrt(35)-6"
+    ],
+    "pair": [
+     1,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $-2\\sqrt{6}-5$;  $2\\sqrt{6}-5$;  $\\dfrac{1}{2\\sqrt{6}+5}$ найдите пару взаимно обратных чисел.",
+   "answer": "0",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(2\\sqrt{6}-5)(-2\\sqrt{6}-5)=(5)^2-(2\\sqrt{6})^2=25-24=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$-2\\sqrt{6}-5$ и $2\\sqrt{6}-5$",
+    "$-2\\sqrt{6}-5$ и $\\dfrac{1}{2\\sqrt{6}+5}$",
+    "$2\\sqrt{6}-5$ и $\\dfrac{1}{2\\sqrt{6}+5}$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "-2*sqrt(6)-5",
+     "2*sqrt(6)-5",
+     "1/(2*sqrt(6)+5)"
+    ],
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "group": "conj",
+   "level": 3,
+   "id": "g-conj-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $3\\sqrt{11}-10$;  $\\dfrac{1}{3\\sqrt{11}+10}$;  $-3\\sqrt{11}-10$ найдите пару взаимно обратных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(3\\sqrt{11}-10)(-3\\sqrt{11}-10)=(10)^2-(3\\sqrt{11})^2=100-99=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$3\\sqrt{11}-10$ и $\\dfrac{1}{3\\sqrt{11}+10}$",
+    "$3\\sqrt{11}-10$ и $-3\\sqrt{11}-10$",
+    "$\\dfrac{1}{3\\sqrt{11}+10}$ и $-3\\sqrt{11}-10$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "3*sqrt(11)-10",
+     "1/(3*sqrt(11)+10)",
+     "-3*sqrt(11)-10"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{6\\sqrt{10}+19}$;  $6\\sqrt{10}-19$;  $-6\\sqrt{10}-19$ найдите пару взаимно обратных чисел.",
+   "answer": "2",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(6\\sqrt{10}-19)(-6\\sqrt{10}-19)=(19)^2-(6\\sqrt{10})^2=361-360=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{6\\sqrt{10}+19}$ и $6\\sqrt{10}-19$",
+    "$\\dfrac{1}{6\\sqrt{10}+19}$ и $-6\\sqrt{10}-19$",
+    "$6\\sqrt{10}-19$ и $-6\\sqrt{10}-19$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "1/(6*sqrt(10)+19)",
+     "6*sqrt(10)-19",
+     "-6*sqrt(10)-19"
+    ],
+    "pair": [
+     1,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $3\\sqrt{7}-8$;  $3\\sqrt{7}+8$;  $\\dfrac{1}{3\\sqrt{7}+8}$ найдите пару противоположных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{7}\\cdot3+8)(3\\sqrt{7}-8)=63-64=-1$, поэтому $\\dfrac{1}{3\\sqrt{7}+8}=-(3\\sqrt{7}-8)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$3\\sqrt{7}-8$ и $3\\sqrt{7}+8$",
+    "$3\\sqrt{7}-8$ и $\\dfrac{1}{3\\sqrt{7}+8}$",
+    "$3\\sqrt{7}+8$ и $\\dfrac{1}{3\\sqrt{7}+8}$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "3*sqrt(7)-8",
+     "3*sqrt(7)+8",
+     "1/(3*sqrt(7)+8)"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $6\\sqrt{10}-19$;  $-6\\sqrt{10}-19$;  $\\dfrac{1}{6\\sqrt{10}+19}$ найдите пару взаимно обратных чисел.",
+   "answer": "0",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(6\\sqrt{10}-19)(-6\\sqrt{10}-19)=(19)^2-(6\\sqrt{10})^2=361-360=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$6\\sqrt{10}-19$ и $-6\\sqrt{10}-19$",
+    "$6\\sqrt{10}-19$ и $\\dfrac{1}{6\\sqrt{10}+19}$",
+    "$-6\\sqrt{10}-19$ и $\\dfrac{1}{6\\sqrt{10}+19}$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "6*sqrt(10)-19",
+     "-6*sqrt(10)-19",
+     "1/(6*sqrt(10)+19)"
+    ],
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{3\\sqrt{11}+10}$;  $-3\\sqrt{11}-10$;  $3\\sqrt{11}-10$ найдите пару взаимно обратных чисел.",
+   "answer": "2",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(3\\sqrt{11}-10)(-3\\sqrt{11}-10)=(10)^2-(3\\sqrt{11})^2=100-99=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{3\\sqrt{11}+10}$ и $-3\\sqrt{11}-10$",
+    "$\\dfrac{1}{3\\sqrt{11}+10}$ и $3\\sqrt{11}-10$",
+    "$-3\\sqrt{11}-10$ и $3\\sqrt{11}-10$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "1/(3*sqrt(11)+10)",
+     "-3*sqrt(11)-10",
+     "3*sqrt(11)-10"
+    ],
+    "pair": [
+     1,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{3\\sqrt{11}+10}$;  $3\\sqrt{11}+10$;  $3\\sqrt{11}-10$ найдите пару противоположных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{11}\\cdot3+10)(3\\sqrt{11}-10)=99-100=-1$, поэтому $\\dfrac{1}{3\\sqrt{11}+10}=-(3\\sqrt{11}-10)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{3\\sqrt{11}+10}$ и $3\\sqrt{11}+10$",
+    "$\\dfrac{1}{3\\sqrt{11}+10}$ и $3\\sqrt{11}-10$",
+    "$3\\sqrt{11}+10$ и $3\\sqrt{11}-10$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "1/(3*sqrt(11)+10)",
+     "3*sqrt(11)+10",
+     "3*sqrt(11)-10"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 3,
+   "id": "g-conj-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $2\\sqrt{6}-5$;  $\\dfrac{1}{2\\sqrt{6}+5}$;  $2\\sqrt{6}+5$ найдите пару противоположных чисел.",
+   "answer": "0",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{6}\\cdot2+5)(2\\sqrt{6}-5)=24-25=-1$, поэтому $\\dfrac{1}{2\\sqrt{6}+5}=-(2\\sqrt{6}-5)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$2\\sqrt{6}-5$ и $\\dfrac{1}{2\\sqrt{6}+5}$",
+    "$2\\sqrt{6}-5$ и $2\\sqrt{6}+5$",
+    "$\\dfrac{1}{2\\sqrt{6}+5}$ и $2\\sqrt{6}+5$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "2*sqrt(6)-5",
+     "1/(2*sqrt(6)+5)",
+     "2*sqrt(6)+5"
+    ],
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\sqrt{8}+3$;  $\\dfrac{1}{\\sqrt{8}+3}$;  $\\sqrt{8}-3$ найдите пару противоположных чисел.",
+   "answer": "2",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{8}\\cdot1+3)(1\\sqrt{8}-3)=8-9=-1$, поэтому $\\dfrac{1}{1\\sqrt{8}+3}=-(1\\sqrt{8}-3)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\sqrt{8}+3$ и $\\dfrac{1}{\\sqrt{8}+3}$",
+    "$\\sqrt{8}+3$ и $\\sqrt{8}-3$",
+    "$\\dfrac{1}{\\sqrt{8}+3}$ и $\\sqrt{8}-3$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "1*sqrt(8)+3",
+     "1/(1*sqrt(8)+3)",
+     "1*sqrt(8)-3"
+    ],
+    "pair": [
+     1,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 3,
+   "id": "g-conj-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $-\\sqrt{24}-5$;  $\\sqrt{24}-5$;  $\\dfrac{1}{\\sqrt{24}+5}$ найдите пару взаимно обратных чисел.",
+   "answer": "0",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(\\sqrt{24}-5)(-\\sqrt{24}-5)=(5)^2-(1\\sqrt{24})^2=25-24=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$-\\sqrt{24}-5$ и $\\sqrt{24}-5$",
+    "$-\\sqrt{24}-5$ и $\\dfrac{1}{\\sqrt{24}+5}$",
+    "$\\sqrt{24}-5$ и $\\dfrac{1}{\\sqrt{24}+5}$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "-1*sqrt(24)-5",
+     "1*sqrt(24)-5",
+     "1/(1*sqrt(24)+5)"
+    ],
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $-\\sqrt{35}-6$;  $\\dfrac{1}{\\sqrt{35}+6}$;  $\\sqrt{35}-6$ найдите пару взаимно обратных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(\\sqrt{35}-6)(-\\sqrt{35}-6)=(6)^2-(1\\sqrt{35})^2=36-35=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$-\\sqrt{35}-6$ и $\\dfrac{1}{\\sqrt{35}+6}$",
+    "$-\\sqrt{35}-6$ и $\\sqrt{35}-6$",
+    "$\\dfrac{1}{\\sqrt{35}+6}$ и $\\sqrt{35}-6$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "-1*sqrt(35)-6",
+     "1/(1*sqrt(35)+6)",
+     "1*sqrt(35)-6"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\sqrt{35}+6$;  $\\sqrt{35}-6$;  $\\dfrac{1}{\\sqrt{35}+6}$ найдите пару противоположных чисел.",
+   "answer": "2",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{35}\\cdot1+6)(1\\sqrt{35}-6)=35-36=-1$, поэтому $\\dfrac{1}{1\\sqrt{35}+6}=-(1\\sqrt{35}-6)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\sqrt{35}+6$ и $\\sqrt{35}-6$",
+    "$\\sqrt{35}+6$ и $\\dfrac{1}{\\sqrt{35}+6}$",
+    "$\\sqrt{35}-6$ и $\\dfrac{1}{\\sqrt{35}+6}$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "1*sqrt(35)+6",
+     "1*sqrt(35)-6",
+     "1/(1*sqrt(35)+6)"
+    ],
+    "pair": [
+     1,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $4\\sqrt{5}-9$;  $-4\\sqrt{5}-9$;  $\\dfrac{1}{4\\sqrt{5}+9}$ найдите пару взаимно обратных чисел.",
+   "answer": "0",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(4\\sqrt{5}-9)(-4\\sqrt{5}-9)=(9)^2-(4\\sqrt{5})^2=81-80=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$4\\sqrt{5}-9$ и $-4\\sqrt{5}-9$",
+    "$4\\sqrt{5}-9$ и $\\dfrac{1}{4\\sqrt{5}+9}$",
+    "$-4\\sqrt{5}-9$ и $\\dfrac{1}{4\\sqrt{5}+9}$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "4*sqrt(5)-9",
+     "-4*sqrt(5)-9",
+     "1/(4*sqrt(5)+9)"
+    ],
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "group": "conj",
+   "level": 1,
+   "id": "g-conj-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\sqrt{8}-3$;  $-\\sqrt{8}-3$;  $\\dfrac{1}{\\sqrt{8}+3}$ найдите пару взаимно обратных чисел.",
+   "answer": "0",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(\\sqrt{8}-3)(-\\sqrt{8}-3)=(3)^2-(1\\sqrt{8})^2=9-8=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\sqrt{8}-3$ и $-\\sqrt{8}-3$",
+    "$\\sqrt{8}-3$ и $\\dfrac{1}{\\sqrt{8}+3}$",
+    "$-\\sqrt{8}-3$ и $\\dfrac{1}{\\sqrt{8}+3}$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "1*sqrt(8)-3",
+     "-1*sqrt(8)-3",
+     "1/(1*sqrt(8)+3)"
+    ],
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $6\\sqrt{10}-19$;  $\\dfrac{1}{6\\sqrt{10}+19}$;  $6\\sqrt{10}+19$ найдите пару противоположных чисел.",
+   "answer": "0",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{10}\\cdot6+19)(6\\sqrt{10}-19)=360-361=-1$, поэтому $\\dfrac{1}{6\\sqrt{10}+19}=-(6\\sqrt{10}-19)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$6\\sqrt{10}-19$ и $\\dfrac{1}{6\\sqrt{10}+19}$",
+    "$6\\sqrt{10}-19$ и $6\\sqrt{10}+19$",
+    "$\\dfrac{1}{6\\sqrt{10}+19}$ и $6\\sqrt{10}+19$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "6*sqrt(10)-19",
+     "1/(6*sqrt(10)+19)",
+     "6*sqrt(10)+19"
+    ],
+    "pair": [
+     0,
+     1
+    ]
+   },
+   "group": "conj",
+   "level": 3,
+   "id": "g-conj-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{2\\sqrt{12}+7}$;  $2\\sqrt{12}-7$;  $-2\\sqrt{12}-7$ найдите пару взаимно обратных чисел.",
+   "answer": "2",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "Произведение $(2\\sqrt{12}-7)(-2\\sqrt{12}-7)=(7)^2-(2\\sqrt{12})^2=49-48=1$.",
+    "Произведение равно 1, значит числа взаимно обратные."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{2\\sqrt{12}+7}$ и $2\\sqrt{12}-7$",
+    "$\\dfrac{1}{2\\sqrt{12}+7}$ и $-2\\sqrt{12}-7$",
+    "$2\\sqrt{12}-7$ и $-2\\sqrt{12}-7$"
+   ],
+   "pairCheck": {
+    "kind": "inverse",
+    "exprs": [
+     "1/(2*sqrt(12)+7)",
+     "2*sqrt(12)-7",
+     "-2*sqrt(12)-7"
+    ],
+    "pair": [
+     1,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 2,
+   "id": "g-conj-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Среди чисел $\\dfrac{1}{\\sqrt{8}+3}$;  $\\sqrt{8}+3$;  $\\sqrt{8}-3$ найдите пару противоположных чисел.",
+   "answer": "1",
+   "answerKind": "choice",
+   "hint": "Перемножь пары чисел (для обратных нужно получить 1) или сложи (для противоположных нужен 0).",
+   "solution": [
+    "$(\\sqrt{8}\\cdot1+3)(1\\sqrt{8}-3)=8-9=-1$, поэтому $\\dfrac{1}{1\\sqrt{8}+3}=-(1\\sqrt{8}-3)$.",
+    "Значит первое и третье числа противоположны."
+   ],
+   "skills": [
+    "rationalize",
+    "fsu"
+   ],
+   "options": [
+    "$\\dfrac{1}{\\sqrt{8}+3}$ и $\\sqrt{8}+3$",
+    "$\\dfrac{1}{\\sqrt{8}+3}$ и $\\sqrt{8}-3$",
+    "$\\sqrt{8}+3$ и $\\sqrt{8}-3$"
+   ],
+   "pairCheck": {
+    "kind": "opposite",
+    "exprs": [
+     "1/(1*sqrt(8)+3)",
+     "1*sqrt(8)+3",
+     "1*sqrt(8)-3"
+    ],
+    "pair": [
+     0,
+     2
+    ]
+   },
+   "group": "conj",
+   "level": 3,
+   "id": "g-conj-24",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a*x^4/2",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a x^{4}}{2}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((2*a^2)/x^3)/((4*a)/x^7)",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*a*x^2/3",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{2 a x^{2}}{3}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((2*a^2)/x^3)*(x^5/(3*a))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "3*x^5/(5*a^4)",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{3 x^{5}}{5 a^{4}}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((6*a+12*b)/(a^6*x))/((10*a+20*b)/(a^2*x^6))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a*x^4/2",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a x^{4}}{2}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((3*a^2)/x^1)/((6*a)/x^5)",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a^3*x^4/4",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a^{3} x^{4}}{4}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2+3*a)/x^1)*((a^2*x^5)/(4*a+12))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "(a - 4)/(x + 3)",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a - 4}{x + 3}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2-16)/(x^2-9))/((a+4)/(x-3))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 3,
+   "id": "g-prd-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a^3*x^2/3",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a^{3} x^{2}}{3}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2+4*a)/x^1)*((a^2*x^3)/(3*a+12))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "(a - 6)/(x + 5)",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a - 6}{x + 5}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2-36)/(x^2-25))/((a+6)/(x-5))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 3,
+   "id": "g-prd-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a*x",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $a x$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((3*a^2)/x^1)*(x^2/(3*a))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "3*a*x/2",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{3 a x}{2}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((3*a^2)/x^1)/((2*a)/x^2)",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a^4*x^4/3",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a^{4} x^{4}}{3}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2+5*a)/x^2)*((a^3*x^6)/(3*a+15))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*a*x^2",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $2 a x^{2}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((4*a^2)/x^2)*(x^4/(2*a))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a^2*x/4",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a^{2} x}{4}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2+5*a)/x^2)*((a^1*x^3)/(4*a+20))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "(a - 3)/(x - 4)",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a - 3}{x - 4}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2-9)/(x^2-16))*((x+4)/(a+3))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 3,
+   "id": "g-prd-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a^4*x^5/4",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a^{4} x^{5}}{4}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2+4*a)/x^1)*((a^3*x^6)/(4*a+16))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "(a - 4)/(x - 6)",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a - 4}{x - 6}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2-16)/(x^2-36))*((x+6)/(a+4))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 3,
+   "id": "g-prd-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a*x^2/2",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a x^{2}}{2}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((3*a^2)/x^2)*(x^4/(6*a))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "2*a*x^2/3",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{2 a x^{2}}{3}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((2*a^2)/x^2)*(x^4/(3*a))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "3*x^2/(5*a^6)",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{3 x^{2}}{5 a^{6}}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((3*a+9*b)/(a^8*x))/((5*a+15*b)/(a^2*x^3))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a*x/3",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a x}{3}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((2*a^2)/x^3)*(x^4/(6*a))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 1,
+   "id": "g-prd-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "a^2*x^3/2",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a^{2} x^{3}}{2}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2+4*a)/x^2)*((a^1*x^5)/(2*a+8))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "(a - 2)/(x - 3)",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a - 2}{x - 3}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2-4)/(x^2-9))*((x+3)/(a+2))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 3,
+   "id": "g-prd-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "3*x^5/a^3",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{3 x^{5}}{a^{3}}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((12*a+18*b)/(a^5*x))/((4*a+6*b)/(a^2*x^6))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 2,
+   "id": "g-prd-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Упростите выражение {expr}.",
+   "answer": "(a - 7)/(x - 4)",
+   "answerKind": "expr",
+   "hint": "Разложи на множители числители и знаменатели, потом сократи. Деление — это умножение на перевёрнутую дробь.",
+   "solution": [
+    "Деление заменяем умножением на перевёрнутую дробь (если оно есть).",
+    "Раскладываем числители и знаменатели на множители, сокращаем общие.",
+    "Получаем $\\frac{a - 7}{x - 4}$."
+   ],
+   "skills": [
+    "fraction-mult",
+    "cancel",
+    "fsu"
+   ],
+   "expr": "((a^2-49)/(x^2-16))*((x+4)/(a+7))",
+   "reduce": true,
+   "verify": {
+    "op": "self"
+   },
+   "group": "prd",
+   "level": 3,
+   "id": "g-prd-24",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{5}{z}=\\frac{1}{y}+\\frac{4}{x}$ выразите $y$ через $z$ и $x$. Ответ упростите.",
+   "answer": "x*z/(5*x - 4*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=\\frac{x z}{5 x - 4 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "5/z",
+    "rhs": "1/y+4/x",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-01",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{5}{y}=\\frac{1}{z}-\\frac{4}{x}$ выразите $z$ через $y$ и $x$. Ответ упростите.",
+   "answer": "x*y/(5*x + 4*y)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $z$ и упрощаем: $z=\\frac{x y}{5 x + 4 y}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "5/y",
+    "rhs": "1/z-4/x",
+    "solveFor": "z"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-02",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{1}{x}=\\frac{2}{z}+\\frac{3}{y}$ выразите $y$ через $x$ и $z$. Ответ упростите.",
+   "answer": "-3*x*z/(2*x - z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=- \\frac{3 x z}{2 x - z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "1/x",
+    "rhs": "2/z+3/y",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-03",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{4}{z}=\\frac{3}{y}-\\frac{5}{x}$ выразите $y$ через $z$ и $x$. Ответ упростите.",
+   "answer": "3*x*z/(4*x + 5*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=\\frac{3 x z}{4 x + 5 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "4/z",
+    "rhs": "3/y-5/x",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-04",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{3}{y}=\\frac{5}{z}+\\frac{3}{x}$ выразите $x$ через $y$ и $z$. Ответ упростите.",
+   "answer": "-3*y*z/(5*y - 3*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=- \\frac{3 y z}{5 y - 3 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "3/y",
+    "rhs": "5/z+3/x",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-05",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{3}{x}=\\frac{5}{z}-\\frac{5}{y}$ выразите $x$ через $z$ и $y$. Ответ упростите.",
+   "answer": "3*y*z/(5*(y - z))",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=\\frac{3 y z}{5 \\left(y - z\\right)}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "3/x",
+    "rhs": "5/z-5/y",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 3,
+   "id": "g-frm-06",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{3}{z}=\\frac{2}{y}+\\frac{3}{x}$ выразите $x$ через $z$ и $y$. Ответ упростите.",
+   "answer": "3*y*z/(3*y - 2*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=\\frac{3 y z}{3 y - 2 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "3/z",
+    "rhs": "2/y+3/x",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-07",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{5}{z}=\\frac{5}{x}+\\frac{5}{y}$ выразите $y$ через $z$ и $x$. Ответ упростите.",
+   "answer": "x*z/(x - z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=\\frac{x z}{x - z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "5/z",
+    "rhs": "5/x+5/y",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 3,
+   "id": "g-frm-08",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{4}{z}=\\frac{1}{x}-\\frac{2}{y}$ выразите $x$ через $z$ и $y$. Ответ упростите.",
+   "answer": "y*z/(2*(2*y + z))",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=\\frac{y z}{2 \\left(2 y + z\\right)}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "4/z",
+    "rhs": "1/x-2/y",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-09",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{2}{z}=\\frac{5}{x}-\\frac{5}{y}$ выразите $x$ через $z$ и $y$. Ответ упростите.",
+   "answer": "5*y*z/(2*y + 5*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=\\frac{5 y z}{2 y + 5 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "2/z",
+    "rhs": "5/x-5/y",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-10",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{1}{z}=\\frac{4}{y}+\\frac{1}{x}$ выразите $y$ через $z$ и $x$. Ответ упростите.",
+   "answer": "4*x*z/(x - z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=\\frac{4 x z}{x - z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "1/z",
+    "rhs": "4/y+1/x",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-11",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{2}{z}=\\frac{5}{x}-\\frac{2}{y}$ выразите $x$ через $z$ и $y$. Ответ упростите.",
+   "answer": "5*y*z/(2*(y + z))",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=\\frac{5 y z}{2 \\left(y + z\\right)}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "2/z",
+    "rhs": "5/x-2/y",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-12",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{3}{y}=\\frac{2}{x}-\\frac{1}{z}$ выразите $x$ через $y$ и $z$. Ответ упростите.",
+   "answer": "2*y*z/(y + 3*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=\\frac{2 y z}{y + 3 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "3/y",
+    "rhs": "2/x-1/z",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-13",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{4}{x}=\\frac{3}{z}+\\frac{3}{y}$ выразите $z$ через $x$ и $y$. Ответ упростите.",
+   "answer": "-3*x*y/(3*x - 4*y)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $z$ и упрощаем: $z=- \\frac{3 x y}{3 x - 4 y}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "4/x",
+    "rhs": "3/z+3/y",
+    "solveFor": "z"
+   },
+   "group": "frm",
+   "level": 3,
+   "id": "g-frm-14",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{1}{z}=\\frac{2}{x}+\\frac{3}{y}$ выразите $y$ через $z$ и $x$. Ответ упростите.",
+   "answer": "3*x*z/(x - 2*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=\\frac{3 x z}{x - 2 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "1/z",
+    "rhs": "2/x+3/y",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-15",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{2}{y}=\\frac{4}{z}+\\frac{4}{x}$ выразите $x$ через $y$ и $z$. Ответ упростите.",
+   "answer": "-2*y*z/(2*y - z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=- \\frac{2 y z}{2 y - z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "2/y",
+    "rhs": "4/z+4/x",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 3,
+   "id": "g-frm-16",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{2}{x}=\\frac{1}{z}+\\frac{4}{y}$ выразите $z$ через $x$ и $y$. Ответ упростите.",
+   "answer": "-x*y/(2*(2*x - y))",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $z$ и упрощаем: $z=- \\frac{x y}{2 \\left(2 x - y\\right)}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "2/x",
+    "rhs": "1/z+4/y",
+    "solveFor": "z"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-17",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{3}{x}=\\frac{2}{z}+\\frac{4}{y}$ выразите $z$ через $x$ и $y$. Ответ упростите.",
+   "answer": "-2*x*y/(4*x - 3*y)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $z$ и упрощаем: $z=- \\frac{2 x y}{4 x - 3 y}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "3/x",
+    "rhs": "2/z+4/y",
+    "solveFor": "z"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-18",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{1}{x}=\\frac{2}{y}-\\frac{3}{z}$ выразите $z$ через $x$ и $y$. Ответ упростите.",
+   "answer": "3*x*y/(2*x - y)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $z$ и упрощаем: $z=\\frac{3 x y}{2 x - y}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "1/x",
+    "rhs": "2/y-3/z",
+    "solveFor": "z"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-19",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{3}{x}=\\frac{5}{y}-\\frac{4}{z}$ выразите $y$ через $x$ и $z$. Ответ упростите.",
+   "answer": "5*x*z/(4*x + 3*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=\\frac{5 x z}{4 x + 3 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "3/x",
+    "rhs": "5/y-4/z",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 1,
+   "id": "g-frm-20",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{3}{x}=\\frac{5}{y}-\\frac{2}{z}$ выразите $y$ через $x$ и $z$. Ответ упростите.",
+   "answer": "5*x*z/(2*x + 3*z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=\\frac{5 x z}{2 x + 3 z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "3/x",
+    "rhs": "5/y-2/z",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-21",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{2}{x}=\\frac{2}{z}-\\frac{4}{y}$ выразите $y$ через $x$ и $z$. Ответ упростите.",
+   "answer": "2*x*z/(x - z)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $y$ и упрощаем: $y=\\frac{2 x z}{x - z}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "2/x",
+    "rhs": "2/z-4/y",
+    "solveFor": "y"
+   },
+   "group": "frm",
+   "level": 3,
+   "id": "g-frm-22",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{2}{x}=\\frac{5}{y}+\\frac{3}{z}$ выразите $z$ через $x$ и $y$. Ответ упростите.",
+   "answer": "-3*x*y/(5*x - 2*y)",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $z$ и упрощаем: $z=- \\frac{3 x y}{5 x - 2 y}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "2/x",
+    "rhs": "5/y+3/z",
+    "solveFor": "z"
+   },
+   "group": "frm",
+   "level": 2,
+   "id": "g-frm-23",
+   "source": "генератор"
+  },
+  {
+   "prompt": "Из формулы $\\frac{3}{y}=\\frac{3}{z}-\\frac{1}{x}$ выразите $x$ через $y$ и $z$. Ответ упростите.",
+   "answer": "y*z/(3*(y - z))",
+   "answerKind": "expr",
+   "hint": "Сложи (вычти) дроби с другой стороны, приведя к общему знаменателю, потом переверни обе части.",
+   "solution": [
+    "Приведём дроби к общему знаменателю и избавимся от знаменателей.",
+    "Выражаем $x$ и упрощаем: $x=\\frac{y z}{3 \\left(y - z\\right)}$."
+   ],
+   "skills": [
+    "fraction-add",
+    "formula"
+   ],
+   "reduce": true,
+   "formula": {
+    "lhs": "3/y",
+    "rhs": "3/z-1/x",
+    "solveFor": "x"
+   },
+   "group": "frm",
+   "level": 3,
+   "id": "g-frm-24",
+   "source": "генератор"
+  }
+ ]
+}
