@@ -4,7 +4,7 @@ import { normalizeInput } from './normalize'
 import { tryParse, type Parsed } from './expr'
 import type { AnswerKind } from '../content/types'
 
-export type CheckStatus = 'correct' | 'wrong' | 'invalid' | 'notReduced' | 'notSingle' | 'empty'
+export type CheckStatus = 'correct' | 'wrong' | 'invalid' | 'notReduced' | 'notSingle' | 'approx' | 'empty'
 export type CheckResult = { status: CheckStatus; message: string }
 
 export const MESSAGES = {
@@ -14,6 +14,8 @@ export const MESSAGES = {
   wrong: 'Пока не верно. Посмотри на подсказку и попробуй ещё раз.',
   notReduced: 'Значение верное, но дробь можно сократить ещё.',
   notSingle: 'Значение верное, но запиши ответ одной дробью.',
+  approx: 'Это приблизительное значение. Запиши точный ответ обыкновенной дробью, например 2/3.',
+  inverted: 'Похоже, дробь перевёрнута: проверь, что у тебя в числителе, а что в знаменателе.',
   correct: 'Верно!',
 }
 
@@ -44,6 +46,23 @@ function sameSet(a: number[], b: number[]): boolean {
   return a.length === b.length && a.every((v, i) => Math.abs(v - b[i]) <= 1e-9 * Math.max(1, Math.abs(v)))
 }
 
+/** Подсказки для числовых ответов: округление и «перевёрнутая» дробь. */
+function diagnoseNumbers(input: string, user: Parsed, ref: Parsed): CheckResult | null {
+  if (user.vars.length > 0 || ref.vars.length > 0) return null
+  const vu = user.fn({})
+  const vr = ref.fn({})
+  if (vu === null || vr === null || vr === 0 || vu === 0) return null
+  const refIsShortDecimal = Math.abs(vr * 1000 - Math.round(vr * 1000)) < 1e-6
+  const typedDecimal = /\d\.\d/.test(normalizeInput(input))
+  if (typedDecimal && !refIsShortDecimal && Math.abs(vu - vr) / Math.abs(vr) < 0.03) {
+    return { status: 'approx', message: MESSAGES.approx }
+  }
+  if (Math.abs(Math.abs(vr) - 1) > 1e-9 && Math.abs(vu * vr - 1) < 1e-9) {
+    return { status: 'wrong', message: MESSAGES.inverted }
+  }
+  return null
+}
+
 export function checkAnswer(
   input: string,
   answer: string,
@@ -65,7 +84,7 @@ export function checkAnswer(
   if (!user) return { status: 'invalid', message: MESSAGES.invalid }
   const ref = tryParse(answer)
   if (!ref) throw new Error(`Некорректный эталонный ответ: ${answer}`)
-  if (!equivalent(user, ref)) return { status: 'wrong', message: MESSAGES.wrong }
+  if (!equivalent(user, ref)) return diagnoseNumbers(input, user, ref) ?? { status: 'wrong', message: MESSAGES.wrong }
 
   if (opts.reduce) {
     if (!fractionShape(user.node).single) return { status: 'notSingle', message: MESSAGES.notSingle }

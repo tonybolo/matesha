@@ -1,0 +1,99 @@
+# Шпаргалка. У пунктов с lhs/rhs тесты проверяют равенство числами (запись для компьютера: x^2, дробь через /).
+sections:
+  - title: Сокращённое умножение
+    items:
+      - name: Квадрат суммы
+        tex: '(a+b)^2=a^2+2ab+b^2'
+        lhs: '(a+b)^2'
+        rhs: 'a^2+2ab+b^2'
+      - name: Квадрат разности
+        tex: '(a-b)^2=a^2-2ab+b^2'
+        lhs: '(a-b)^2'
+        rhs: 'a^2-2ab+b^2'
+      - name: Разность квадратов
+        tex: 'a^2-b^2=(a-b)(a+b)'
+        lhs: 'a^2-b^2'
+        rhs: '(a-b)(a+b)'
+      - name: Куб суммы
+        tex: '(a+b)^3=a^3+3a^2b+3ab^2+b^3'
+        lhs: '(a+b)^3'
+        rhs: 'a^3+3a^2b+3ab^2+b^3'
+      - name: Куб разности
+        tex: '(a-b)^3=a^3-3a^2b+3ab^2-b^3'
+        lhs: '(a-b)^3'
+        rhs: 'a^3-3a^2b+3ab^2-b^3'
+      - name: Сумма кубов
+        tex: 'a^3+b^3=(a+b)(a^2-ab+b^2)'
+        lhs: 'a^3+b^3'
+        rhs: '(a+b)(a^2-ab+b^2)'
+      - name: Разность кубов
+        tex: 'a^3-b^3=(a-b)(a^2+ab+b^2)'
+        lhs: 'a^3-b^3'
+        rhs: '(a-b)(a^2+ab+b^2)'
+
+  - title: Разложение на множители
+    items:
+      - name: Вынесение общего множителя
+        tex: 'ax+ay=a(x+y)'
+        lhs: 'ax+ay'
+        rhs: 'a(x+y)'
+      - name: Группировка
+        tex: 'ax+ay+bx+by=(a+b)(x+y)'
+        lhs: 'ax+ay+bx+by'
+        rhs: '(a+b)(x+y)'
+      - name: Противоположные выражения
+        tex: 'b-a=-(a-b)'
+        lhs: 'b-a'
+        rhs: '-(a-b)'
+
+  - title: Дроби
+    items:
+      - name: Основное свойство дроби (c ≠ 0)
+        tex: '\frac{a}{b}=\frac{a\cdot c}{b\cdot c}'
+        lhs: 'a/b'
+        rhs: '(a c)/(b c)'
+      - name: Знаки в дроби
+        tex: '\frac{-a}{b}=\frac{a}{-b}=-\frac{a}{b}'
+        lhs: '(-a)/b'
+        rhs: '-(a/b)'
+      - name: Сложение с одинаковыми знаменателями
+        tex: '\frac{a}{c}+\frac{b}{c}=\frac{a+b}{c}'
+        lhs: 'a/c+b/c'
+        rhs: '(a+b)/c'
+      - name: Вычитание с одинаковыми знаменателями
+        tex: '\frac{a}{c}-\frac{b}{c}=\frac{a-b}{c}'
+        lhs: 'a/c-b/c'
+        rhs: '(a-b)/c'
+      - name: Сложение с разными знаменателями
+        tex: '\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}'
+        lhs: 'a/b+c/d'
+        rhs: '(a d+b c)/(b d)'
+
+  - title: Степени
+    items:
+      - name: Произведение степеней
+        tex: 'a^m\cdot a^n=a^{m+n}'
+        lhs: 'a^m a^n'
+        rhs: 'a^(m+n)'
+      - name: Частное степеней
+        tex: 'a^m:a^n=a^{m-n}'
+        lhs: 'a^m/a^n'
+        rhs: 'a^(m-n)'
+      - name: Степень степени
+        tex: '(a^m)^n=a^{mn}'
+        lhs: '(a^m)^n'
+        rhs: 'a^(m n)'
+      - name: Степень произведения
+        tex: '(ab)^n=a^nb^n'
+        lhs: '(a b)^n'
+        rhs: 'a^n b^n'
+      - name: Степень дроби
+        tex: '\left(\frac{a}{b}\right)^n=\frac{a^n}{b^n}'
+        lhs: '(a/b)^n'
+        rhs: 'a^n/b^n'
+      - name: Отрицательная степень
+        tex: 'a^{-n}=\frac{1}{a^n}'
+        lhs: 'a^(-n)'
+        rhs: '1/a^n'
+      - name: Нулевая степень (a ≠ 0)
+        tex: 'a^0=1'

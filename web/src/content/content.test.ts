@@ -1,5 +1,7 @@
 import katex from 'katex'
 import { describe, expect, it } from 'vitest'
+import { cheatsheet, cubes, squares } from './cheatsheet'
+import { equivalent } from '../lib/equivalence'
 import { checkAnswer } from '../lib/check'
 import { tryParse } from '../lib/expr'
 import { mathOf } from '../lib/rich'
@@ -80,4 +82,32 @@ describe('контент', () => {
       })
     })
   }
+})
+
+describe('шпаргалка', () => {
+  const items = cheatsheet.flatMap((s) => s.items)
+  it('не пустая', () => {
+    expect(cheatsheet.length).toBeGreaterThanOrEqual(4)
+    expect(items.length).toBeGreaterThan(15)
+  })
+  it('формулы собираются в KaTeX', () => {
+    for (const it of items) texOk(it.tex, it.name)
+  })
+  it('тождества верны (проверка числами)', () => {
+    for (const it of items) {
+      if (!it.lhs || !it.rhs) continue
+      const l = tryParse(it.lhs)
+      const r = tryParse(it.rhs)
+      expect(l, `${it.name}: lhs`).not.toBeNull()
+      expect(r, `${it.name}: rhs`).not.toBeNull()
+      expect(equivalent(l!, r!), it.name).toBe(true)
+    }
+  })
+  it('ловит неверное тождество', () => {
+    expect(equivalent(tryParse('(a+b)^2')!, tryParse('a^2+b^2')!)).toBe(false)
+  })
+  it('таблицы квадратов и кубов', () => {
+    expect(squares[19]).toEqual({ n: 20, v: 400 })
+    expect(cubes[9]).toEqual({ n: 10, v: 1000 })
+  })
 })

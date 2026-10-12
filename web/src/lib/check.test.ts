@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { checkAnswer, parseNumberSet } from './check'
+import { checkAnswer, MESSAGES, parseNumberSet } from './check'
 import { toTex } from './expr'
 import { normalizeInput } from './normalize'
 
@@ -55,6 +55,29 @@ describe('эквивалентность выражений', () => {
   it('несколько переменных', () => {
     expect(ok('(a+b)/(a-b)', '(b+a)/(-b+a)', true)).toBe('correct')
     expect(ok('(a^2+b^2)/(a^2-b^2)', '(a^2+b^2)/((a-b)(a+b))', true)).toBe('correct')
+  })
+})
+
+describe('числовые подсказки', () => {
+  const run = (input: string, answer: string) => checkAnswer(input, answer, 'expr')
+  it('точное десятичное значение засчитывается', () => {
+    expect(run('1.5', '3/2').status).toBe('correct')
+    expect(run('0,25', '1/4').status).toBe('correct')
+  })
+  it('округление не засчитывается, но и не считается ошибкой', () => {
+    expect(run('0.67', '2/3').status).toBe('approx')
+    expect(run('0,6667', '2/3').status).toBe('approx')
+    expect(run('0.7', '2/3').status).toBe('wrong')
+  })
+  it('перевёрнутая дробь', () => {
+    const r = run('1.5', '2/3')
+    expect(r.status).toBe('wrong')
+    expect(r.message).toContain('перевёрнута')
+    expect(run('3/2', '2/3').message).toContain('перевёрнута')
+  })
+  it('обычный неверный ответ без особых подсказок', () => {
+    expect(run('5', '2/3').message).toBe(MESSAGES.wrong)
+    expect(run('1.51', '1.5').message).toBe(MESSAGES.wrong)
   })
 })
 
