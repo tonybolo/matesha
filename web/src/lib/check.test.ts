@@ -145,6 +145,13 @@ describe('наборы чисел', () => {
     expect(parseNumberSet('4, -4')).toEqual([-4, 4])
     expect(parseNumberSet('два')).toBeNull()
   })
+  it('разбор: подписи x₁ =, «ответ:», «или»', () => {
+    expect(parseNumberSet('x1 = 2, x2 = 3')).toEqual([2, 3])
+    expect(parseNumberSet('x₁=2; x₂=-3')).toEqual([-3, 2])
+    expect(parseNumberSet('ответ: 2 или 3')).toEqual([2, 3])
+    expect(parseNumberSet('x=2 или x=3')).toEqual([2, 3])
+    expect(parseNumberSet('Корни: 5; -5')).toEqual([-5, 5])
+  })
   it('подсказки: не все корни, лишние, корней нет', () => {
     expect(checkAnswer('3', '3; -3', 'roots').message).toBe(MESSAGES.rootsMissing)
     expect(checkAnswer('3; -3; 5', '3; -3', 'roots').message).toBe(MESSAGES.rootsExtra)
@@ -157,6 +164,27 @@ describe('наборы чисел', () => {
     expect(checkAnswer('-3;3', '3; -3', 'roots').status).toBe('correct')
     expect(checkAnswer('3', '3; -3', 'roots').status).toBe('wrong')
     expect(checkAnswer('нет корней', 'нет', 'roots').status).toBe('correct')
+  })
+})
+
+describe('удобство ввода', () => {
+  it('«x = 5» и «ответ: 5» принимаются как 5, если ответ — число', () => {
+    expect(checkAnswer('x = 5', '5', 'expr').status).toBe('correct')
+    expect(checkAnswer('ответ: 5', '5', 'expr').status).toBe('correct')
+    expect(checkAnswer('p=12', '12', 'expr').status).toBe('correct')
+    expect(checkAnswer('x = 6', '5', 'expr').status).toBe('wrong')
+  })
+  it('смешанное число просим записать дробью', () => {
+    const r = checkAnswer('2 1/3', '7/3', 'expr')
+    expect(r.status).toBe('invalid')
+    expect(r.message).toBe(MESSAGES.mixed)
+    expect(checkAnswer('-1 1/2', '-3/2', 'expr').message).toBe(MESSAGES.mixed)
+    expect(checkAnswer('2 1/3', '7/3', 'roots').message).toBe(MESSAGES.mixed)
+    expect(checkAnswer('7/3', '7/3', 'expr').status).toBe('correct')
+  })
+  it('в ответах с буквами метка не отрезается', () => {
+    expect(checkAnswer('x+1', 'x+1', 'expr').status).toBe('correct')
+    expect(checkAnswer('2x', '2*x', 'expr').status).toBe('correct')
   })
 })
 

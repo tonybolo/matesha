@@ -30,20 +30,26 @@ export const MESSAGES = {
   rootsExtra: 'Среди ответов есть лишнее значение: проверь каждое подстановкой в уравнение.',
   rootsNone: 'На самом деле корней нет: проверь дискриминант (D меньше нуля) или знак числа справа.',
   rootsHave: 'Корни есть: проверь дискриминант (D больше или равен нулю) и реши ещё раз.',
+  mixed: 'Смешанное число запиши обыкновенной дробью: вместо «2 1/3» напиши 7/3.',
 }
 
 const EMPTY_SET = /^(нет|нет корней|нет таких|нет таких значений|пусто|∅|none|-)$/
+/** «2 1/3» — смешанное число: слитная запись читалась бы как произведение, поэтому просим дробь. */
+const MIXED = /\d+\s+\d+\s*\/\s*\d+/
+const ANSWER_WORD = /^\s*(?:ответ|корни|корень)\s*[:=]?\s*/i
+/** «x = », «x₁ = », «x1 = », «p = » перед числом. */
+const VAR_LABEL = /^\s*[a-zа-я][₁₂₃₄0-9]?\s*(?:=|∈)\s*/i
 
 /** Разбор «2; -3» в отсортированный список чисел. null — не разобралось. */
 export function parseNumberSet(raw: string): number[] | null {
   let s = raw.trim().toLowerCase()
-  s = s.replace(/^[xх]\s*(=|∈)\s*/, '').replace(/[{}]/g, '')
+  s = s.replace(ANSWER_WORD, '').replace(VAR_LABEL, '').replace(/[{}]/g, '')
   if (!s) return null
   if (EMPTY_SET.test(s)) return []
-  const parts = s.includes(';') ? s.split(';') : s.split(/\s*(?:,|\sи\s)\s*/)
+  const parts = s.includes(';') ? s.split(';') : s.split(/\s*(?:,|\sи\s|\sили\s)\s*/)
   const out: number[] = []
   for (const part of parts) {
-    const t = part.replace(/^[xх]\s*=\s*/, '').trim()
+    const t = part.replace(VAR_LABEL, '').trim()
     if (!t) continue
     const p = tryParse(normalizeInput(t) === t ? t : t)
     if (!p || p.vars.length > 0) return null
@@ -117,7 +123,7 @@ export function checkAnswer(input: string, answer: string, kind: AnswerKind, opt
 
   if (kind === 'roots') {
     const user = parseNumberSet(input)
-    if (!user) return { status: 'invalid', message: MESSAGES.invalid }
+    if (!user) return { status: 'invalid', message: MIXED.test(input) ? MESSAGES.mixed : MESSAGES.invalid }
     const ref = parseNumberSet(answer) ?? []
     if (sameSet(user, ref)) return { status: 'correct', message: MESSAGES.correct }
     const has = (list: number[], v: number) => list.some((r) => Math.abs(r - v) <= 1e-9 * Math.max(1, Math.abs(v)))
@@ -128,11 +134,14 @@ export function checkAnswer(input: string, answer: string, kind: AnswerKind, opt
     return { status: 'wrong', message: MESSAGES.wrong }
   }
 
-  const user: Parsed | null = tryParse(input)
-  if (!user) return { status: 'invalid', message: MESSAGES.invalid }
   const ref = tryParse(answer)
   if (!ref) throw new Error(`Некорректный эталонный ответ: ${answer}`)
-  if (!equivalent(user, ref)) return diagnoseNumbers(input, user, ref) ?? { status: 'wrong', message: MESSAGES.wrong }
+  // Если ответ — число, «x = 5» и «ответ: 5» принимаем как 5.
+  const text = ref.vars.length === 0 ? input.replace(ANSWER_WORD, '').replace(VAR_LABEL, '') : input
+  if (MIXED.test(text)) return { status: 'invalid', message: MESSAGES.mixed }
+  const user: Parsed | null = tryParse(text)
+  if (!user) return { status: 'invalid', message: MESSAGES.invalid }
+  if (!equivalent(user, ref)) return diagnoseNumbers(text, user, ref) ?? { status: 'wrong', message: MESSAGES.wrong }
 
   if (opts.radical) {
     const issue = radicalIssue(user.node)
