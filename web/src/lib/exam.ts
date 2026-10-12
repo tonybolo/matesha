@@ -2,7 +2,7 @@ import type { Task, Topic } from '../content/types'
 import { mulberry32 } from './equivalence'
 
 export type Difficulty = 'basic' | 'advanced'
-export type ExamKind = 'class' | 'kr3' | 'kr4' | 'kr5'
+export type ExamKind = 'class' | 'kr2' | 'kr3' | 'kr4' | 'kr5'
 
 export type ExamItem = {
   id: string
@@ -25,6 +25,7 @@ type PlanSection = { kicker: string; title: string; slots: Slot[] }
 
 export type ExamFormat = { id: ExamKind; title: string; blurb: string; minutes: number; sections: PlanSection[] }
 
+const T6 = '06-fraction-mult'
 const T3 = '03-roots-compare'
 const T4 = '04-roots-simplify'
 const T5 = '05-quadratic'
@@ -69,6 +70,32 @@ export const FORMATS: ExamFormat[] = [
             label: '3б',
             sources: [src(T5, 'dsc', [2], [3]), src(T5, 'brk', [1, 2], [2, 3]), src(T5, 'nbx', [2], [3]), src(T5, 'inc', [2], [3]), src(T5, 'o5vie', [], [3]), src(T5, 'o5par', [], [3]), src(T5, 'o5bq', [], [3]), src(T5, 'o5two', [], [3])],
           },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'kr2',
+    title: 'КР № 2 · Произведение и частное дробей',
+    blurb: 'Умножение и деление дробей, обратная пропорциональность, длинное выражение, выразить переменную, график.',
+    minutes: 45,
+    sections: [
+      {
+        kicker: 'Часть А',
+        title: 'Упростите и выберите верный ответ',
+        slots: [
+          { label: 'А1', sources: [src(T6, 'mul', [2], [3]), src(T6, 'pw', [], [2, 3])] },
+          { label: 'А2', sources: [src(T6, 'div', [2], [3]), src(T6, 'pw', [], [3])] },
+          { label: 'А3', sources: [src(T6, 'inv', [1, 2], [2, 3])] },
+        ],
+      },
+      { kicker: 'Часть В', title: 'Длинное выражение', slots: [{ label: 'В1', sources: [src(T6, 'long', [2], [3])] }] },
+      {
+        kicker: 'Часть С',
+        title: 'Задания посложнее',
+        slots: [
+          { label: 'С1', sources: [src(T6, 'frm', [2], [3])] },
+          { label: 'С2', sources: [src(T6, 'ghyp', [1, 2], [2, 3])] },
         ],
       },
     ],

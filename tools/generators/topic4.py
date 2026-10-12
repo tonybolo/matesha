@@ -1,4 +1,4 @@
-"""Тема 4: упрощение выражений с корнями (КР №3 A2, КР №4, классная работа №2, КР №2)."""
+"""Тема 4: упрощение выражений с корнями (КР №3 A2, КР №4, классная работа №2)."""
 from __future__ import annotations
 
 import math
@@ -382,101 +382,6 @@ def g_conj(rng: random.Random, level: int):
                 pairCheck={"kind": kind, "exprs": [s[1] for s in shown], "pair": list(correct_pair)})
 
 
-# ---------- КР №2: произведение и частное дробей ----------
-
-def g_prd(rng: random.Random, level: int):
-    def build(n1, d1, n2, d2, op):
-        """n1/d1 (·|:) n2/d2 — строки в записи приложения; возвращает expr и TeX."""
-        e1, e2 = f"({n1})/({d1})", f"({n2})/({d2})"
-        expr = f"({e1})*({e2})" if op == "mul" else f"({e1})/({e2})"
-        # дроби в TeX берём «как введено», без автоматического сокращения SymPy
-        def frac_tex(n, d):
-            return f"\\dfrac{{{sp.latex(parse_app(n))}}}{{{sp.latex(parse_app(d))}}}"
-        tex = frac_tex(n1, d1) + ("\\cdot " if op == "mul" else ":") + frac_tex(n2, d2)
-        return expr, tex
-
-    if level == 1:
-        p, q = rng.randint(2, 4), rng.randint(2, 6)
-        m, n = rng.randint(1, 3), rng.randint(1, 4)
-        op = rng.choice(["mul", "div"])
-        n1, d1, n2, d2 = f"{p}*a^2", f"x^{m}", f"x^{m + n}", f"{q}*a"
-        if op == "div":
-            n2, d2 = f"{q}*a", f"x^{m + n}"
-    elif level == 2:
-        if rng.random() < 0.5:
-            p, q, s, n, m = rng.randint(2, 6), rng.randint(2, 5), rng.randint(1, 3), rng.randint(3, 6), rng.randint(1, 2)
-            op = "mul"
-            n1, d1, n2, d2 = f"a^2+{p}*a", f"x^{m}", f"a^{s}*x^{n}", f"{q}*a+{q * p}"
-        else:
-            c1, c2 = rng.randint(1, 3), rng.randint(2, 5)
-            u, v = rng.sample(range(2, 7), 2)
-            op = "div"
-            n1, d1 = f"{u * c1}*a+{u * c2}*b", f"a^{rng.randint(3, 9)}*x"
-            n2, d2 = f"{v * c1}*a+{v * c2}*b", f"a^{rng.randint(2, 4)}*x^{rng.randint(3, 6)}"
-    else:
-        p, q = rng.sample(range(2, 8), 2)
-        op = rng.choice(["mul", "div"])
-        n1, d1 = f"a^2-{p * p}", f"x^2-{q * q}"
-        n2, d2 = (f"x+{q}", f"a+{p}") if op == "mul" else (f"a+{p}", f"x-{q}")
-    expr, tex = build(n1, d1, n2, d2, op)
-    e = sp.cancel(parse_app(expr))
-    nn1, dd1, nn2, dd2 = (parse_app(x) for x in (n1, d1, n2, d2))
-    flip = (dd2, nn2) if op == "div" else (nn2, dd2)
-    fx = lambda z: sp.latex(sp.factor(z))
-    sol = []
-    if op == "div":
-        sol.append(f"Деление заменяем умножением на перевёрнутую дробь: $\\dfrac{{{sp.latex(nn1)}}}{{{sp.latex(dd1)}}}\\cdot\\dfrac{{{sp.latex(flip[0])}}}{{{sp.latex(flip[1])}}}$.")
-    sol.append(f"Раскладываем на множители: $\\dfrac{{{fx(nn1)}}}{{{fx(dd1)}}}\\cdot\\dfrac{{{fx(flip[0])}}}{{{fx(flip[1])}}}$.")
-    sol.append(f"Сокращаем одинаковые множители: ${sp.latex(sp.factor(e))}$.")
-    return task("Упростите выражение {expr}.", sym_to_app(sp.factor(e)) if level == 3 else sym_to_app(e), "expr",
-                "Если есть деление, замени его умножением на перевёрнутую дробь. Потом разложи на множители и сократи.", sol,
-                ["fraction-mult", "cancel", "fsu"], expr=expr, tex=tex, reduce=True, verify={"op": "self"})
-
-
-# ---------- КР №2 C1: выразить переменную ----------
-
-def g_frm(rng: random.Random, level: int):
-    letters = ["x", "y", "z"]
-    rng.shuffle(letters)
-    A, B, C = letters
-    p, q, r = rng.randint(1, 5), rng.randint(1, 5), rng.randint(1, 5)
-    target = rng.choice(letters if level > 1 else [B])
-    SA, SB, SC = SYMS[A], SYMS[B], SYMS[C]
-    sign = rng.choice(["-", "+"])
-    lhs = sp.Rational(p) / SA
-    rest_terms = {A: None, B: sp.Rational(q) / SB, C: (-1 if sign == "-" else 1) * sp.Rational(r) / SC}
-    rhs = rest_terms[B] + rest_terms[C]
-    sols = sp.solve(sp.Eq(lhs, rhs), SYMS[target])
-    if len(sols) != 1:
-        return None
-    ans_e = sp.factor(sp.cancel(sols[0]))
-    others = [l for l in letters if l != target]
-    frac = lambda n, v: f"\\frac{{{n}}}{{{v}}}"
-    tex_eq = f"{frac(p, A)}={frac(q, B)}{sign}{frac(r, C)}"
-    St = SYMS[target]
-    # шаги: оставить дробь с target одну, остальное перенести
-    if target == A:
-        combined = sp.together(rhs)
-        N, Dn = sp.fraction(combined)
-        sol = [f"Правую часть приводим к общему знаменателю: $\\dfrac{{{p}}}{{{A}}}={sp.latex(combined)}$.",
-               f"Переворачиваем обе части (дробь равна дроби): ${A}=\\dfrac{{{p}\\cdot {sp.latex(Dn)}}}{{{sp.latex(N)}}}$.",
-               f"Упрощаем: ${A}={sp.latex(ans_e)}$."]
-    else:
-        term = rest_terms[target]
-        other = rest_terms[B if target == C else C]
-        isolated = sp.together(lhs - other)
-        sign_t = "-" if (target == C and sign == "-") else ""
-        N, Dn = sp.fraction(isolated)
-        lhs_tex = f"{sign_t}\\dfrac{{{r if target == C else q}}}{{{target}}}"
-        sol = [f"Оставим дробь с ${target}$ в одной части, остальное перенесём: ${lhs_tex}={sp.latex(lhs - other)}$.",
-               f"Правую часть приведём к общему знаменателю: ${lhs_tex}={sp.latex(isolated)}$.",
-               f"Выразим ${target}$ (перевернём дроби и учтём числитель слева): ${target}={sp.latex(ans_e)}$."]
-    return task(f"Из формулы ${tex_eq}$ выразите ${target}$ через ${others[0]}$ и ${others[1]}$. Ответ упростите.", sym_to_app(ans_e), "expr",
-                "Сложи (вычти) дроби с другой стороны, приведя их к общему знаменателю, потом переверни обе части.", sol,
-                ["fraction-add", "formula"], reduce=True,
-                formula={"lhs": f"{p}/{A}", "rhs": f"{q}/{B}{sign}{r}/{C}", "solveFor": target})
-
-
 GROUPS = [
     ("val", "Значение: корни из дробей", g_val, 2),
     ("val2", "Значение с корнями", g_val2, 2),
@@ -485,6 +390,4 @@ GROUPS = [
     ("sq", "Квадрат суммы с корнем", g_sq, 3),
     ("rat", "Корень в знаменателе", g_rat, 4),
     ("conj", "Пара чисел", g_conj, 4),
-    ("prd", "Дроби: умножить и делить", g_prd, 0),
-    ("frm", "Выразить из формулы", g_frm, 0),
 ]

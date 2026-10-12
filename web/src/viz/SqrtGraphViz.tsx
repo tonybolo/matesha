@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Tex } from '../components/Tex'
+import { Stepper } from './Stepper'
 
 const W = 340
 const H = 260
@@ -17,21 +18,6 @@ const PRESETS: { k: number; b: number; tex: string }[] = [
   { k: 0.25, b: 0.75, tex: '\\sqrt{x}=\\dfrac{3}{4}+\\dfrac{x}{4}' },
   { k: -1, b: 2, tex: '\\sqrt{x}=2-x' },
 ]
-
-function Stepper({ label, value, min, max, step, onChange }: { label: string; value: number; min: number; max: number; step: number; onChange: (n: number) => void }) {
-  return (
-    <span className="stepper">
-      <span className="muted">{label}</span>
-      <button className="key" onClick={() => onChange(Math.max(min, Math.round((value - step) * 100) / 100))} disabled={value <= min} aria-label={`${label}: меньше`}>
-        −
-      </button>
-      <strong>{fmt(value)}</strong>
-      <button className="key" onClick={() => onChange(Math.min(max, Math.round((value + step) * 100) / 100))} disabled={value >= max} aria-label={`${label}: больше`}>
-        +
-      </button>
-    </span>
-  )
-}
 
 /** График y = √x и прямая y = kx + b: корни уравнения √x = kx + b — абсциссы точек пересечения. */
 export function SqrtGraphViz() {
@@ -59,10 +45,6 @@ export function SqrtGraphViz() {
             <Tex tex={pr.tex} />
           </button>
         ))}
-      </div>
-      <div className="steppers">
-        <Stepper label="k" value={k} min={-2} max={2} step={0.25} onChange={(v) => set(0, v)} />
-        <Stepper label="b" value={b} min={-3} max={8} step={0.5} onChange={(v) => set(1, v)} />
       </div>
       <svg viewBox={`0 0 ${W} ${H}`} className="rug" role="img" aria-label="Графики корня и прямой">
         {Array.from({ length: X1 - X0 + 1 }, (_, i) => X0 + i).map((x) => (
@@ -92,6 +74,10 @@ export function SqrtGraphViz() {
             Пересечения: {uniq.map((p) => `(${fmt(p.x)}; ${fmt(p.y)})`).join(', ')}. Значит {uniq.length > 1 ? 'корни' : 'корень'}: <strong>x = {uniq.map((p) => fmt(p.x)).join(' и ')}</strong>
           </>
         )}
+      </div>
+      <div className="steppers">
+        <Stepper compact label="k" value={k} min={-2} max={2} step={0.25} onChange={(v) => set(0, v)} format={fmt} />
+        <Stepper compact label="b" value={b} min={-3} max={8} step={0.5} onChange={(v) => set(1, v)} format={fmt} />
       </div>
     </div>
   )

@@ -1,9 +1,12 @@
 import type { VizBlock } from '../content/types'
+import { AreaMultViz } from './AreaMultViz'
 import { BarsViz } from './BarsViz'
 import { BringInViz } from './BringInViz'
 import { CancelViz } from './CancelViz'
 import { CommonDenomViz } from './CommonDenomViz'
+import { DivideViz } from './DivideViz'
 import { DomainViz } from './DomainViz'
+import { HyperbolaViz } from './HyperbolaViz'
 import { OdzViz } from './OdzViz'
 import { PairsViz } from './PairsViz'
 import { ParabolaViz } from './ParabolaViz'
@@ -32,5 +35,11 @@ export function Viz({ id, preset }: { id: VizBlock['id']; preset?: string }) {
       return <DomainViz />
     case 'sqrtGraph':
       return <SqrtGraphViz />
+    case 'areaMult':
+      return <AreaMultViz />
+    case 'divide':
+      return <DivideViz />
+    case 'hyperbola':
+      return <HyperbolaViz preset={preset} />
   }
 }

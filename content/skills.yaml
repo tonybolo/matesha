@@ -17,7 +17,7 @@ like-terms:      {title: 'Приведение подобных слагаемы
 fsu:             {title: 'Формулы сокращённого умножения', topic: '04-roots-simplify', step: 3}
 rationalize:     {title: 'Избавиться от корня в знаменателе', topic: '04-roots-simplify', step: 4}
 cancel:          {title: 'Сокращение дробей', topic: '01-rational-fractions', step: 3}
-fraction-mult:   {title: 'Умножение и деление дробей', topic: '01-rational-fractions', step: 3}
+fraction-mult:   {title: 'Умножение дробей', topic: '06-fraction-mult', step: 1}
 fraction-add:    {title: 'Сложение и вычитание дробей', topic: '02-add-sub-fractions', step: 3}
 formula:         {title: 'Выразить переменную из формулы', topic: '02-add-sub-fractions', step: 3}
 fraction-eq:     {title: 'Уравнение с дробью', topic: '05-quadratic', step: 3}
@@ -32,3 +32,7 @@ sqrt-domain:     {title: 'Когда корень существует', topic: 
 function-value:  {title: 'Значение функции y = √x', topic: '03-roots-compare', step: 6}
 sqrt-graph:      {title: 'График y = √x', topic: '03-roots-compare', step: 6}
 linear-function: {title: 'График линейной функции', topic: '03-roots-compare', step: 6}
+fraction-div:    {title: 'Деление дробей', topic: '06-fraction-mult', step: 2}
+fraction-power:  {title: 'Степень дроби', topic: '06-fraction-mult', step: 3}
+inverse-prop:    {title: 'Обратная пропорциональность', topic: '06-fraction-mult', step: 4}
+hyperbola-graph: {title: 'Гипербола и графическое решение', topic: '06-fraction-mult', step: 5}

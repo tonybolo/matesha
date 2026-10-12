@@ -113,6 +113,22 @@ def check(t: dict) -> str | None:
         return None if want == t["answer"] else f"порядок {want}, в ответе {t['answer']}"
     if t.get("olyCheck"):
         return check_olympiad(t)
+    if t.get("invCheck"):
+        c = t["invCheck"]
+        x0, y0 = sp.Rational(c["pt"][0]), sp.Rational(c["pt"][1])
+        x = SYMS["x"]
+        # в условии просят именно обратную пропорциональность (вид c/x): прямая y = mx тоже может пройти через точку, но она не подходит
+        good = [i for i, o in enumerate(c["opts"]) if o.endswith("/x") and sp.simplify(exact(o).subs(x, x0) - y0) == 0]
+        if good != [int(t["answer"])]:
+            return f"через точку проходят обратные пропорциональности {good}, в ответе {t['answer']}"
+        # обратная пропорциональность: у верного варианта вид k/x
+        right = exact(c["opts"][int(t["answer"])])
+        return None if sp.simplify(right * x - x0 * y0) == 0 else "верный вариант не k/x"
+    if t.get("longCheck"):
+        c = t["longCheck"]
+        value = exact(c["expr"]).subs({SYMS["a"]: sp.Rational(c["a"]), SYMS["b"]: sp.Rational(c["b"])})
+        d = sp.simplify(value - exact(t["answer"]))
+        return None if d == 0 else f"значение выражения {sp.simplify(value)}, в ответе {t['answer']}"
     if t.get("vieta"):
         v = t["vieta"]
         a, b, c = v["abc"]

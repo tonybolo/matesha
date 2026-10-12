@@ -12,7 +12,7 @@ from common import build_group  # noqa: E402
 OUT = Path(__file__).resolve().parents[2] / "content/algebra8/generated"
 
 TOPICS = {}
-for name, topic_id in [("topic3", "03-roots-compare"), ("topic4", "04-roots-simplify"), ("topic5", "05-quadratic")]:
+for name, topic_id in [("topic3", "03-roots-compare"), ("topic4", "04-roots-simplify"), ("topic5", "05-quadratic"), ("topic6", "06-fraction-mult")]:
     try:
         TOPICS[topic_id] = __import__(name)
     except ModuleNotFoundError:
