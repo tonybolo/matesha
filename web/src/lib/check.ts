@@ -121,11 +121,10 @@ export function checkAnswer(input: string, answer: string, kind: AnswerKind, opt
     const ref = parseNumberSet(answer) ?? []
     if (sameSet(user, ref)) return { status: 'correct', message: MESSAGES.correct }
     const has = (list: number[], v: number) => list.some((r) => Math.abs(r - v) <= 1e-9 * Math.max(1, Math.abs(v)))
-    if (user.length > 0 && user.every((v) => has(ref, v)) && user.length < ref.length)
-      return { status: 'wrong', message: MESSAGES.rootsMissing }
+    if (ref.length === 0) return { status: 'wrong', message: MESSAGES.rootsNone }
+    if (user.length === 0) return { status: 'wrong', message: MESSAGES.rootsHave }
+    if (user.every((v) => has(ref, v)) && user.length < ref.length) return { status: 'wrong', message: MESSAGES.rootsMissing }
     if (user.length > ref.length && ref.every((v) => has(user, v))) return { status: 'wrong', message: MESSAGES.rootsExtra }
-    if (user.length > 0 && ref.length === 0) return { status: 'wrong', message: MESSAGES.rootsNone }
-    if (user.length === 0 && ref.length > 0) return { status: 'wrong', message: MESSAGES.rootsHave }
     return { status: 'wrong', message: MESSAGES.wrong }
   }
 
