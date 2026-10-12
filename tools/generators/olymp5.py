@@ -14,8 +14,9 @@ NZ = [i for i in range(-9, 10) if i != 0]
 
 
 def _fr(v: Fraction) -> str:
+    """Число для подстановки: отрицательные и дроби берём в скобки (иначе степень «прилипнет» не к тому)."""
     t = tex_num(v)
-    return f"({t})" if v < 0 else t
+    return f"\\left({t}\\right)" if (v < 0 or v.denominator != 1) else t
 
 
 def _dec_or_frac(v: Fraction) -> str:

@@ -23,6 +23,11 @@ def lin_expr(p, q, v="x"):
     return (f"{p}*{v}" if abs(p) != 1 else (v if p == 1 else f"-{v}")) + (f"+{q}" if q > 0 else (f"-{-q}" if q < 0 else ""))
 
 
+def coef(n: int) -> str:
+    """Коэффициент перед переменной: единицу не пишем."""
+    return "" if n == 1 else ("-" if n == -1 else str(n))
+
+
 def roots_str(a, b, c):
     D = b * b - 4 * a * c
     if D < 0:
@@ -114,7 +119,7 @@ def g_nbx(rng: random.Random, level: int):
         a, b = rng.randint(2, 5), rng.randint(1, 15)
         s = rng.choice(["+", "-"])
         root = sp.Rational(-b if s == "+" else b, a)
-        return task(f"Решите уравнение ${a}x^2{s}{b}x=0$. {RES}", f"0; {sym_to_app(root)}", "roots",
+        return task(f"Решите уравнение ${a}x^2{s}{coef(b)}x=0$. {RES}", f"0; {sym_to_app(root)}", "roots",
                     "Вынеси $x$ за скобку и приравняй каждый множитель к нулю.",
                     [f"$x({a}x{s}{b})=0$.", f"$x=0$ или ${a}x{s}{b}=0$.", f"$x=0$ или $x={sp.latex(root)}$."], ["quad-incomplete", "factor-common"],
                     equation=[f"{a}*x^2{s}{b}*x", "0"])
@@ -124,9 +129,9 @@ def g_nbx(rng: random.Random, level: int):
         return None
     root = sp.Rational(e - b, a - d)
     bb = b - e
-    first = f"{a - d}x^2{'+' if bb > 0 else '-'}{abs(bb)}x=0" if bb != 0 else f"{a - d}x^2=0"
-    inner = f"{a - d}x{'+' if bb > 0 else '-'}{abs(bb)}"
-    return task(f"Решите уравнение ${a}x^2+{b}x={d}x^2+{e}x$. {RES}", f"0; {sym_to_app(root)}", "roots",
+    first = f"{coef(a - d)}x^2{'+' if bb > 0 else '-'}{coef(abs(bb))}x=0" if bb != 0 else f"{coef(a - d)}x^2=0"
+    inner = f"{coef(a - d)}x{'+' if bb > 0 else '-'}{abs(bb)}"
+    return task(f"Решите уравнение ${a}x^2+{coef(b)}x={coef(d)}x^2+{coef(e)}x$. {RES}", f"0; {sym_to_app(root)}", "roots",
                 "Перенеси всё в левую часть и приведи подобные: получится неполное уравнение.",
                 [f"Переносим всё влево и приводим подобные: ${first}$.", f"Выносим $x$: $x({inner})=0$.", f"$x=0$ или $x={sp.latex(root)}$."],
                 ["quad-incomplete", "factor-common", "like-terms"], equation=[f"{a}*x^2+{b}*x", f"{d}*x^2+{e}*x"])
@@ -317,8 +322,8 @@ def g_frac(rng: random.Random, level: int):
         eq_tex = f"\\frac{{{k}}}{{x}}={rhs_tex}"
         eqs = [f"{k}/x", f"x-({m})"]
         if m != 0:
-            steps = [f"Умножим обе части на $x$ ($x\\ne 0$): ${k}=x^2{'-' if m > 0 else '+'}{abs(m)}x$.",
-                     f"Перенесём всё влево: $x^2{'-' if m > 0 else '+'}{abs(m)}x-{k}=0$."]
+            steps = [f"Умножим обе части на $x$ ($x\\ne 0$): ${k}=x^2{'-' if m > 0 else '+'}{coef(abs(m))}x$.",
+                     f"Перенесём всё влево: $x^2{'-' if m > 0 else '+'}{coef(abs(m))}x-{k}=0$."]
         else:
             steps = [f"Умножим на $x$ ($x\\ne 0$): ${k}=x^2$.", f"$x^2-{k}=0$."]
         steps += solution_dsc(1, -m, -k)[1:]
