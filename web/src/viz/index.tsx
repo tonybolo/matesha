@@ -3,10 +3,12 @@ import { BarsViz } from './BarsViz'
 import { BringInViz } from './BringInViz'
 import { CancelViz } from './CancelViz'
 import { CommonDenomViz } from './CommonDenomViz'
+import { DomainViz } from './DomainViz'
 import { OdzViz } from './OdzViz'
 import { PairsViz } from './PairsViz'
 import { ParabolaViz } from './ParabolaViz'
 import { RugViz } from './RugViz'
+import { SqrtGraphViz } from './SqrtGraphViz'
 
 export function Viz({ id, preset }: { id: VizBlock['id']; preset?: string }) {
   switch (id) {
@@ -26,5 +28,9 @@ export function Viz({ id, preset }: { id: VizBlock['id']; preset?: string }) {
       return <PairsViz />
     case 'parabola':
       return <ParabolaViz />
+    case 'domain':
+      return <DomainViz />
+    case 'sqrtGraph':
+      return <SqrtGraphViz />
   }
 }

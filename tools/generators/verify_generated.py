@@ -39,6 +39,47 @@ def check(t: dict) -> str | None:
     if k == "choice" and t.get("optExprs"):
         irr = [i for i, e in enumerate(t["optExprs"]) if not sp.simplify(exact(e)).is_rational]
         return None if irr == [int(t["answer"])] else f"иррациональные варианты {irr}, в ответе {t['answer']}"
+    if t.get("domSpec"):
+        d = t["domSpec"]
+        x = SYMS["x"]
+        inner = d["a"] * x + d["b"]
+        sol = sp.solve_univariate_inequality(inner > 0 if d["strict"] else inner >= 0, x, relational=False)
+
+        def as_set(op, r):
+            r = sp.Rational(r)
+            return {">=": sp.Interval(r, sp.oo), ">": sp.Interval.open(r, sp.oo), "<=": sp.Interval(-sp.oo, r), "<": sp.Interval.open(-sp.oo, r)}[op]
+
+        good = [i for i, (op, r) in enumerate(d["opts"]) if as_set(op, r) == sol]
+        return None if good == [int(t["answer"])] else f"верные варианты {good}, в ответе {t['answer']}, решение {sol}"
+    if t.get("argSpec"):
+        a_ = t["argSpec"]
+        a, c, v = sp.Integer(a_["a"]), sp.Integer(a_["c"]), sp.Rational(a_["v"])
+        base = (v - c) / a
+        if base < 0:
+            return "нет решения"
+        x0 = base**2
+        if x0 != sp.Rational(a_["x0"]):
+            return f"x0 в данных {a_['x0']}, на самом деле {x0}"
+        good = [i for i, o in enumerate(a_["options"]) if "|pm" not in o and sp.Rational(o) == x0]
+        return None if good == [int(t["answer"])] else f"верные варианты {good}, в ответе {t['answer']}"
+    if t.get("mkCheck"):
+        m = t["mkCheck"]
+        x = SYMS["x"]
+        x0 = sp.Rational(m["x0"])
+        holds = [i for i, (l, r) in enumerate(m["eqs"]) if sp.simplify(exact(l).subs(x, x0) - exact(r).subs(x, x0)) == 0]
+        return None if holds == [int(t["answer"])] else f"при x={x0} выполняются варианты {holds}, в ответе {t['answer']}"
+    if t.get("diffOf"):
+        lhs, rhs = t["diffOf"]
+        x = SYMS["x"]
+        roots = [r for r in sp.solve(sp.Eq(exact(lhs), exact(rhs)), x) if r.is_real]
+        if len(roots) < 2:
+            return "нужно минимум два корня"
+        diff = max(roots) - min(roots)
+        if t["answerKind"] == "choice":
+            want = sp.Rational(t["optValues"][int(t["answer"])])
+            same_vals = [i for i, o in enumerate(t["optValues"]) if sp.Rational(o) == diff]
+            return None if (want == diff and same_vals == [int(t["answer"])]) else f"разность {diff}, в ответе вариант {t['answer']}"
+        return None if sp.simplify(diff - exact(t["answer"])) == 0 else f"разность {diff}, в ответе {t['answer']}"
     if t.get("pairCheck"):
         pc = t["pairCheck"]
         e = [exact(x) for x in pc["exprs"]]

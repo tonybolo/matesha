@@ -342,6 +342,114 @@ def g_frac(rng: random.Random, level: int):
                 equation=eqs)
 
 
+# ---------- КР №5 A3: составить уравнение к задаче ----------
+
+def _eq(tex, lhs, rhs):
+    return {"tex": tex, "lhs": lhs, "rhs": rhs}
+
+
+def g_mk(rng: random.Random, level: int):
+    kind = rng.choice(["bush", "rect"] if level == 1 else ["consec", "square"] if level == 2 else ["sumsq", "sumprod"])
+    if kind == "bush":
+        d, x0 = rng.randint(2, 9), rng.randint(8, 25)
+        less = rng.random() < 0.5
+        N = x0 * (x0 + d) if less else x0 * (x0 - d)
+        if x0 <= d:
+            return None
+        sg, osg = ("+", "-") if less else ("-", "+")
+        story = (f"Фермер высадил {N} кустов малины в несколько рядов. При этом кустов в каждом ряду оказалось на {d} "
+                 f"{'меньше' if less else 'больше'}, чем рядов. Составьте уравнение к задаче, обозначив буквой $x$ количество кустов в одном ряду.")
+        good = _eq(f"(x{sg}{d})x={N}", f"(x{sg}{d})*x", str(N))
+        bad = [_eq(f"(x{osg}{d})x={N}", f"(x{osg}{d})*x", str(N)), _eq(f"(x+{d})(x-{d})={N}", f"(x+{d})*(x-{d})", str(N)), _eq(f"x^2{sg}{d}={N}", f"x^2{sg}{d}", str(N))]
+        sol = [f"Пусть в ряду $x$ кустов. Кустов в ряду на ${d}$ {'меньше' if less else 'больше'}, чем рядов, значит рядов $x{sg}{d}$.",
+               f"Всего кустов (кустов в ряду) · (число рядов) $=x(x{sg}{d})={N}$."]
+    elif kind == "rect":
+        d, x0 = rng.randint(2, 9), rng.randint(3, 20)
+        S = x0 * (x0 + d)
+        story = f"Длина прямоугольника на {d} см больше его ширины, а площадь равна {S} см². Составьте уравнение к задаче, обозначив буквой $x$ ширину прямоугольника (в сантиметрах)."
+        good = _eq(f"x(x+{d})={S}", f"x*(x+{d})", str(S))
+        bad = [_eq(f"x(x-{d})={S}", f"x*(x-{d})", str(S)), _eq(f"x^2+{d}={S}", f"x^2+{d}", str(S)), _eq(f"(x+{d})^2={S}", f"(x+{d})^2", str(S))]
+        sol = [f"Ширина $x$ см, длина на ${d}$ см больше: $x+{d}$ см.", f"Площадь — это длина · ширина: $x(x+{d})={S}$."]
+    elif kind == "consec":
+        x0 = rng.randint(5, 30)
+        N = x0 * (x0 + 1)
+        story = f"Произведение двух последовательных натуральных чисел равно {N}. Составьте уравнение к задаче, обозначив буквой $x$ меньшее из чисел."
+        good = _eq(f"x(x+1)={N}", "x*(x+1)", str(N))
+        bad = [_eq(f"x(x-1)={N}", "x*(x-1)", str(N)), _eq(f"x^2+1={N}", "x^2+1", str(N)), _eq(f"2x+1={N}", "2*x+1", str(N))]
+        sol = ["Меньшее число $x$, следующее за ним $x+1$.", f"Их произведение $x(x+1)={N}$."]
+    elif kind == "square":
+        d, x0 = rng.randint(2, 7), rng.randint(3, 15)
+        S = (x0 + d) ** 2
+        story = f"Сторону квадрата увеличили на {d} см, и площадь нового квадрата стала равна {S} см². Составьте уравнение к задаче, обозначив буквой $x$ первоначальную сторону квадрата (в сантиметрах)."
+        good = _eq(f"(x+{d})^2={S}", f"(x+{d})^2", str(S))
+        bad = [_eq(f"x^2+{d}={S}", f"x^2+{d}", str(S)), _eq(f"x^2+{d * d}={S}", f"x^2+{d * d}", str(S)), _eq(f"x(x+{d})={S}", f"x*(x+{d})", str(S))]
+        sol = [f"Сторона нового квадрата $x+{d}$ см.", f"Его площадь $(x+{d})^2={S}$ (площадь квадрата — сторона во второй степени, а не «сторона плюс число»)."]
+    elif kind == "sumsq":
+        x0 = rng.randint(3, 20)
+        N = x0 * x0 + (x0 + 1) ** 2
+        story = f"Сумма квадратов двух последовательных натуральных чисел равна {N}. Составьте уравнение к задаче, обозначив буквой $x$ меньшее из чисел."
+        good = _eq(f"x^2+(x+1)^2={N}", "x^2+(x+1)^2", str(N))
+        bad = [_eq(f"(2x+1)^2={N}", "(2*x+1)^2", str(N)), _eq(f"x^2+x+1={N}", "x^2+x+1", str(N)), _eq(f"2x^2+1={N}", "2*x^2+1", str(N))]
+        sol = ["Числа $x$ и $x+1$. Квадраты: $x^2$ и $(x+1)^2$.", f"Сумма квадратов: $x^2+(x+1)^2={N}$ (не путай с квадратом суммы $(x+x+1)^2$)."]
+    else:
+        u, v = rng.sample(range(2, 20), 2)
+        x0, S, P = u, u + v, u * v
+        story = f"Сумма двух чисел равна {S}, а их произведение равно {P}. Составьте уравнение к задаче, обозначив буквой $x$ одно из чисел."
+        good = _eq(f"x({S}-x)={P}", f"x*({S}-x)", str(P))
+        bad = [_eq(f"x({S}+x)={P}", f"x*({S}+x)", str(P)), _eq(f"x+{S}={P}", f"x+{S}", str(P)), _eq(f"x^2+{S}={P}", f"x^2+{S}", str(P))]
+        sol = [f"Одно число $x$, тогда другое ${S}-x$ (их сумма ${S}$).", f"Произведение: $x({S}-x)={P}$."]
+    eqs = [good] + bad
+    # ровно один вариант должен выполняться при x0
+    x = sp.Symbol("x")
+    holds = [i for i, e in enumerate(eqs) if sp.simplify(parse_app(e["lhs"]).subs(x, x0) - parse_app(e["rhs"]).subs(x, x0)) == 0]
+    if holds != [0]:
+        return None
+    order = list(range(4))
+    rng.shuffle(order)
+    shown = [eqs[i] for i in order]
+    answer = order.index(0)
+    return task(story, str(answer), "choice", "Обозначь неизвестное буквой и выразим через неё остальные величины. Подставь число из условия и проверь, верно ли равенство.",
+                sol, ["word-to-equation"], options=[f"${e['tex']}$" for e in shown],
+                mkCheck={"x0": str(x0), "eqs": [[e["lhs"], e["rhs"]] for e in shown], "answer": answer})
+
+
+# ---------- КР №5 A1: разность наибольшего и наименьшего корней ----------
+
+def g_incd(rng: random.Random, level: int):
+    if level == 1:
+        k, r = rng.randint(2, 6), rng.randint(3, 12)
+        vals = [r, r * r, 2 * r, 2 * r * r]
+        order = list(range(4))
+        rng.shuffle(order)
+        shown = [vals[i] for i in order]
+        answer = order.index(2)
+        sol = [f"${k}x^2={k * r * r}$, $x^2={r * r}$, корни $x={r}$ и $x=-{r}$.", f"Наибольший корень ${r}$, наименьший $-{r}$. Разность: ${r}-(-{r})={2 * r}$."]
+        return task(f"Решите уравнение ${k}x^2-{k * r * r}=0$. Если уравнение имеет более одного корня, найдите разность наибольшего и наименьшего из них.",
+                    str(answer), "choice", "Найди оба корня, потом из большего вычти меньший. Помни: вычитаем отрицательное число — значит прибавляем.",
+                    sol, ["quad-incomplete", "negatives"], options=[f"${v}$" for v in shown], optValues=[str(v) for v in shown],
+                    diffOf=[f"{k}*x^2-{k * r * r}", "0"])
+    if level == 2:
+        if rng.random() < 0.5:
+            k, q = rng.randint(2, 7), rng.randint(3, 15)
+            sol = [f"${k}x^2={k * q * q}$, $x^2={q * q}$, корни ${q}$ и $-{q}$.", f"Разность: ${q}-(-{q})={2 * q}$."]
+            return task(f"Решите уравнение ${k}x^2-{k * q * q}=0. Найдите разность наибольшего и наименьшего из корней.", str(2 * q), "expr",
+                        "Корни — два противоположных числа $\\pm q$. Их разность в два раза больше $q$.", sol, ["quad-incomplete", "negatives"],
+                        diffOf=[f"{k}*x^2-{k * q * q}", "0"])
+        p, q = rng.randint(1, 8), rng.randint(2, 12)
+        sol = [f"$x-{p}={q}$ или $x-{p}=-{q}$.", f"$x_1={p + q}$, $x_2={p - q}$. Разность: ${p + q}-({p - q})={2 * q}$."]
+        return task(f"Решите уравнение $(x-{p})^2={q * q}$. Найдите разность наибольшего и наименьшего из корней.", str(2 * q), "expr",
+                    "Из квадрата выражения: само выражение равно плюс-минус корню.", sol, ["quad-incomplete", "negatives"],
+                    diffOf=[f"(x-{p})^2", str(q * q)])
+    r1, r2 = rng.sample([i for i in range(-9, 10) if i != 0], 2)
+    a = rng.choice([1, 1, 2, 3])
+    b, c = -a * (r1 + r2), a * r1 * r2
+    hi, lo = max(r1, r2), min(r1, r2)
+    sol = disc_steps(a, b, c) + [f"Корни ${hi}$ и ${lo}$. Разность: ${hi}-({lo})={hi - lo}$."]
+    return task(f"Найдите разность большего и меньшего корней уравнения ${poly_tex(a, b, c)}=0$.", str(hi - lo), "expr",
+                "Реши уравнение через дискриминант и вычти из большего корня меньший.", sol, ["quad-formula", "discriminant", "negatives"],
+                diffOf=[poly_expr(a, b, c), "0"])
+
+
 GROUPS = [
     ("inc", "x² = число", g_inc, 0),
     ("nbx", "Неполные уравнения", g_nbx, 1),
@@ -350,4 +458,6 @@ GROUPS = [
     ("brk", "Со скобками", g_brk, 4),
     ("wrd", "Задачи", g_wrd, 5),
     ("frac", "С дробью", g_frac, 3),
+    ("mk", "Составь уравнение по задаче", g_mk, 5),
+    ("incd", "Разность корней", g_incd, 0),
 ]

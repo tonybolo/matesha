@@ -171,6 +171,7 @@ a { color: var(--accent); }
 .example-actions { display: flex; gap: 8px; margin-top: 8px; }
 @keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
+.glue { white-space: nowrap; }
 .tex-display { display: block; text-align: center; overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
 .katex { font-size: 1.1em; }
 
@@ -186,7 +187,8 @@ input[type='text'], .input-row input, .welcome input {
 .key:disabled { opacity: 0.4; }
 .preview { min-height: 52px; border-radius: 12px; background: var(--accent-soft); padding: 8px 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .preview-label { font-size: 0.85rem; color: var(--muted); }
-.preview .tex-display { flex: 1; }
+.preview .glue { white-space: nowrap; }
+.tex-display { flex: 1; }
 .soft-msg { color: var(--bad); margin-top: 6px; }
 
 .feedback { border-radius: 12px; padding: 12px 14px; margin: 12px 0; border: 1px solid var(--line); }
@@ -322,6 +324,8 @@ details summary { cursor: pointer; color: var(--accent); margin: 6px 0; }
 .mini-cell { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
 .big-frame { fill: none; stroke: var(--accent); stroke-width: 3; }
 .curve { stroke: var(--c1); stroke-width: 3; }
+.line2 { stroke: var(--c0); stroke-width: 3; }
+.good-zone { fill: var(--ok); fill-opacity: 0.3; }
 .root { fill: var(--bad); stroke: #fff; stroke-width: 2; }
 .house { display: flex; align-items: center; gap: 6px; padding: 8px; border: 2px solid var(--accent); border-radius: 12px; background: var(--accent-soft); margin: 8px 0; }
 .roof { font-size: 2.6rem; line-height: 1; color: var(--accent); }

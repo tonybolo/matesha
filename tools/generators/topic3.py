@@ -259,9 +259,172 @@ def g_ord(rng: random.Random, level: int):
                        ["compare-roots", "negatives", "bring-under-root"], "Числа отрицательные.")
 
 
+# ---------- КР №3 A3: при каких x имеет смысл √(kx) ----------
+
+OPS = [(">=", "\\ge"), (">", ">"), ("<=", "\\le"), ("<", "<")]
+
+
+def _r_tex(r: Fraction) -> str:
+    return _small_frac_tex(r) if r != 0 else "0"
+
+
+def _dom_options(rng, r: Fraction, correct_op: str):
+    pairs = [(op, f"x\\ {tex}\\ {_r_tex(r)}") for op, tex in OPS]
+    order = list(range(4))
+    rng.shuffle(order)
+    shown = [pairs[i] for i in order]
+    idx = next(i for i, (op, _) in enumerate(shown) if op == correct_op)
+    return [f"${t}$" for _, t in shown], str(idx), [[op, str(r)] for op, _ in shown]
+
+
+def g_dom(rng: random.Random, level: int):
+    if level == 1:
+        k = rng.choice([-81, -64, -49, -36, -25, -16, -9, -4, 4, 9, 16, 25, 36, 49, 64, 81])
+        kt = f"{k}x"
+        op = ">=" if k > 0 else "<="
+        options, answer, spec = _dom_options(rng, Fraction(0), op)
+        if k > 0:
+            sol = [f"Под корнем не может быть отрицательное число: нужно ${kt}\\ge 0$.",
+                   f"Число ${k}$ положительное, поэтому произведение ${kt}$ неотрицательно, когда $x\\ge 0$.",
+                   "Ноль подходит: $\\sqrt{0}=0$. Строгого неравенства не нужно."]
+        else:
+            sol = [f"Под корнем не может быть отрицательное число: нужно ${kt}\\ge 0$.",
+                   f"Число ${k}$ отрицательное. Произведение отрицательного числа на $x$ неотрицательно, когда $x$ тоже отрицательное или равно нулю: $x\\le 0$.",
+                   "Ноль подходит: $\\sqrt{0}=0$."]
+        return task("Найдите все значения переменной, при которых имеет смысл выражение {expr}.", answer, "choice",
+                    "Выражение под корнем должно быть неотрицательным. Подумай про знак числа перед $x$.", sol,
+                    ["sqrt-def", "sqrt-domain"], expr=f"sqrt({k}*x)", options=options,
+                    domSpec={"a": k, "b": 0, "strict": False, "opts": spec, "answer": int(answer)})
+    a = rng.choice([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5])
+    b = rng.choice([x for x in range(-12, 13) if x != 0])
+    strict = level == 3
+    r = Fraction(-b, a)
+    if a > 0:
+        op = ">" if strict else ">="
+    else:
+        op = "<" if strict else "<="
+    options, answer, spec = _dom_options(rng, r, op)
+    inner_tex = poly_tex(0, a, b)
+    inner_app = poly_expr(0, a, b)
+    need = ">" if strict else "\\ge"
+    flip = "Делим на отрицательное число, поэтому знак неравенства меняется." if a < 0 else f"Делим на положительное число ${a}$, знак не меняется."
+    rhs = f"{-b}"
+    sol = [f"Под корнем должно быть {'положительное число' if strict else 'неотрицательное число'}: ${inner_tex}{need}0$." if not strict else
+           f"Выражение $\\dfrac{{1}}{{\\sqrt{{{inner_tex}}}}}$ имеет смысл, если $\\sqrt{{{inner_tex}}}$ существует **и не равен нулю**: ${inner_tex}>0$.",
+           f"Переносим число: ${poly_tex(0, a, 0)}{need}{rhs}$.",
+           f"{flip} Получаем $x\\ {'>' if (a > 0 and strict) else ('\\ge' if a > 0 else ('<' if strict else '\\le'))}\\ {_r_tex(r)}$."]
+    expr = f"sqrt({inner_app})" if not strict else f"1/sqrt({inner_app})"
+    return task("Найдите все значения переменной, при которых имеет смысл выражение {expr}.", answer, "choice",
+                "Составь неравенство для выражения под корнем. Если делишь на отрицательное число, знак неравенства меняется. В знаменателе ноль недопустим.", sol,
+                ["sqrt-def", "sqrt-domain"], expr=expr, options=options,
+                domSpec={"a": a, "b": b, "strict": strict, "opts": spec, "answer": int(answer)})
+
+
+# ---------- КР №4 A3: при каком x значение функции y = √x равно v ----------
+
+def _num_tex(v: Fraction) -> str:
+    return _small_frac_tex(v)
+
+
+def g_arg(rng: random.Random, level: int):
+    if level in (1, 2):
+        if level == 1:
+            v = Fraction(rng.randint(2, 15))
+        else:
+            v = rng.choice([Fraction(1, 2), Fraction(2, 3), Fraction(3, 2), Fraction(3, 10), Fraction(7, 10), Fraction(5, 4), Fraction(1, 5), Fraction(6, 5), Fraction(5, 3)])
+        x0 = v * v
+        cands = [(x0, f"{_num_tex(x0)}"), (x0, f"\\pm {_num_tex(x0)}"), (v, f"{_num_tex(v)}"), (v, f"\\pm {_num_tex(v)}")]
+        right = 0
+        sol = [f"Функция $y=\\sqrt{{x}}$ принимает значение ${_num_tex(v)}$, когда $\\sqrt{{x}}={_num_tex(v)}$.",
+               f"Возводим обе части в квадрат: $x=({_num_tex(v)})^2={_num_tex(x0)}$.",
+               "Минус не нужен: подкоренное число $x$ не может быть отрицательным."]
+        task_expr = f"sqrt(x)={_num_tex(v)}".replace("\\", "")
+        info = {"a": 1, "c": 0, "v": str(v), "x0": str(x0), "ok": [True, False, False, False]}
+        prompt = f"Найдите значение аргумента, при котором значение функции $y=\\sqrt{{x}}$ равно ${_num_tex(v)}$."
+    else:
+        t = rng.randint(2, 9)
+        a = rng.randint(2, 5)
+        c = rng.choice([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6])
+        v = a * t + c
+        x0 = t * t
+        wrong = [a * a * t * t, v * v, t]
+        cands = [(x0, f"{x0}"), (wrong[0], f"{wrong[0]}"), (wrong[1], f"{wrong[1]}"), (wrong[2], f"{wrong[2]}")]
+        if len({str(x) for x, _ in cands}) < 4:
+            return None
+        sol = [f"Подставим в формулу: ${a}\\sqrt{{x}}{'+' if c > 0 else '-'}{abs(c)}={v}$.",
+               f"${a}\\sqrt{{x}}={v - c}$, значит $\\sqrt{{x}}={t}$.", f"Возводим в квадрат: $x={t}^2={x0}$."]
+        prompt = f"Найдите значение аргумента, при котором значение функции $y={a}\\sqrt{{x}}{'+' if c > 0 else '-'}{abs(c)}$ равно ${v}$."
+        info = {"a": a, "c": c, "v": str(v), "x0": str(x0), "ok": [True, False, False, False]}
+        right = 0
+    order = list(range(4))
+    rng.shuffle(order)
+    shown = [cands[i] for i in order]
+    answer = order.index(right)
+    options = [f"${tex}$" for _, tex in shown]
+    return task(prompt, str(answer), "choice",
+                "Подставь значение функции в формулу и реши получившееся уравнение. Корень не бывает отрицательным.", sol,
+                ["sqrt-def", "function-value"], options=options,
+                argSpec={"a": info["a"], "c": info["c"], "v": info["v"], "x0": info["x0"], "answer": answer,
+                         "options": [str(x) + ("|pm" if "pm" in tex else "") for x, tex in shown]})
+
+
+# ---------- КР №3 C2: решить графически √x = kx + b ----------
+
+_GSQ_KS = sorted({Fraction(sg * a, b) for a, b in [(1, 2), (1, 3), (1, 4), (2, 3), (3, 4), (1, 1), (3, 2), (2, 1), (1, 5), (1, 6)] for sg in (1, -1)})
+
+
+def g_gsq(rng: random.Random, level: int):
+    max_den = {1: 2, 2: 4, 3: 6}[level]
+    x0s = {1: [1, 4, 9], 2: [1, 4, 9, 16], 3: [1, 4, 9, 16, 25]}[level]
+    t = sp.symbols("t")
+    for _ in range(300):
+        x0 = rng.choice(x0s)
+        k = rng.choice(_GSQ_KS)
+        b = Fraction(math.isqrt(x0)) - k * x0
+        if b.denominator > max_den or b == 0 or abs(b) > 9:
+            continue
+        sols = [r for r in sp.solve(sp.Rational(k.numerator, k.denominator) * t**2 - t + sp.Rational(b.numerator, b.denominator), t) if r.is_real and r >= 0]
+        xs = sorted({sp.nsimplify(r * r) for r in sols})
+        if not xs or any(not x.is_integer for x in xs) or len(xs) > 2:
+            continue
+        if level == 1 and len(xs) > 1:
+            continue
+        # запись прямой «b + kx» как в книге: 4 − x/2
+        if k.denominator == 1:
+            kx = ("-" if k < 0 else "+") + ("" if abs(k) == 1 else f"{abs(k).numerator}*") + "x"
+        else:
+            kx = ("-" if k < 0 else "+") + ("" if abs(k.numerator) == 1 else f"{abs(k.numerator)}*") + "x" + f"/{k.denominator}"
+        b_str = f"{b.numerator}/{b.denominator}" if b.denominator != 1 else str(b.numerator)
+        if b > 0:
+            line_expr = f"{b_str}{kx}"
+        else:
+            line_expr = f"{kx.lstrip('+')}-{abs(b).numerator}" + (f"/{b.denominator}" if b.denominator != 1 else "")
+        ans_s = "; ".join(str(x) for x in xs)
+        pts = [(x, k * x + b) for x in range(0, 17) if (k * x + b).denominator == 1 and 0 <= k * x + b <= 8][:3]
+        pts_txt = ", ".join(f"$({x};\\ {int(y)})$" for x, y in pts)
+        sq_txt = ", ".join(f"$({i * i};\\ {i})$" for i in range(0, 5))
+        inter = "; ".join(f"$({int(x)};\\ {int(math.isqrt(int(x)))})$" for x in xs)
+        many = len(xs) > 1
+        sol = [f"Построим график $y=\\sqrt{{x}}$ по точкам: {sq_txt}.",
+               f"Построим график $y={sp.latex(parse_app(line_expr))}$: это прямая, она проходит через точки {pts_txt}.",
+               f"Графики пересекаются в {'точках' if many else 'точке'} {inter}. Ответ — {'абсциссы этих точек' if many else 'абсцисса этой точки'}: ${ans_s.replace(';', ';\\ ')}$.",
+               "Проверка: подставь найденное значение в обе части уравнения."]
+        return task("Решите графически уравнение {expr}={expr2}. " + RES_ROOTS, ans_s, "roots",
+                    "Нарисуй график $y=\\sqrt{x}$ и график правой части. Корень уравнения — абсцисса точки пересечения. Сделай проверку подстановкой.",
+                    sol, ["sqrt-graph", "linear-function"], expr="sqrt(x)", expr2=line_expr,
+                    equation=["sqrt(x)", line_expr])
+    return None
+
+
+RES_ROOTS = "Если корней несколько, запишите их через «;»."
+
+
 GROUPS = [
     ("irr", "Какое число иррациональное?", g_irr, 1),
     ("rootnum", "Корень и число", g_rootnum, 2),
     ("cmp", "Сравни a√b и c√d", g_cmp, 3),
     ("ord", "Расставь по порядку", g_ord, 2),
+    ("dom", "Когда корень имеет смысл", g_dom, 5),
+    ("arg", "Найди аргумент (y = √x)", g_arg, 6),
+    ("gsq", "Графически: √x = kx + b", g_gsq, 6),
 ]

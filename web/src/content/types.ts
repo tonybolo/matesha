@@ -10,6 +10,11 @@ export type VizId =
   | 'bringIn'
   | 'pairs'
   | 'parabola'
+  | 'domain'
+  | 'sqrtGraph'
+  | 'areaMult'
+  | 'divide'
+  | 'hyperbola'
 
 export type VizBlock = { type: 'viz'; id: VizId; preset?: string }
 
