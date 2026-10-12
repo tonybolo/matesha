@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { topics } from '../content/load'
 import { hrefTopic } from '../route'
 import { skillInfo } from '../content/skills'
+import { planProgress } from '../lib/plan'
 import { emptyState, setName, topicStats, weakSkills } from '../store/progress'
 import { useProgress } from '../store/useProgress'
 import { Rich } from './Tex'
@@ -63,6 +64,7 @@ export function Home() {
           </div>
         </div>
       </header>
+      <PlanCard />
       <ExamCard />
       <WeakSpots />
       <ul className="topic-list">
@@ -111,6 +113,61 @@ export function Home() {
         </button>
       </p>
     </main>
+  )
+}
+
+function PlanCard() {
+  const { state } = useProgress()
+  const rows = planProgress(topics, state)
+  const classExams = state.exams.filter((e) => !e.kind || e.kind === 'class')
+  const best = classExams.reduce<(typeof classExams)[number] | null>((m, e) => (!m || e.score / e.total > m.score / m.total ? e : m), null)
+  return (
+    <section className="card plan" aria-label="План подготовки к контрольной">
+      <h2>🎯 Подготовка к контрольной</h2>
+      <p className="muted">В контрольной три задания: сравнить числа, упростить выражения, решить квадратные уравнения. Иди по порядку: урок, потом минимум по пять задач каждого типа.</p>
+      <ol className="plan-list">
+        {rows.map((r, i) => {
+          const percent = r.total ? Math.round((r.done / r.total) * 100) : 0
+          const icon = r.next.kind === 'lesson' ? '📖' : r.next.kind === 'train' ? '✏️' : '✓'
+          return (
+            <li key={r.item.id}>
+              <div className="plan-head">
+                <span className="plan-num">{i + 1}</span>
+                <strong>{r.item.title}</strong>
+                <span className="muted">
+                  {r.done} / {r.total}
+                </span>
+              </div>
+              <div className="progress-bar" aria-hidden>
+                <div style={{ width: `${percent}%` }} />
+              </div>
+              <div className="plan-actions">
+                <a className={`btn small ${r.next.kind === 'done' ? '' : 'primary'}`} href={r.next.href}>
+                  {icon} {r.next.label}
+                </a>
+                {r.next.kind !== 'lesson' && (
+                  <a className="link" href={r.lessonHref}>
+                    урок
+                  </a>
+                )}
+              </div>
+            </li>
+          )
+        })}
+        <li>
+          <div className="plan-head">
+            <span className="plan-num">4</span>
+            <strong>Пробная контрольная</strong>
+            <span className="muted">{best ? `лучший результат ${best.score} из ${best.total}` : 'ещё не писали'}</span>
+          </div>
+          <div className="plan-actions">
+            <a className="btn small" href="#/exam">
+              📝 Написать
+            </a>
+          </div>
+        </li>
+      </ol>
+    </section>
   )
 }
 

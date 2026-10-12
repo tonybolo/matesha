@@ -45,7 +45,7 @@ export function TopicPage({ route }: { route: Extract<Route, { name: 'topic' }> 
       </nav>
       {route.tab === 'learn' && <Lesson topic={topic} step={route.step} />}
       {route.tab === 'check' && <Check topic={topic} />}
-      {route.tab === 'train' && <Trainer topic={topic} />}
+      {route.tab === 'train' && <Trainer topic={topic} initialGroup={route.group} />}
     </main>
   )
 }

@@ -148,18 +148,19 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
 }
 
 /** Тренажёр с группами типов (сгенерированные задания): внутри группы идём по порядку, уровни растут. */
-function GroupTrainer({ topic }: { topic: Topic }) {
+function GroupTrainer({ topic, initialGroup }: { topic: Topic; initialGroup?: string }) {
   const { state } = useProgress()
   const progress = state.topics[topic.id]
   const groups = topic.groups ?? []
-  const [gid, setGid] = useState(groups[0]?.id ?? '')
+  const startGroup = groups.find((g) => g.id === initialGroup)?.id ?? groups[0]?.id ?? ''
+  const [gid, setGid] = useState(startGroup)
   const list = useMemo(() => topic.tasks.filter((t) => t.group === gid), [topic, gid])
   const current = groups.find((g) => g.id === gid)
   const firstOpen = (l: Task[]) => {
     const i = l.findIndex((t) => !progress?.tasks[t.id]?.solved)
     return i < 0 ? 0 : i
   }
-  const [pos, setPos] = useState(() => firstOpen(topic.tasks.filter((t) => t.group === groups[0]?.id)))
+  const [pos, setPos] = useState(() => firstOpen(topic.tasks.filter((t) => t.group === startGroup)))
   const idx = Math.min(pos, Math.max(0, list.length - 1))
   const task = list[idx]
   const groupSolved = (id: string) => topic.tasks.filter((t) => t.group === id && progress?.tasks[t.id]?.solved).length
@@ -209,8 +210,8 @@ function GroupTrainer({ topic }: { topic: Topic }) {
   )
 }
 
-export function Trainer({ topic }: { topic: Topic }) {
-  if (topic.groups?.length) return <GroupTrainer topic={topic} />
+export function Trainer({ topic, initialGroup }: { topic: Topic; initialGroup?: string }) {
+  if (topic.groups?.length) return <GroupTrainer topic={topic} initialGroup={initialGroup} />
   return <LevelTrainer topic={topic} />
 }
 

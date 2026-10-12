@@ -383,3 +383,12 @@ details summary { cursor: pointer; color: var(--accent); margin: 6px 0; }
   * { animation: none !important; transition: none !important; }
 }
 .update-banner { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 60; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; border-radius: 14px; background: var(--card); border: 2px solid var(--accent); box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18); max-width: 520px; margin: 0 auto; }
+.plan { margin-bottom: 12px; border-color: var(--accent); }
+.plan h2 { margin: 0 0 4px; }
+.plan-list { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 14px; }
+.plan-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.plan-head .muted { margin-left: auto; }
+.plan-num { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--accent-text); display: grid; place-items: center; font-size: 0.85rem; font-weight: 700; flex: none; }
+.plan-actions { display: flex; align-items: center; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+a.btn { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
+.exam-card .cta { white-space: nowrap; }
