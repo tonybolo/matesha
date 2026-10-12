@@ -2,6 +2,7 @@ import { CheatsheetButton } from './components/Cheatsheet'
 import { Exam } from './components/Exam'
 import { Home } from './components/Home'
 import { TopicPage } from './components/TopicPage'
+import { UpdateBanner } from './components/UpdateBanner'
 import { useRoute } from './route'
 import { ProgressProvider } from './store/useProgress'
 
@@ -11,6 +12,7 @@ export default function App() {
     <ProgressProvider>
       {route.name === 'home' ? <Home /> : route.name === 'exam' ? <Exam /> : <TopicPage key={route.id} route={route} />}
       <CheatsheetButton />
+      <UpdateBanner />
     </ProgressProvider>
   )
 }

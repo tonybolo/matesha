@@ -21,7 +21,7 @@ export default defineConfig({
     yamlContent,
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      registerType: 'prompt',
       includeAssets: ['icons/apple-touch-icon.png', 'icons/favicon-64.png'],
       manifest: {
         name: 'Матеша — алгебра 8 класса',
