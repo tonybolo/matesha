@@ -28,8 +28,14 @@ function noStray(rich: Rich, where: string) {
   }
 }
 
+/** Команда TeX без обратного слэша: на экране вместо знака появятся буквы («sqrt», «ge0», «pm16»). */
+const BARE_COMMAND = /(^|[^\\a-zA-Z])(sqrt|frac|dfrac|cdot|pm|ge|le|geq|leq|neq|times|left|right|dots|ldots|infty|varnothing|Rightarrow)(?![a-zA-Z])/
+
 function texOk(tex: string, where: string) {
   expect(() => katex.renderToString(tex, { throwOnError: true, strict: 'ignore' }), `${where}: ${tex}`).not.toThrow()
+  // «\\» KaTeX считает переводом строки, поэтому дефект «\\sqrt» проходит компиляцию, но на экране выглядит как «sqrt» на новой строке
+  expect(tex.includes('\\\\'), `${where}: двойной обратный слэш в «${tex}»`).toBe(false)
+  expect(BARE_COMMAND.test(tex), `${where}: команда TeX без обратного слэша в «${tex}»`).toBe(false)
 }
 
 describe('контент', () => {
