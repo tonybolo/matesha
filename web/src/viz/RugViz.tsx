@@ -37,6 +37,7 @@ export function RugViz() {
           {n} плиток
         </text>
       </svg>
+      <div className="slider-label">Площадь коврика: {n} плиток</div>
       <input className="slider" type="range" min={1} max={100} step={1} value={n} onChange={(e) => setN(Number(e.target.value))} aria-label="Площадь коврика в плитках" />
       <div className="readout" aria-live="polite">
         {whole ? (

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Tex } from '../components/Tex'
+import { boundaryTex, substitutionTex, texNum } from './domain'
+import { Stepper } from './Stepper'
 
 const MIN = -8
 const MAX = 8
@@ -14,24 +16,9 @@ const PRESETS: [number, number][] = [
   [-1, 5],
 ]
 
-function Stepper({ label, value, min, max, onChange }: { label: string; value: number; min: number; max: number; onChange: (n: number) => void }) {
-  return (
-    <span className="stepper">
-      <span className="muted">{label}</span>
-      <button className="key" onClick={() => onChange(Math.max(min, value - 1))} disabled={value <= min} aria-label={`${label}: меньше`}>
-        −
-      </button>
-      <strong>{fmt(value)}</strong>
-      <button className="key" onClick={() => onChange(Math.min(max, value + 1))} disabled={value >= max} aria-label={`${label}: больше`}>
-        +
-      </button>
-    </span>
-  )
-}
-
 const poly = (a: number, b: number) => `${a === 1 ? '' : a === -1 ? '-' : a}x${b === 0 ? '' : b > 0 ? `+${b}` : `${b}`}`
 
-/** Когда √(ax+b) существует: подкоренное число не может быть отрицательным. */
+/** Когда √(ax+b) существует: подкоренное число не может быть отрицательным. Ребёнок подставляет x и видит, что получилось под корнем. */
 export function DomainViz() {
   const [[a, b], setV] = useState(PRESETS[0])
   const [x, setX] = useState(2)
@@ -42,9 +29,20 @@ export function DomainViz() {
   const from = a > 0 ? boundary : MIN
   const to = a > 0 ? MAX : boundary
   const clamp = (v: number) => Math.max(MIN, Math.min(MAX, v))
+  // нажатие на числовую прямую ставит x в это место (с точностью до 0,5)
+  const pick = (clientX: number, svg: SVGSVGElement) => {
+    const r = svg.getBoundingClientRect()
+    const v = MIN + ((((clientX - r.left) / r.width) * W - 18) / (W - 36)) * (MAX - MIN)
+    setX(clamp(Math.round(v * 2) / 2))
+  }
+  const labelX = Math.max(30, Math.min(W - 30, px(x)))
   return (
     <div className="viz">
       <div className="viz-title">Когда корень существует?</div>
+
+      <div className="viz-step">
+        <span className="viz-num">1</span> Выбери выражение под корнем
+      </div>
       <div className="chips">
         {PRESETS.map(([p, q], i) => (
           <button key={i} className={`chip wide ${p === a && q === b ? 'on' : ''}`} onClick={() => setV([p, q])}>
@@ -53,10 +51,23 @@ export function DomainViz() {
         ))}
       </div>
       <div className="steppers">
-        <Stepper label="число при x" value={a} min={-9} max={9} onChange={(v) => set(0, v)} />
-        <Stepper label="свободное число" value={b} min={-9} max={9} onChange={(v) => set(1, v)} />
+        <Stepper compact label="число при x" value={a} min={-9} max={9} step={1} onChange={(v) => set(0, v)} format={fmt} />
+        <Stepper compact label="свободное число" value={b} min={-9} max={9} step={1} onChange={(v) => set(1, v)} format={fmt} />
       </div>
-      <svg viewBox={`0 0 ${W} 70`} className="numline" role="img" aria-label="Числовая прямая: где корень существует">
+      <div className="viz-expr" aria-live="polite">
+        <Tex tex={`\\sqrt{${poly(a, b)}}`} />
+      </div>
+
+      <div className="viz-step">
+        <span className="viz-num">2</span> Подставь число x и посмотри, что получится под корнем
+      </div>
+      <svg
+        viewBox={`0 0 ${W} 70`}
+        className="numline tappable"
+        role="img"
+        aria-label="Числовая прямая: где корень существует. Нажми на прямую, чтобы выбрать x"
+        onClick={(e) => pick(e.clientX, e.currentTarget)}
+      >
         <line x1={14} x2={W - 14} y1={38} y2={38} stroke="currentColor" strokeWidth={2} opacity={0.6} />
         <rect x={px(clamp(from))} y={30} width={Math.max(0, px(clamp(to)) - px(clamp(from)))} height={16} className="good-zone" />
         {Array.from({ length: MAX - MIN + 1 }, (_, i) => MIN + i).map((t) => (
@@ -71,19 +82,37 @@ export function DomainViz() {
         ))}
         {boundary >= MIN && boundary <= MAX && <circle cx={px(boundary)} cy={38} r={6} fill="var(--accent)" stroke="var(--bg)" strokeWidth={2} />}
         <path d={`M${px(x)} 31 l-6 -12 h12 z`} fill={ok ? 'var(--ok)' : 'var(--bad)'} />
+        <text x={labelX} y={13} textAnchor="middle" fontSize={12} fontWeight={700} fill={ok ? 'var(--ok)' : 'var(--bad)'}>
+          x = {fmt(x)}
+        </text>
       </svg>
+      <div className="x-row">
+        <span className="slider-label">Число x:</span>
+        <Stepper compact aria="x" value={x} min={MIN} max={MAX} step={1} onChange={setX} format={fmt} />
+        <span className="muted">(или двигай ползунок, или нажми на прямую)</span>
+      </div>
       <input className="slider" type="range" min={MIN} max={MAX} step={0.5} value={x} onChange={(e) => setX(Number(e.target.value))} aria-label="Значение x" />
+
       <div className={`readout ${ok ? '' : 'bad'}`} aria-live="polite">
-        При <strong>x = {fmt(x)}</strong> под корнем получается <strong>{fmt(inner)}</strong>:{' '}
-        {ok ? (
-          <>
-            корень существует, <Tex tex={`\\sqrt{${fmt(inner).replace('−', '-')}}`.replace(',', '{,}')} />
-          </>
-        ) : (
-          <>отрицательное число, корня нет 💥</>
-        )}
+        <div>
+          Подставим <Tex tex={`x=${texNum(x)}`} /> в <Tex tex={poly(a, b)} />:
+        </div>
+        <div className="viz-calc">
+          <Tex tex={substitutionTex(a, b, x)} />
+        </div>
+        <div>
+          {ok ? (
+            <>
+              <Tex tex={`${texNum(inner)}\\ge 0`} /> — число не отрицательное, корень существует: <Tex tex={`\\sqrt{${texNum(inner)}}`} />
+            </>
+          ) : (
+            <>
+              <Tex tex={`${texNum(inner)}<0`} /> — под корнем отрицательное число, корня нет 💥
+            </>
+          )}
+        </div>
         <div className="muted">
-          Зелёная полоса — подходящие значения: <Tex tex={`x\\ ${a > 0 ? '\\ge' : '\\le'}\\ ${fmt(boundary).replace('−', '-').replace(',', '{,}')}`} />
+          Зелёная полоса — все x, при которых под корнем не будет отрицательного числа: <Tex tex={boundaryTex(a, b)} />
         </div>
       </div>
     </div>

@@ -66,6 +66,7 @@ export function OdzViz() {
           <path d="M0 33 L-7 20 L7 20 Z" fill={broken ? 'var(--bad)' : 'var(--accent)'} />
         </g>
       </svg>
+      <div className="slider-label">Двигай x и смотри, что получается:</div>
       <input
         className="slider"
         type="range"

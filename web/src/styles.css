@@ -392,3 +392,10 @@ details summary { cursor: pointer; color: var(--accent); margin: 6px 0; }
 .plan-actions { display: flex; align-items: center; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
 a.btn { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
 .exam-card .cta { white-space: nowrap; }
+.viz-step { display: flex; align-items: center; gap: 8px; font-weight: 600; margin: 12px 0 6px; }
+.viz-num { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: var(--accent-text); display: grid; place-items: center; font-size: 0.8rem; font-weight: 700; flex: none; }
+.viz-expr { text-align: center; font-size: 1.5rem; margin: 6px 0 2px; }
+.numline.tappable { cursor: pointer; touch-action: manipulation; }
+.x-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 2px; }
+.slider-label { font-weight: 600; margin: 8px 0 0; }
+.viz-calc { font-size: 1.25rem; margin: 2px 0 4px; }
