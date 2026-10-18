@@ -163,7 +163,7 @@ a { color: var(--accent); }
 .note { display: flex; gap: 10px; border-radius: 12px; padding: 12px 14px; margin: 8px 0; }
 .note.tip { background: var(--tip-soft); }
 .note.warn { background: var(--warn-soft); }
-.note > div { min-width: 0; }
+.note > div { min-width: 0; overflow-x: auto; }
 .note-icon { flex: none; }
 
 .example { border: 1px solid var(--line); background: var(--card); border-radius: 12px; padding: 12px 14px; margin: 8px 0; }
