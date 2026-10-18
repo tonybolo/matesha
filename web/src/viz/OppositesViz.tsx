@@ -150,7 +150,7 @@ function MirrorMode() {
         </button>
       </div>
       <svg viewBox={`0 0 ${W} 110`} className="numline tappable" role="img" aria-label={`Число ${fmt(a)} и противоположное ему ${fmt(-a)}: до нуля ${steps(d)}`} onClick={(e) => setA(tapValue(e))}>
-        <line x1={px(0)} x2={px(0)} y1={6} y2={y + 6} className="ov-mirror" />
+        <line x1={px(0)} x2={px(0)} y1={20} y2={y + 6} className="ov-mirror" />
         <text x={px(0)} y={14} textAnchor="middle" className="ov-label muted-text">
           зеркало
         </text>
@@ -175,7 +175,7 @@ function MirrorMode() {
           <>
             <div>Ноль — сам себе противоположный: отражение нуля — снова ноль.</div>
             <div className="viz-calc">
-              <Tex tex="-0=0,\qquad |0|=0" />
+              <Tex tex="-0=0,\qquad \left|0\right|=0" />
             </div>
           </>
         ) : (
@@ -184,7 +184,10 @@ function MirrorMode() {
               Числа {fmt(a)} и {fmt(-a)} противоположные: они по разные стороны от нуля, и до нуля от каждого {steps(d)}.
             </div>
             <div className="viz-calc">
-              <Tex tex={`-\\left(${tn(a)}\\right)=${tn(-a)},\\qquad |${tn(a)}|=|${tn(-a)}|=${tn(d)}`} />
+              <Tex tex={`-\\left(${tn(a)}\\right)=${tn(-a)}`} />
+            </div>
+            <div className="viz-calc">
+              <Tex tex={`\\left|${tn(a)}\\right|=\\left|${tn(-a)}\\right|=${tn(d)}`} />
             </div>
             <div className="muted">Модуль — это расстояние до нуля, поэтому у противоположных чисел модули одинаковые.</div>
           </>
@@ -221,7 +224,7 @@ function CompareMode() {
         ]}
         on={([p, q]) => p === a && q === b}
         pick={(v) => setAB(v)}
-        tex={([p, q]) => `${tn(p)}\\ \\text{и}\\ ${tn(q)}`}
+        tex={([p, q]) => `${tn(p)}\\ \\text{и}\\ {${tn(q)}}`}
       />
       <div className="steppers">
         <Stepper label="a" value={a} min={MIN} max={MAX} step={STEP} onChange={(v) => setAB([v, b])} />
@@ -285,7 +288,7 @@ function DistanceMode() {
         ]}
         on={([p, q]) => p === a && q === b}
         pick={(v) => setAB(v)}
-        tex={([p, q]) => `${tn(p)}\\ \\text{и}\\ ${tn(q)}`}
+        tex={([p, q]) => `${tn(p)}\\ \\text{и}\\ {${tn(q)}}`}
       />
       <div className="steppers">
         <Stepper label="a" value={a} min={MIN} max={MAX} step={STEP} onChange={(v) => setAB([v, b])} />
@@ -317,10 +320,10 @@ function DistanceMode() {
       </svg>
       <div className="readout" aria-live="polite">
         <div className="viz-calc">
-          <Tex tex={`|a-b|=\\left|${tn(a)}-${tw(b)}\\right|=|${tn(a - b)}|=${tn(d)}`} />
+          <Tex tex={`|a-b|=\\left|${tn(a)}-${tw(b)}\\right|=\\left|${tn(a - b)}\\right|=${tn(d)}`} />
         </div>
         <div className="viz-calc">
-          <Tex tex={`|b-a|=\\left|${tn(b)}-${tw(a)}\\right|=|${tn(b - a)}|=${tn(d)}`} />
+          <Tex tex={`|b-a|=\\left|${tn(b)}-${tw(a)}\\right|=\\left|${tn(b - a)}\\right|=${tn(d)}`} />
         </div>
         <div>
           {d === 0

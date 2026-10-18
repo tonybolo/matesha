@@ -34,7 +34,7 @@ sections:
       - name: 'Модуль — расстояние от нуля'
         tex: '|a|=a\ \text{при}\ a\ge 0,\qquad |a|=-a\ \text{при}\ a<0'
       - name: 'Модуль противоположного числа'
-        tex: '|-a|=|a|'
+        tex: '\left|-a\right|=|a|'
         lhs: 'abs(-a)'
         rhs: 'abs(a)'
       - name: 'Расстояние между точками a и b'
