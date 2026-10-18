@@ -1,0 +1,28 @@
+/* Части четырёхугольника (QuadPartsViz) */
+.qp-pick { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 8px; }
+.qp-svg { width: 100%; max-width: 360px; height: auto; display: block; margin: 4px auto; color: var(--text); }
+.qp-poly { fill: var(--accent-soft); fill-opacity: 0.55; stroke: none; }
+.qp-side { stroke: var(--muted); stroke-width: 3; stroke-linecap: round; transition: stroke 0.15s; }
+.qp-side.on { stroke: var(--c1); stroke-width: 5; }
+.qp-side.sel { stroke: var(--accent); stroke-width: 7; }
+.qp-side.nb { stroke: var(--ok); stroke-width: 6; }
+.qp-side.p1 { stroke: var(--c1); stroke-width: 5; }
+.qp-side.p2 { stroke: var(--c3); stroke-width: 5; }
+.qp-diag { stroke: var(--c0); stroke-width: 3; stroke-dasharray: 7 5; stroke-linecap: round; }
+.qp-diag.sel { stroke-width: 5; }
+.qp-dot { fill: var(--text); stroke: var(--card); stroke-width: 2; transition: r 0.15s; }
+.qp-dot.on { fill: var(--accent); r: 7px; }
+.qp-dot.sel { fill: var(--accent); r: 10px; stroke: var(--card); stroke-width: 3; }
+.qp-dot.nb { fill: var(--ok); r: 9px; }
+.qp-dot.opp { fill: var(--c0); r: 9px; }
+.qp-name { font-size: 16px; font-weight: 800; fill: var(--text); }
+.qp-sidename { font-size: 13px; font-weight: 700; fill: var(--muted); }
+.qp-sidename.sel { fill: var(--accent); font-size: 15px; }
+.qp-warn { font-size: 13px; font-weight: 800; fill: var(--bad); }
+.qp-move { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 6px 0; }
+.qp-pad { display: grid; grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(2, 44px); gap: 4px; }
+.qp-up { grid-column: 2; grid-row: 1; }
+.qp-left { grid-column: 1; grid-row: 2; }
+.qp-down { grid-column: 2; grid-row: 2; }
+.qp-right { grid-column: 3; grid-row: 2; }
+.qp-presets { flex: 1 1 160px; margin-bottom: 0; }
