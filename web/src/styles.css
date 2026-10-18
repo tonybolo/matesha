@@ -204,7 +204,7 @@ input[type='text'], .input-row input, .welcome input {
 .option.right { border-color: var(--ok); background: var(--ok-soft); }
 .option.wrong { border-color: var(--bad); background: var(--bad-soft); }
 .option.dim { opacity: 0.55; }
-.q-prompt { font-size: 1.08rem; margin-bottom: 12px; }
+.q-prompt { font-size: 1.08rem; margin-bottom: 12px; overflow-x: auto; }
 .check-result { text-align: center; }
 .big-score { font-size: 2.4rem; font-weight: 800; margin: 4px 0; }
 
