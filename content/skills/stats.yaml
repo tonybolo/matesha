@@ -1,0 +1,12 @@
+# Навыки раздела «Вероятность и статистика». topic/step — урок, где навык объясняется (step считается с нуля).
+st-mean:         {title: 'Среднее арифметическое', topic: 'st-01-expectation-variance', step: 0}
+st-mean-freq:    {title: 'Среднее, когда числа повторяются', topic: 'st-01-expectation-variance', step: 0}
+st-deviation:    {title: 'Отклонения от среднего', topic: 'st-01-expectation-variance', step: 2}
+st-variance:     {title: 'Дисперсия набора чисел', topic: 'st-01-expectation-variance', step: 2}
+st-sigma:        {title: 'Стандартное отклонение', topic: 'st-01-expectation-variance', step: 3}
+st-distribution: {title: 'Таблица распределения: сумма вероятностей равна 1', topic: 'st-01-expectation-variance', step: 4}
+st-expectation:  {title: 'Математическое ожидание', topic: 'st-01-expectation-variance', step: 5}
+st-fair-game:    {title: 'Средний выигрыш и справедливая игра', topic: 'st-01-expectation-variance', step: 5}
+st-variance-x:   {title: 'Дисперсия случайной величины', topic: 'st-01-expectation-variance', step: 6}
+st-linear:       {title: 'E и D при X → aX + b', topic: 'st-01-expectation-variance', step: 7}
+st-independent:  {title: 'Сумма независимых величин', topic: 'st-01-expectation-variance', step: 7}
