@@ -1,4 +1,5 @@
 import { getTopic } from '../content/load'
+import { subjectTitle } from '../content/subjects'
 import { hrefTopic, type Route } from '../route'
 import { topicStats } from '../store/progress'
 import { useProgress } from '../store/useProgress'
@@ -28,7 +29,9 @@ export function TopicPage({ route }: { route: Extract<Route, { name: 'topic' }> 
     <main className="page">
       <a className="back" href="#/">← Все темы</a>
       <header className="topic-head">
-        <p className="eyebrow">Тема {topic.order}</p>
+        <p className="eyebrow">
+          {subjectTitle(topic.subject)} · {topic.order === 0 ? 'повторение' : `тема ${topic.order}`}
+        </p>
         <h1>{topic.title}</h1>
         <div className="progress-bar" aria-label={`Освоено ${stats.percent}%`}>
           <div style={{ width: `${stats.percent}%` }} />

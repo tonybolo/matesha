@@ -24,9 +24,9 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['icons/apple-touch-icon.png', 'icons/favicon-64.png'],
       manifest: {
-        name: 'Матеша — алгебра 8 класса',
+        name: 'Матеша — математика 8 класса',
         short_name: 'Матеша',
-        description: 'Алгебра по шагам: объяснение, проверка, тренировка.',
+        description: 'Алгебра, геометрия, вероятность и статистика по шагам: объяснение, проверка, тренировка.',
         lang: 'ru',
         start_url: base,
         scope: base,

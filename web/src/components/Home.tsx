@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { topics } from '../content/load'
+import { topics, topicsOf } from '../content/load'
+import { SUBJECTS } from '../content/subjects'
 import { hrefTopic } from '../route'
 import { skillInfo } from '../content/skills'
 import { planProgress } from '../lib/plan'
@@ -21,7 +22,7 @@ function Welcome() {
     <section className="welcome card">
       <h1>Матеша 👋</h1>
       <p>
-        Алгебра 8 класса по шагам: понятное объяснение, проверка, тренировка. Как тебя зовут?
+        Математика 8 класса по шагам: алгебра, геометрия, вероятность и статистика. Понятное объяснение, проверка, тренировка. Как тебя зовут?
       </p>
       <form
         className="input-row"
@@ -50,7 +51,7 @@ export function Home() {
     <main className="page">
       <header className="home-head">
         <div>
-          <p className="eyebrow">Алгебра · 8 класс</p>
+          <p className="eyebrow">Математика · 8 класс</p>
           <h1>Привет, {state.name}!</h1>
         </div>
         <div className="stats">
@@ -67,37 +68,50 @@ export function Home() {
       <PlanCard />
       <ExamCard />
       <WeakSpots />
-      <ul className="topic-list">
-        {topics.map((t) => {
-          const p = state.topics[t.id]
-          const st = topicStats(t, p)
-          const cta = st.status === 'new' ? 'Начать' : 'Продолжить'
-          const tab = !p?.explainDone ? 'learn' : !p.checkPassed ? 'check' : 'train'
-          return (
-            <li key={t.id} className="card topic-card">
-              <a href={hrefTopic(t.id, tab, tab === 'learn' ? p?.stepReached : undefined)}>
-                <div className="topic-top">
-                  <span className="topic-num">{t.order}</span>
-                  <div>
-                    <h2>{t.title}</h2>
-                    <p className="muted">
-                      <Rich text={t.summary} />
-                    </p>
-                  </div>
-                </div>
-                <div className="progress-bar">
-                  <div style={{ width: `${st.percent}%` }} />
-                </div>
-                <div className="topic-bottom">
-                  <span className={`status ${st.status}`}>{STATUS[st.status]}</span>
-                  <span className="muted">{st.percent}%</span>
-                  <span className="cta">{cta} ▸</span>
-                </div>
-              </a>
-            </li>
-          )
-        })}
-      </ul>
+      {SUBJECTS.map((subject) => {
+        const list = topicsOf(subject.id)
+        if (list.length === 0) return null
+        return (
+          <section key={subject.id} className="subject" aria-labelledby={`subject-${subject.id}`}>
+            <h2 id={`subject-${subject.id}`} className="subject-title">
+              <span aria-hidden>{subject.icon}</span> {subject.title}
+            </h2>
+            <ul className="topic-list">
+              {list.map((t) => {
+                const p = state.topics[t.id]
+                const st = topicStats(t, p)
+                const cta = st.status === 'new' ? 'Начать' : 'Продолжить'
+                const tab = !p?.explainDone ? 'learn' : !p.checkPassed ? 'check' : 'train'
+                return (
+                  <li key={t.id} className="card topic-card">
+                    <a href={hrefTopic(t.id, tab, tab === 'learn' ? p?.stepReached : undefined)}>
+                      <div className="topic-top">
+                        <span className="topic-num" title={t.order === 0 ? 'Повторение' : `Тема ${t.order}`}>
+                          {t.order === 0 ? '↺' : t.order}
+                        </span>
+                        <div>
+                          <h3>{t.title}</h3>
+                          <p className="muted">
+                            <Rich text={t.summary} />
+                          </p>
+                        </div>
+                      </div>
+                      <div className="progress-bar">
+                        <div style={{ width: `${st.percent}%` }} />
+                      </div>
+                      <div className="topic-bottom">
+                        <span className={`status ${st.status}`}>{STATUS[st.status]}</span>
+                        <span className="muted">{st.percent}%</span>
+                        <span className="cta">{cta} ▸</span>
+                      </div>
+                    </a>
+                  </li>
+                )
+              })}
+            </ul>
+          </section>
+        )
+      })}
       <p className="foot muted">
         Прогресс хранится в этом браузере.{' '}
         <button
@@ -123,7 +137,7 @@ function PlanCard() {
   const best = classExams.reduce<(typeof classExams)[number] | null>((m, e) => (!m || e.score / e.total > m.score / m.total ? e : m), null)
   return (
     <section className="card plan" aria-label="План подготовки к контрольной">
-      <h2>🎯 Подготовка к контрольной</h2>
+      <h2>🎯 Алгебра: подготовка к контрольной</h2>
       <p className="muted">В контрольной три задания: сравнить числа, упростить выражения, решить квадратные уравнения. Иди по порядку: урок, потом минимум по пять задач каждого типа.</p>
       <ol className="plan-list">
         {rows.map((r, i) => {
@@ -177,7 +191,7 @@ function ExamCard() {
   return (
     <a className="card exam-card" href="#/exam">
       <div>
-        <h2>📝 Контрольная</h2>
+        <h2>📝 Алгебра: контрольная</h2>
         <p className="muted">
           Классная работа или КР № 3, 4, 5 как в книге. Каждый раз новый вариант.
           {last && (

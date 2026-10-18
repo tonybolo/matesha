@@ -5,7 +5,7 @@ import { checkAnswer, expectedOrder, type CheckResult } from '../lib/check'
 import { toTex } from '../lib/expr'
 import { hrefTopic } from '../route'
 import { Figure } from '../viz'
-import { GROUP_GOAL, markRevealed, recordAttempt } from '../store/progress'
+import { GROUP_GOAL, markRevealed, recordAttempt, type TopicProgress } from '../store/progress'
 import { useProgress } from '../store/useProgress'
 import { AnswerInput, varsOf } from './AnswerInput'
 import { Rich } from './Tex'
@@ -41,14 +41,19 @@ export function taskPrompt(task: Task): string {
   return renderPrompt(task.prompt, task.expr, { expr2: task.expr2, items: task.items, tex: task.tex })
 }
 
-function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: () => void }) {
+/** Переходы между заданиями: null — на краю списка кнопка неактивна. */
+type Nav = { prev: (() => void) | null; next: (() => void) | null }
+
+function TaskPanel({ topic, task, nav }: { topic: Topic; task: Task; nav: Nav }) {
   const { state, update } = useProgress()
   const st = state.topics[topic.id]?.tasks[task.id]
   const [value, setValue] = useState('')
   const [res, setRes] = useState<CheckResult | null>(null)
   const [hint, setHint] = useState(false)
-  const [solution, setSolution] = useState(false)
   const solved = !!st?.solved
+  // Вернулись к заданию, которое уже решено раньше: вместо пустого поля показываем ответ и решение.
+  const [revisit] = useState(solved)
+  const [solution, setSolution] = useState(solved)
 
   const submit = () => {
     if (solved) return
@@ -79,26 +84,37 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
         <Rich text={taskPrompt(task)} />
       </p>
       {task.fig && <Figure fig={task.fig} />}
-      <AnswerInput
-        value={value}
-        onChange={(v) => {
-          setValue(v)
-          if (res && res.status !== 'correct') setRes(null)
-        }}
-        onSubmit={submit}
-        kind={task.answerKind}
-        vars={vars}
-        sqrtKey={sqrtKey}
-        placeholder={task.placeholder ?? (/^-?\d+([./]\d+)?$/.test(task.answer) && task.answerKind === 'expr' ? 'ответ числом, например 7 или 3/4' : undefined)}
-        options={task.options}
-        items={task.items}
-        disabled={solved}
-      />
-      {res && (
-        <div className={`feedback ${res.status === 'correct' ? 'ok' : res.status === 'wrong' ? 'bad' : 'soft'}`}>
-          <strong>{res.status === 'correct' ? 'Верно! 🎉' : res.message}</strong>
-          {res.status === 'correct' && <p>{st?.firstTry ? '+10 очков' : '+5 очков'}</p>}
+      {revisit ? (
+        <div className="feedback ok revisit">
+          <strong>Уже решено ✓</strong>
+          <p>
+            Ответ: <Rich text={answerText(task)} />
+          </p>
         </div>
+      ) : (
+        <>
+          <AnswerInput
+            value={value}
+            onChange={(v) => {
+              setValue(v)
+              if (res && res.status !== 'correct') setRes(null)
+            }}
+            onSubmit={submit}
+            kind={task.answerKind}
+            vars={vars}
+            sqrtKey={sqrtKey}
+            placeholder={task.placeholder ?? (/^-?\d+([./]\d+)?$/.test(task.answer) && task.answerKind === 'expr' ? 'ответ числом, например 7 или 3/4' : undefined)}
+            options={task.options}
+            items={task.items}
+            disabled={solved}
+          />
+          {res && (
+            <div className={`feedback ${res.status === 'correct' ? 'ok' : res.status === 'wrong' ? 'bad' : 'soft'}`}>
+              <strong>{res.status === 'correct' ? 'Верно! 🎉' : res.message}</strong>
+              {res.status === 'correct' && <p>{st?.firstTry ? '+10 очков' : '+5 очков'}</p>}
+            </div>
+          )}
+        </>
       )}
       <div className="task-actions">
         {!solved && (
@@ -106,21 +122,19 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
             💡 Подсказка
           </button>
         )}
-        {(solved || attempts > 0 || hint) && (
+        {!revisit && (solved || attempts > 0 || hint) && (
           <button className="btn small ghost" onClick={showSolution} disabled={solution}>
             Показать решение
           </button>
         )}
-        {solved && (
-          <button className="btn primary" onClick={onNext}>
-            Следующая ▸
-          </button>
-        )}
-        {!solved && (
-          <button className="btn small ghost" onClick={onNext}>
-            Пропустить
-          </button>
-        )}
+      </div>
+      <div className="nav-row task-nav">
+        <button className="btn ghost" onClick={nav.prev ?? undefined} disabled={!nav.prev}>
+          ◂ Предыдущая
+        </button>
+        <button className={`btn ${solved ? 'primary' : 'ghost'}`} onClick={nav.next ?? undefined} disabled={!nav.next}>
+          Следующая ▸
+        </button>
       </div>
       {hint && !solved && (
         <aside className="note tip">
@@ -140,14 +154,44 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
               </li>
             ))}
           </ol>
-          <p className="muted">
-            Ответ: <Rich text={answerText(task)} />
-          </p>
+          {!revisit && (
+            <p className="muted">
+              Ответ: <Rich text={answerText(task)} />
+            </p>
+          )}
         </div>
       )}
     </div>
   )
 }
+
+/** Ряд номеров заданий: зелёный — решено, жёлтый — были попытки, рамка — открыто сейчас. */
+function TaskChips({ list, idx, progress, onPick }: { list: Task[]; idx: number; progress: TopicProgress | undefined; onPick: (i: number) => void }) {
+  if (list.length < 2) return null
+  return (
+    <div className="chips small" role="group" aria-label="Задания, нажми на номер, чтобы открыть">
+      {list.map((t, i) => {
+        const ts = progress?.tasks[t.id]
+        return (
+          <button
+            key={t.id}
+            className={`chip ${i === idx ? 'on' : ''} ${ts?.solved ? 'solved' : ts && ts.attempts > 0 ? 'tried' : ''}`}
+            onClick={() => onPick(i)}
+            aria-label={`Задача ${i + 1}${ts?.solved ? ', решена' : ''}`}
+            aria-current={i === idx ? 'true' : undefined}
+          >
+            {i + 1}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+const stepNav = (idx: number, length: number, setPos: (i: number) => void): Nav => ({
+  prev: idx > 0 ? () => setPos(idx - 1) : null,
+  next: idx < length - 1 ? () => setPos(idx + 1) : null,
+})
 
 /** Тренажёр с группами типов (сгенерированные задания): внутри группы идём по порядку, уровни растут. */
 function GroupTrainer({ topic, initialGroup }: { topic: Topic; initialGroup?: string }) {
@@ -167,11 +211,6 @@ function GroupTrainer({ topic, initialGroup }: { topic: Topic; initialGroup?: st
   const task = list[idx]
   const groupSolved = (id: string) => topic.tasks.filter((t) => t.group === id && progress?.tasks[t.id]?.solved).length
   const doneAll = list.length > 0 && groupSolved(gid) >= Math.min(GROUP_GOAL, list.length)
-
-  const goNext = () => {
-    const nextOpen = list.findIndex((t, i) => i > idx && !progress?.tasks[t.id]?.solved)
-    setPos(nextOpen >= 0 ? nextOpen : (idx + 1) % list.length)
-  }
 
   return (
     <section className="trainer">
@@ -207,7 +246,8 @@ function GroupTrainer({ topic, initialGroup }: { topic: Topic; initialGroup?: st
         </p>
       )}
       {doneAll && <p className="feedback ok">Цель по этому типу выполнена ({GROUP_GOAL} решено). Можно идти дальше или потренироваться ещё.</p>}
-      {task && <TaskPanel key={task.id} topic={topic} task={task} onNext={goNext} />}
+      <TaskChips list={list} idx={idx} progress={progress} onPick={setPos} />
+      {task && <TaskPanel key={task.id} topic={topic} task={task} nav={stepNav(idx, list.length, setPos)} />}
     </section>
   )
 }
@@ -228,11 +268,6 @@ function LevelTrainer({ topic }: { topic: Topic }) {
   const list = useMemo(() => topic.tasks.filter((t) => t.level === level), [topic, level])
   const idx = Math.min(pos, list.length - 1)
   const task = list[idx]
-
-  const goNext = () => {
-    const nextOpen = list.findIndex((t, i) => i > idx && !progress?.tasks[t.id]?.solved)
-    setPos(nextOpen >= 0 ? nextOpen : (idx + 1) % list.length)
-  }
 
   return (
     <section className="trainer">
@@ -260,22 +295,8 @@ function LevelTrainer({ topic }: { topic: Topic }) {
           )
         })}
       </div>
-      <div className="chips" aria-label="Задачи уровня">
-        {list.map((t, i) => {
-          const ts = progress?.tasks[t.id]
-          return (
-            <button
-              key={t.id}
-              className={`chip ${i === idx ? 'on' : ''} ${ts?.solved ? 'solved' : ts && ts.attempts > 0 ? 'tried' : ''}`}
-              onClick={() => setPos(i)}
-              aria-label={`Задача ${i + 1}${ts?.solved ? ', решена' : ''}`}
-            >
-              {i + 1}
-            </button>
-          )
-        })}
-      </div>
-      {task && <TaskPanel key={task.id} topic={topic} task={task} onNext={goNext} />}
+      <TaskChips list={list} idx={idx} progress={progress} onPick={setPos} />
+      {task && <TaskPanel key={task.id} topic={topic} task={task} nav={stepNav(idx, list.length, setPos)} />}
     </section>
   )
 }
