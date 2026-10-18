@@ -1,0 +1,23 @@
+/* Картинка «Числовая прямая» (OppositesViz): цвета только из переменных темы. */
+.ov-zone { opacity: 0.12; }
+.ov-zone.neg { fill: var(--c1); }
+.ov-zone.pos { fill: var(--ok); }
+.ov-zone-label { font-size: 12px; fill: var(--muted); }
+.ov-label { font-size: 12px; fill: currentColor; opacity: 0.75; }
+.ov-label.strong { font-weight: 700; opacity: 1; }
+.ov-label.a { fill: var(--accent); }
+.ov-label.b { fill: var(--c0); }
+.ov-label.ok { fill: var(--ok); }
+.ov-label.muted-text { fill: var(--muted); opacity: 1; }
+.ov-pt { stroke: var(--card); stroke-width: 2; }
+.ov-pt.a { fill: var(--accent); }
+.ov-pt.b { fill: var(--c0); }
+.ov-mirror { stroke: var(--muted); stroke-width: 2; stroke-dasharray: 5 4; }
+.ov-brace { fill: none; stroke-width: 2.5; stroke-linejoin: round; }
+.ov-brace.a { stroke: var(--accent); }
+.ov-brace.b { stroke: var(--c0); }
+.ov-walk { stroke-width: 4; stroke-linecap: round; }
+.ov-walk.pos { stroke: var(--ok); }
+.ov-walk.neg { stroke: var(--c1); }
+.ov-seg { stroke: var(--ok); stroke-width: 7; stroke-linecap: round; opacity: 0.55; }
+.ov-dot { fill: var(--ok); }
