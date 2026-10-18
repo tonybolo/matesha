@@ -83,7 +83,7 @@ function SidesPanel() {
   for (const sd of sides) pl.dot(mid2(pts[sd.p], pts[sd.q]))
   const labels = sides.map((sd) => ({ sd, at: placeSeg(pl, pts[sd.p], pts[sd.q], c, fmt(sd.len)) }))
   const note =
-    ang === 90 ? 'Угол 90°: получился прямоугольник. Он тоже параллелограмм.' : a === b ? 'Все стороны равны: это ромб. Он тоже параллелограмм.' : 'Меняй наклон: стороны и периметр остаются прежними.'
+    ang === 90 && a === b ? 'Все стороны равны и угол 90°: это квадрат. Он тоже параллелограмм.' : ang === 90 ? 'Угол 90°: получился прямоугольник. Он тоже параллелограмм.' : a === b ? 'Все стороны равны: это ромб. Он тоже параллелограмм.' : 'Меняй наклон: стороны и периметр остаются прежними.'
   return (
     <div className="viz">
       <div className="viz-title">Крутим параллелограмм: что остаётся одинаковым?</div>
@@ -225,7 +225,7 @@ function DiagonalsPanel() {
   const q = parallelogram(sh.a, sh.b, sh.ang)
   const o = intersect(q.A, q.C, q.B, q.D)!.p
   const H = 180
-  const view = fixedView([...VERTS.map((n) => q[n]), o], { w: W, h: H, k: 16, padBottom: 32, padTop: 22 })
+  const view = fixedView([...VERTS.map((n) => q[n]), o], { w: W, h: H, k: 16, padBottom: 32, padTop: 22, center: true })
   const pts = Object.fromEntries(VERTS.map((n) => [n, view.S(q[n])])) as Record<VName, XY>
   const O = view.S(o)
   const c = centroid(VERTS.map((n) => pts[n]))
