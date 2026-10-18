@@ -1,0 +1,18 @@
+# Навыки темы «Параллелограмм, трапеция» (geo-02). step — шаг урока (с нуля), где навык объясняется.
+geo-p-sides:           {title: 'Противоположные стороны параллелограмма равны', topic: 'geo-02-parallelogram-trapezoid', step: 0}
+geo-p-perimeter:       {title: 'Периметр параллелограмма: P = 2(a + b)', topic: 'geo-02-parallelogram-trapezoid', step: 0}
+geo-p-parts:           {title: 'Задачи «на части»: обозначить меньшую часть через x', topic: 'geo-02-parallelogram-trapezoid', step: 0}
+geo-p-angles:          {title: 'Углы параллелограмма: соседние в сумме 180°, противоположные равны', topic: 'geo-02-parallelogram-trapezoid', step: 1}
+geo-p-parallel-angles: {title: 'Углы при параллельных прямых: односторонние и накрест лежащие', topic: 'geo-02-parallelogram-trapezoid', step: 1}
+geo-p-triangle:        {title: 'Сумма углов треугольника', topic: 'geo-02-parallelogram-trapezoid', step: 1}
+geo-p-diag:            {title: 'Диагонали параллелограмма делятся пополам', topic: 'geo-02-parallelogram-trapezoid', step: 2}
+geo-p-bisector:        {title: 'Биссектриса угла параллелограмма отсекает равнобедренный треугольник', topic: 'geo-02-parallelogram-trapezoid', step: 3}
+geo-p-signs:           {title: 'Признаки параллелограмма', topic: 'geo-02-parallelogram-trapezoid', step: 4}
+geo-p-trap:            {title: 'Трапеция: основания, боковые стороны, углы при боковой стороне', topic: 'geo-02-parallelogram-trapezoid', step: 5}
+geo-p-iso:             {title: 'Равнобедренная трапеция', topic: 'geo-02-parallelogram-trapezoid', step: 5}
+geo-p-leg30:           {title: 'Катет против угла 30° вдвое короче гипотенузы', topic: 'geo-02-parallelogram-trapezoid', step: 5}
+geo-p-midline:         {title: 'Средняя линия трапеции: m = (a + b) / 2', topic: 'geo-02-parallelogram-trapezoid', step: 6}
+geo-p-tri-midline:     {title: 'Средняя линия треугольника вдвое короче основания', topic: 'geo-02-parallelogram-trapezoid', step: 6}
+geo-p-area:            {title: 'Площадь параллелограмма: S = a · h', topic: 'geo-02-parallelogram-trapezoid', step: 7}
+geo-p-area-trap:       {title: 'Площадь трапеции: S = (a + b) / 2 · h', topic: 'geo-02-parallelogram-trapezoid', step: 7}
+geo-p-pythagoras:      {title: 'Теорема Пифагора', topic: 'geo-02-parallelogram-trapezoid', step: 7}
