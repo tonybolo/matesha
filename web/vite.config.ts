@@ -39,7 +39,8 @@ export default defineConfig({
           { src: 'icons/maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
-      workbox: { globPatterns: ['**/*.{js,css,html,png,woff2}'] },
+      // весь контент (уроки и задания) собирается в один JS-файл: он давно больше 2 МиБ — лимита по умолчанию
+      workbox: { globPatterns: ['**/*.{js,css,html,png,woff2}'], maximumFileSizeToCacheInBytes: 8 * 1024 * 1024 },
     }),
   ],
   build: { target: ['es2020', 'safari14', 'chrome87', 'firefox78'] },
