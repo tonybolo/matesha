@@ -1,0 +1,19 @@
+.dst-svg { width: 100%; max-width: 380px; height: auto; display: block; margin: 4px auto; color: var(--text); }
+.dst-bar { fill: var(--c1); fill-opacity: 0.75; stroke: var(--c1); stroke-width: 1.5; transition: height 0.25s, y 0.25s; }
+.dst-bar.sel { fill: var(--accent); stroke: var(--text); stroke-width: 2.5; }
+.dst-bar.dst-x0 { fill: var(--muted); stroke: var(--muted); fill-opacity: 0.45; }
+.dst-bar.dst-y { fill: var(--c0); stroke: var(--c0); }
+.dst-ghost { fill: none; stroke: var(--bad); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.dst-hit { fill: transparent; }
+.dst-hit.on { fill: var(--accent-soft); }
+.dst-pick { cursor: pointer; }
+.dst-p { font-size: 12px; font-weight: 700; fill: currentColor; text-anchor: middle; }
+.dst-x { font-size: 12px; fill: var(--muted); text-anchor: middle; }
+.dst-fulcrum { fill: var(--accent); }
+.dst-elabel { font-size: 12px; font-weight: 700; fill: var(--accent); text-anchor: middle; }
+.dst-band { fill: var(--ok); fill-opacity: 0.35; }
+.dst-note { margin: 0 0 4px; color: var(--muted); }
+.dst-table { overflow-x: auto; }
+.dst-rows { margin: 4px 0; padding-left: 1.1em; }
+.dst-rows li { margin: 3px 0; overflow-x: auto; }
+.dst-row-title { margin: 8px 0 0; }

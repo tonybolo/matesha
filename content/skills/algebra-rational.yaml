@@ -1,0 +1,15 @@
+# Навыки темы 0 «Сложение и вычитание рациональных чисел» (повторение). step — шаг урока с нуля.
+rn-number-line:   {title: 'Числа на прямой: положительные и отрицательные', topic: '00-rational-numbers', step: 0}
+rn-opposite:      {title: 'Противоположные числа', topic: '00-rational-numbers', step: 1}
+rn-abs:           {title: 'Модуль числа', topic: '00-rational-numbers', step: 1}
+rn-compare:       {title: 'Сравнение рациональных чисел', topic: '00-rational-numbers', step: 1}
+rn-add-same:      {title: 'Сложение чисел с одинаковыми знаками', topic: '00-rational-numbers', step: 2}
+rn-add-diff:      {title: 'Сложение чисел с разными знаками', topic: '00-rational-numbers', step: 2}
+rn-sub:           {title: 'Вычитание: прибавить противоположное', topic: '00-rational-numbers', step: 3}
+rn-missing:       {title: 'Неизвестное слагаемое, уменьшаемое, вычитаемое', topic: '00-rational-numbers', step: 3}
+rn-decimal:       {title: 'Десятичные дроби со знаками', topic: '00-rational-numbers', step: 4}
+rn-common-denom:  {title: 'Обыкновенные дроби со знаками: общий знаменатель', topic: '00-rational-numbers', step: 5}
+rn-mixed:         {title: 'Смешанные числа со знаками', topic: '00-rational-numbers', step: 5}
+rn-chain:         {title: 'Цепочки сложений и вычитаний', topic: '00-rational-numbers', step: 6}
+rn-brackets:      {title: 'Минус перед скобкой', topic: '00-rational-numbers', step: 6}
+rn-distance:      {title: 'Модуль разности — расстояние', topic: '00-rational-numbers', step: 7}

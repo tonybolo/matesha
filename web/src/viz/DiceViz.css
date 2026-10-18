@@ -1,0 +1,14 @@
+.dice-svg { width: 100%; max-width: 380px; height: auto; display: block; margin: 6px auto; color: var(--text); }
+.dice-actions .btn { min-width: 52px; }
+.dice-face { fill: var(--card); stroke: var(--text); stroke-width: 2; }
+.dice-face.fresh { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 3; }
+.dice-pip { fill: var(--text); }
+.dice-empty { font-size: 13px; fill: var(--muted); text-anchor: middle; }
+.dice-bar { fill: var(--c1); fill-opacity: 0.75; transition: height 0.2s, y 0.2s; }
+.dice-count { font-size: 12px; font-weight: 700; fill: currentColor; text-anchor: middle; }
+.dice-face-label { font-size: 12px; fill: var(--muted); text-anchor: middle; }
+.dice-tick { font-size: 11px; fill: var(--muted); }
+.dice-e { stroke: var(--ok); stroke-width: 2; stroke-dasharray: 6 4; }
+.dice-elabel { font-size: 12px; font-weight: 700; fill: var(--ok); }
+.dice-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; }
+.dice-now { fill: var(--accent); stroke: var(--card); stroke-width: 2; }

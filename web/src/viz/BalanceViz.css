@@ -1,0 +1,22 @@
+.bal-svg { width: 100%; max-width: 380px; height: auto; display: block; margin: 4px auto; color: var(--text); --bal-ink: #14171f; }
+.bal-ground { stroke: var(--muted); stroke-width: 2; }
+.bal-ruler { fill: var(--card); stroke: var(--muted); stroke-width: 1.5; }
+.bal-tick { stroke: var(--muted); stroke-width: 1; }
+.bal-num { font-size: 11px; fill: var(--muted); text-anchor: middle; }
+.bal-tilt { transform-box: view-box; transition: transform 0.45s ease; }
+.bal-w { stroke: var(--card); stroke-width: 2; }
+.bal-w.sel { stroke: var(--text); stroke-width: 3; }
+.bal-wnum { font-size: 11px; font-weight: 700; fill: var(--bal-ink); text-anchor: middle; pointer-events: none; }
+.bal-w.w0, .bal-dot.w0 { fill: var(--c0); background: var(--c0); }
+.bal-w.w1, .bal-dot.w1 { fill: var(--c1); background: var(--c1); }
+.bal-w.w2, .bal-dot.w2 { fill: var(--c2); background: var(--c2); }
+.bal-w.w3, .bal-dot.w3 { fill: var(--c3); background: var(--c3); }
+.bal-w.w4, .bal-dot.w4 { fill: var(--c4); background: var(--c4); }
+.bal-w.w5, .bal-dot.w5 { fill: var(--c5); background: var(--c5); }
+.bal-pick { cursor: pointer; }
+.bal-fulcrum { fill: var(--accent); }
+.bal-flabel { font-size: 12px; font-weight: 700; fill: var(--accent); text-anchor: middle; }
+.bal-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.bal-chips .chip { min-width: 52px; }
+.bal-name { font-weight: 700; margin: 10px 0 0; }
+.bal-line { margin: 4px 0; }

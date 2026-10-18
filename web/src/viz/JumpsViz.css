@@ -1,0 +1,20 @@
+/* Картинка «Прыжки по прямой» (JumpsViz): цвета только из переменных темы. */
+.jv-zone { opacity: 0.12; }
+.jv-zone.neg { fill: var(--c1); }
+.jv-zone.pos { fill: var(--ok); }
+.jv-zone-label { font-size: 12px; fill: var(--muted); }
+.jv-label { font-size: 12px; fill: currentColor; opacity: 0.75; }
+.jv-label.special { font-weight: 700; opacity: 1; }
+.jv-label.land { fill: var(--accent); }
+.jv-arc { fill: none; stroke-width: 3; stroke-linecap: round; }
+.jv-arc.right { stroke: var(--ok); }
+.jv-arc.left { stroke: var(--c1); }
+.jv-head.right { fill: var(--ok); }
+.jv-head.left { fill: var(--c1); }
+.jv-jump { font-size: 14px; font-weight: 700; }
+.jv-jump.right { fill: var(--ok); }
+.jv-jump.left { fill: var(--c1); }
+.jv-start { fill: var(--card); stroke: var(--accent); stroke-width: 3; }
+.jv-land { fill: var(--accent); stroke: var(--card); stroke-width: 2; }
+.jv-ops { margin-bottom: 6px; }
+.jv-wallet { margin-top: 4px; }
