@@ -1,0 +1,53 @@
+/* Общие стили рисунков и картинок темы «Параллелограмм, трапеция» (префикс pk-). Цвета только из переменных темы. */
+.pk-svg { width: 100%; max-width: 360px; height: auto; display: block; margin: 6px auto; color: var(--text); overflow: visible; }
+.pk-fill { fill: var(--accent-soft); stroke: none; }
+.pk-fill.alt { fill: var(--warn-soft); }
+.pk-fill.ok { fill: var(--ok-soft); }
+.pk-fill.ghost { fill: var(--line); opacity: 0.55; }
+.pk-edge { fill: none; stroke: var(--text); stroke-width: 2.2; stroke-linejoin: round; stroke-linecap: round; }
+.pk-edge.thin { stroke-width: 1.6; }
+.pk-edge.ghost { stroke: var(--muted); stroke-dasharray: 5 4; stroke-width: 1.6; }
+.pk-aux { fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-dasharray: 5 4; stroke-linecap: round; }
+.pk-diag { fill: none; stroke: var(--c1); stroke-width: 2; stroke-linecap: round; }
+.pk-height { fill: none; stroke: var(--ok); stroke-width: 2; stroke-dasharray: 6 4; stroke-linecap: round; }
+.pk-bis { fill: none; stroke: var(--c0); stroke-width: 2.6; stroke-linecap: round; }
+.pk-mid { fill: none; stroke: var(--c2); stroke-width: 2.8; stroke-linecap: round; }
+.pk-s1 { fill: none; stroke: var(--c1); stroke-width: 3.2; stroke-linecap: round; }
+.pk-s2 { fill: none; stroke: var(--c0); stroke-width: 3.2; stroke-linecap: round; }
+.pk-s3 { fill: none; stroke: var(--c3); stroke-width: 3.2; stroke-linecap: round; }
+.pk-s4 { fill: none; stroke: var(--c2); stroke-width: 3.2; stroke-linecap: round; }
+.pk-tick { fill: none; stroke: var(--text); stroke-width: 2; stroke-linecap: round; }
+.pk-tick.c1 { stroke: var(--c1); }
+.pk-tick.c2 { stroke: var(--c0); }
+.pk-chev { fill: none; stroke: var(--muted); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pk-arc { fill: none; stroke: var(--accent); stroke-width: 2.2; }
+.pk-arc.c1 { stroke: var(--c1); }
+.pk-arc.c2 { stroke: var(--c0); }
+.pk-arc.c3 { stroke: var(--c3); }
+.pk-right { fill: none; stroke: var(--text); stroke-width: 1.6; }
+.pk-dot { fill: var(--text); }
+.pk-dot.acc { fill: var(--accent); }
+.pk-v { font-size: 16px; font-weight: 700; fill: var(--text); text-anchor: middle; }
+.pk-pt { font-size: 14px; font-style: italic; font-weight: 600; fill: var(--muted); text-anchor: middle; }
+.pk-m { font-size: 14px; font-weight: 600; fill: var(--text); text-anchor: middle; }
+.pk-m.q, .pk-q { fill: var(--accent); font-weight: 800; }
+.pk-m, .pk-pt { paint-order: stroke fill; stroke: var(--card); stroke-width: 3.5px; stroke-linejoin: round; }
+.pk-m.in, .pk-pt.in { stroke: var(--accent-soft); }
+.pk-m.c1 { fill: var(--c1); }
+.pk-leg { font-size: 14px; font-weight: 600; fill: var(--text); text-anchor: middle; }
+.pk-note { font-size: 13px; fill: var(--muted); text-anchor: middle; }
+.pk-hit { fill: transparent; stroke: none; }
+
+/* общие мелочи картинок урока */
+.pk-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; margin: 8px 0 2px; }
+.pk-slider-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 6px 0 0; }
+.pk-readout p { margin: 0 0 4px; }
+.pk-readout p:last-child { margin-bottom: 0; }
+.pk-eq { font-weight: 700; }
+.pk-tag { display: inline-block; padding: 0 8px; border-radius: 999px; background: var(--accent); color: var(--accent-text); font-weight: 700; font-size: 0.88rem; }
+.pk-ok { color: var(--ok); font-weight: 700; }
+.pk-no { color: var(--bad); font-weight: 700; }
+.pk-steps { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+@media (prefers-reduced-motion: reduce) {
+  .pk-move { transition: none !important; }
+}
