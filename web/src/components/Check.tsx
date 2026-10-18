@@ -66,6 +66,7 @@ function QuestionView({
             }}
             onSubmit={submitInput}
             kind={q.answerKind}
+            placeholder={q.placeholder}
             vars={varsOf(q.answer)}
             sqrtKey={q.prompt.includes('sqrt') || q.prompt.includes('√') || q.prompt.includes('\\sqrt')}
             disabled={result !== null}

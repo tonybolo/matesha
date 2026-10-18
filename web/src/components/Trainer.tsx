@@ -89,7 +89,7 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
         kind={task.answerKind}
         vars={vars}
         sqrtKey={sqrtKey}
-        placeholder={/^-?\d+([./]\d+)?$/.test(task.answer) && task.answerKind === 'expr' ? 'ответ числом, например 7 или 3/4' : undefined}
+        placeholder={task.placeholder ?? (/^-?\d+([./]\d+)?$/.test(task.answer) && task.answerKind === 'expr' ? 'ответ числом, например 7 или 3/4' : undefined)}
         options={task.options}
         items={task.items}
         disabled={solved}

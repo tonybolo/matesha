@@ -39,6 +39,8 @@ export type InputQuestion = {
   answerKind: AnswerKind
   reduce?: boolean
   radical?: boolean
+  /** Подсказка в пустом поле ввода (например «ответ в градусах»). */
+  placeholder?: string
   explain: Rich
   step: number
   fig?: Fig
@@ -77,6 +79,8 @@ export type Task = {
   radical?: boolean
   /** Схематичный рисунок над условием (геометрия). */
   fig?: Fig
+  /** Подсказка в пустом поле ввода (например «ответ в градусах»). */
+  placeholder?: string
   /** Группа тренажёра (для сгенерированных заданий). */
   group?: string
   /** Вид задания внутри группы (нужен, чтобы собрать контрольную точно по образцу, например «rect»). */
