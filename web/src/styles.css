@@ -154,7 +154,7 @@ a { color: var(--accent); }
 .step-title { margin-bottom: 14px; }
 .step-num { display: block; color: var(--muted); font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
 .step-body { display: grid; gap: 4px; grid-template-columns: minmax(0, 1fr); }
-.lesson-text { margin-bottom: 0.6em; }
+.lesson-text { margin-bottom: 0.6em; overflow-x: auto; }
 .math-block { overflow-x: auto; padding: 4px 0; }
 .nav-row { display: flex; gap: 10px; justify-content: space-between; margin-top: 20px; flex-wrap: wrap; }
 .nav-row.end { justify-content: flex-end; }
