@@ -402,7 +402,7 @@ def conv_note(stmts) -> bool:
     return False
 
 
-CONV = "Напоминание: у трапеции, по нашему определению, параллельна ровно одна пара сторон."
+CONV = "Напоминание: у трапеции параллельна ровно одна пара сторон."
 
 
 def statements_of(level: int, want: bool | None = None):
@@ -563,7 +563,7 @@ def g_which(rng: random.Random, level: int):
     true_idx = tuple(i + 1 for i, s in enumerate(stmts) if truth(s))
     note = CONV + " " if conv_note(stmts) else ""
     body = " ".join(f"**{i + 1})** {stmt_text(s)}" for i, s in enumerate(stmts))
-    prompt = f"Какие из утверждений верны? {note}Выберите верный вариант. {body}"
+    prompt = f"Какие из утверждений верны? {note}{body}"
     # варианты ответа: верный и три правдоподобных (отличаются от верного одним утверждением)
     allsets = [tuple(c) for r in range(0, n + 1) for c in itertools.combinations(range(1, n + 1), r)]
     near = [c for c in allsets if c != true_idx and len(set(c) ^ set(true_idx)) == 1 and c != ()]

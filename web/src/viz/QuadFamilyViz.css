@@ -12,8 +12,9 @@
 
 .qf-tree { position: relative; width: 100%; margin: 8px 0 4px; }
 .qf-edges { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.qf-edge { stroke: var(--line); stroke-width: 3; stroke-linecap: round; }
-.qf-edge.on { stroke: var(--ok); stroke-width: 4; }
+.qf .viz-calc { font-size: 1.05rem; margin: 2px 0; }
+.qf-edge { stroke: var(--muted); stroke-opacity: 0.45; stroke-width: 3; stroke-linecap: round; }
+.qf-edge.on { stroke: var(--ok); stroke-opacity: 1; stroke-width: 4; }
 .qf-node { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px 2px; font: inherit; color: var(--text); background: var(--card); border: 2px solid var(--line); border-radius: 12px; cursor: pointer; min-width: 0; }
 .qf-node.anc { border-color: var(--ok); background: var(--ok-soft); }
 .qf-node.on { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 2px var(--accent); }

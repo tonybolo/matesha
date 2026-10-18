@@ -12,7 +12,8 @@ import type { FigValue } from '../../content/types'
  *   sides — подписи сторон (например «7 см»), по одной на сторону;
  *   angs  — подписи углов («70°», «?»), по одной на вершину;
  *   diag  — две вершины, соединённые пунктирной диагональю, например [0, 2];
- *   view  — [x0, y0, x1, y1]: окно рисунка в тех же координатах (масштаб не зависит от фигуры; нужно картинкам урока).
+ *   view  — [x0, y0, x1, y1]: окно рисунка в тех же координатах (масштаб не зависит от фигуры; нужно картинкам урока);
+ *   angr  — расстояние от вершины до подписи угла в пикселях (по умолчанию 34; для мелких рисунков 26).
  */
 type Props = Record<string, FigValue>
 type Pt = { x: number; y: number }
@@ -42,6 +43,9 @@ export function QuadFig(props: Props) {
   const angs = strs(props.angs)
   const diag = nums(props.diag)
   const view = nums(props.view)
+  const angr = typeof props.angr === 'number' ? props.angr : 34
+  const eqSet = new Set([...eq1, ...eq2])
+  const parSet = new Set([...par1, ...par2])
 
   const M = [0, 1, 2, 3].map((i) => ({ x: raw[2 * i], y: raw[2 * i + 1] }))
   const xs = M.map((p) => p.x)
@@ -96,11 +100,12 @@ export function QuadFig(props: Props) {
   }
 
   const ticks = (i: number, count: number) => {
-    const { mid, outward } = side(i)
-    const along = unit({ x: Q[(i + 1) % 4].x - Q[i].x, y: Q[(i + 1) % 4].y - Q[i].y })
+    const { mid, dir, outward } = side(i)
+    const along = dir // та же ориентация, что у стрелок: у пары параллельных сторон отметки лежат одинаково
     const lines = []
+    const base = parSet.has(i) ? 12 : 0 // если на стороне есть и стрелка, чёрточки сдвигаем в сторону
     for (let k = 0; k < count; k++) {
-      const shift = (k - (count - 1) / 2) * 5
+      const shift = base + (k - (count - 1) / 2) * 5
       const m = at(mid, along, shift)
       const p1 = at(m, outward, -6)
       const p2 = at(m, outward, 6)
@@ -112,8 +117,9 @@ export function QuadFig(props: Props) {
   const arrows = (i: number, count: number) => {
     const { mid, dir, outward } = side(i)
     const chevrons = []
+    const base = eqSet.has(i) ? -12 : 0
     for (let k = 0; k < count; k++) {
-      const shift = (k - (count - 1) / 2) * 7
+      const shift = base + (k - (count - 1) / 2) * 7
       const m = at(mid, dir, shift)
       const tip = at(m, dir, 3.5)
       const l = at(at(m, dir, -3.5), outward, 5)
@@ -140,17 +146,17 @@ export function QuadFig(props: Props) {
     const u = unit({ x: Q[(i + 3) % 4].x - v.x, y: Q[(i + 3) % 4].y - v.y })
     const w = unit({ x: Q[(i + 1) % 4].x - v.x, y: Q[(i + 1) % 4].y - v.y })
     const bis = unit({ x: u.x + w.x, y: u.y + w.y })
-    const r = 15
+    const r = angr < 30 ? 12 : 15
     const a = at(v, u, r)
     const b = at(v, w, r)
     const sweep = u.x * w.y - u.y * w.x > 0 ? 1 : 0
     const unknown = label === '?'
-    const dist = unknown ? 30 : 34
+    const dist = unknown ? angr - 4 : angr
     const lp = at(v, bis, dist)
     return (
       <g key={`g${i}`}>
         {!rt.includes(i) && <path d={`M ${pt(a)} A ${r} ${r} 0 0 ${sweep} ${pt(b)}`} fill="none" stroke={unknown ? 'var(--bad)' : 'var(--muted)'} strokeWidth={1.8} />}
-        <text x={f(lp.x)} y={f(lp.y)} textAnchor="middle" dy=".35em" fontSize={unknown ? 16 : 12} fontWeight={unknown ? 800 : 600} fill={unknown ? 'var(--bad)' : 'var(--text)'}>
+        <text x={f(lp.x)} y={f(lp.y)} textAnchor="middle" dy=".35em" fontSize={unknown ? 16 : angr < 30 ? 11 : 12} fontWeight={unknown ? 800 : 600} fill={unknown ? 'var(--bad)' : 'var(--text)'}>
           {label}
         </text>
       </g>

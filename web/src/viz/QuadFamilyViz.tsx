@@ -99,16 +99,26 @@ const SHAPE: Record<TreeKind, Pt[]> = {
   square: [[0, 0], [5, 0], [5, 5], [0, 5]],
 }
 
+/** Все «предки» фигуры: сначала родители, потом их родители и так далее. */
 const ancestors = (k: TreeKind): TreeKind[] => {
   const out: TreeKind[] = []
-  const walk = (x: TreeKind) => {
-    for (const p of PARENTS[x]) {
-      if (!out.includes(p)) out.push(p)
-      walk(p)
-    }
+  let level: TreeKind[] = [k]
+  while (level.length > 0) {
+    const next: TreeKind[] = []
+    for (const x of level) for (const p of PARENTS[x]) if (!out.includes(p) && !next.includes(p)) next.push(p)
+    out.push(...next)
+    level = next
   }
-  walk(k)
   return out
+}
+
+/** Окно рисунка одного размера для всех фигур, но с центром в центре фигуры. */
+const viewOf = (P: Pt[]): number[] => {
+  const xs = P.map((p) => p[0])
+  const ys = P.map((p) => p[1])
+  const cx = (Math.min(...xs) + Math.max(...xs)) / 2
+  const cy = (Math.min(...ys) + Math.max(...ys)) / 2
+  return [cx - 5.5, cy - 3.6, cx + 5.5, cy + 3.6]
 }
 
 /** Что получилось из переключателей: фигура либо null («так не бывает»). Противоречие: у трапеции параллельна ровно одна пара сторон, а всё остальное делает параллельными обе. */
@@ -178,7 +188,7 @@ function describe(g: Toggles): ReactNode {
     )
   }
   const lead: Record<TreeKind, string> = {
-    quad: 'Пока про фигуру известно только то, что у неё четыре угла. Включи свойства — и имя станет точнее.',
+    quad: 'Пока ничего не включено: известно только, что у фигуры четыре угла.',
     trap: 'Параллельна только одна пара сторон.',
     par: 'Обе пары противоположных сторон параллельны.',
     rect: 'Параллелограмм, у которого все углы прямые.',
@@ -189,6 +199,7 @@ function describe(g: Toggles): ReactNode {
     <>
       <div>
         {lead[fig]} Это <strong>{fig === 'quad' ? 'просто четырёхугольник' : NAME[fig]}</strong>.
+        {fig === 'quad' && ' Включай свойства — и имя станет точнее.'}
       </div>
       {note}
     </>
@@ -274,7 +285,7 @@ export function QuadFamilyViz({ preset }: { preset?: string }) {
 
       <div className="qf-fig">
         {fig ? (
-          <QuadFig pts={flat} {...marks} view={[-1, -1, 10, 7]} />
+          <QuadFig pts={flat} {...marks} view={viewOf(SHAPE[fig])} />
         ) : (
           <div className="qf-none" role="img" aria-label="Такой фигуры нет">
             <span aria-hidden>🚫</span>
@@ -369,8 +380,8 @@ export function ParLabViz({ preset }: { preset?: string }) {
         <span className="viz-num">1</span> Меняй угол и сторону
       </div>
       <div className="steppers">
-        <Stepper compact label="угол A" value={ang} min={50} max={130} step={10} onChange={(v) => setAB([v, b])} format={(v) => `${v}°`} />
-        <Stepper compact label="сторона AD" value={b} min={2} max={7} step={1} onChange={(v) => setAB([ang, v])} format={(v) => String(v)} />
+        <Stepper compact label="угол A" value={ang} min={60} max={120} step={10} onChange={(v) => setAB([v, b])} format={(v) => `${v}°`} />
+        <Stepper compact label="сторона AD" value={b} min={3} max={6} step={1} onChange={(v) => setAB([ang, v])} format={(v) => String(v)} />
       </div>
       <div className="chips">
         {LAB_CHIPS.map((c) => (
@@ -387,8 +398,10 @@ export function ParLabViz({ preset }: { preset?: string }) {
           eq1={equal ? [0, 1, 2, 3] : [0, 2]}
           eq2={equal ? [] : [1, 3]}
           rt={right ? [0, 1, 2, 3] : []}
+          sides={[String(AB), String(b), String(AB), String(b)]}
           angs={[`${a1}°`, `${a2}°`, `${a1}°`, `${a2}°`]}
-          view={[-5, -1, 10, 8]}
+          angr={27}
+          view={[-3.6, -0.8, 8.6, 6.8]}
         />
       </div>
       <div className="readout" aria-live="polite">
@@ -449,11 +462,11 @@ export function TrapLabViz() {
   if (kind === 'iso') marks.eq1 = [0, 2]
   const rt = [0, 1, 2, 3].filter((i) => Math.abs(angleAt(P, i) - 90) < 1e-6)
   const lead: Record<Kind, string> = {
-    trap: 'Основания параллельны, боковые стороны нет — это трапеция.',
-    iso: 'Боковые стороны равны — это равнобедренная трапеция.',
-    rtrap: 'Есть прямой угол (даже два) — это прямоугольная трапеция.',
+    trap: 'Основания параллельны, а боковые стороны нет.',
+    iso: 'Боковые стороны равны.',
+    rtrap: 'Есть прямой угол (даже два).',
     par: 'Боковые стороны тоже стали параллельными! Параллельны обе пары сторон — это уже параллелограмм, а не трапеция.',
-    rect: 'Боковые стороны параллельны и все углы прямые — это прямоугольник (параллелограмм), а не трапеция.',
+    rect: 'Параллельны обе пары сторон и все углы прямые — это прямоугольник, а не трапеция.',
     rhomb: 'Параллельны обе пары сторон — это параллелограмм.',
     square: 'Параллельны обе пары сторон — это параллелограмм.',
     quad: '',
@@ -476,7 +489,7 @@ export function TrapLabViz() {
         ))}
       </div>
       <div className="qf-fig">
-        <QuadFig pts={P.flatMap((p) => p)} {...marks} rt={rt} angs={isTrap ? [`${aA}°`, `${aB}°`, `${aC}°`, `${aD}°`] : []} view={[-1.5, -1, 15.5, 6]} />
+        <QuadFig pts={P.flatMap((p) => p)} {...marks} rt={rt} angs={isTrap ? [`${aA}°`, `${aB}°`, `${aC}°`, `${aD}°`] : []} angr={27} view={[-1.5, -1.2, 15.5, 6.2]} />
       </div>
       <div className="readout" aria-live="polite">
         <div>
