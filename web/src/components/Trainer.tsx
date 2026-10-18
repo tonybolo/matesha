@@ -4,6 +4,7 @@ import type { Task, Topic } from '../content/types'
 import { checkAnswer, expectedOrder, type CheckResult } from '../lib/check'
 import { toTex } from '../lib/expr'
 import { hrefTopic } from '../route'
+import { Figure } from '../viz'
 import { GROUP_GOAL, markRevealed, recordAttempt } from '../store/progress'
 import { useProgress } from '../store/useProgress'
 import { AnswerInput, varsOf } from './AnswerInput'
@@ -77,6 +78,7 @@ function TaskPanel({ topic, task, onNext }: { topic: Topic; task: Task; onNext: 
       <p className="q-prompt">
         <Rich text={taskPrompt(task)} />
       </p>
+      {task.fig && <Figure fig={task.fig} />}
       <AnswerInput
         value={value}
         onChange={(v) => {

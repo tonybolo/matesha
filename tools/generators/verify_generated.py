@@ -12,8 +12,9 @@ import sympy as sp
 
 sys.path.insert(0, str(Path(__file__).parent))
 from common import SYMS, parse_app  # noqa: E402
+from registry import topics as gen_topics  # noqa: E402
 
-GEN = Path(__file__).resolve().parents[2] / "content/algebra8/generated"
+GEN = Path(__file__).resolve().parents[2] / "content"
 
 
 def exact(s: str):
@@ -233,12 +234,15 @@ def check(t: dict) -> str | None:
 
 
 def main() -> int:
+    # у новых тем (t_*.py) своя независимая проверка verify(task); у старых алгебраических — check() выше
+    verifiers = {t.id: t.verify for t in gen_topics() if t.verify}
     bad = total = 0
-    for f in sorted(GEN.glob("*.json")):
+    for f in sorted(GEN.glob("*8/generated/*.json")):
         data = json.loads(f.read_text(encoding="utf-8"))
+        verify = verifiers.get(data["topic"], check)
         for t in data["tasks"]:
             total += 1
-            msg = check(t)
+            msg = verify(t)
             if msg:
                 bad += 1
                 print(f"FAIL {t['id']}: {msg}")

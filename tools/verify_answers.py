@@ -100,9 +100,9 @@ def check_task(task):
 def main() -> int:
     bad = 0
     checked = 0
-    for path in sorted(glob.glob("content/algebra8/*.yaml")):
+    for path in sorted(glob.glob("content/*8/*.yaml")):
         topic = yaml.safe_load(open(path, encoding="utf-8"))
-        for task in topic["tasks"]:
+        for task in topic.get("tasks") or []:
             res = check_task(task)
             if res is None:
                 print(f"  ?  {task['id']}: нет verify")
@@ -113,7 +113,7 @@ def main() -> int:
                 bad += 1
                 print(f"FAIL {task['id']}: {msg}")
         # проверочные вопросы с вводом
-        for q in topic["check"]:
+        for q in topic.get("check") or []:
             if q["kind"] == "input" and q["answerKind"] == "expr":
                 try:
                     parse(q["answer"])

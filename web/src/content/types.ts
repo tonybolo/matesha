@@ -1,20 +1,12 @@
 /** Текст с формулами: $…$ — формула в строке, $$…$$ — формула отдельной строкой. */
 export type Rich = string
 
-export type VizId =
-  | 'cancel'
-  | 'odz'
-  | 'commonDenominator'
-  | 'bars'
-  | 'rug'
-  | 'bringIn'
-  | 'pairs'
-  | 'parabola'
-  | 'domain'
-  | 'sqrtGraph'
-  | 'areaMult'
-  | 'divide'
-  | 'hyperbola'
+/** Картинка урока: имя компонента без «Viz» с маленькой буквы (QuadFamilyViz → quadFamily), см. viz/registry.ts. */
+export type VizId = string
+
+/** Схематичный рисунок к заданию или вопросу: id — имя компонента без «Fig» (ParallelogramFig → parallelogram), props — его параметры. */
+export type FigValue = number | string | boolean | (number | string)[]
+export type Fig = { id: string; props?: Record<string, FigValue> }
 
 export type VizBlock = { type: 'viz'; id: VizId; preset?: string }
 
@@ -35,6 +27,7 @@ export type ChoiceQuestion = {
   correct: number
   explain: Rich
   step: number
+  fig?: Fig
 }
 
 export type InputQuestion = {
@@ -48,6 +41,7 @@ export type InputQuestion = {
   radical?: boolean
   explain: Rich
   step: number
+  fig?: Fig
 }
 
 export type Question = ChoiceQuestion | InputQuestion
@@ -81,6 +75,8 @@ export type Task = {
   reduce?: boolean
   /** Ответ обязан быть в простейшем виде с корнями (без корней из квадратов, без корня в знаменателе). */
   radical?: boolean
+  /** Схематичный рисунок над условием (геометрия). */
+  fig?: Fig
   /** Группа тренажёра (для сгенерированных заданий). */
   group?: string
   /** Вид задания внутри группы (нужен, чтобы собрать контрольную точно по образцу, например «rect»). */
@@ -102,8 +98,14 @@ export type Verify = {
   sympy?: string
 }
 
+/** Раздел: алгебра, геометрия, вероятность и статистика. */
+export type Subject = 'algebra' | 'geometry' | 'stats'
+
 export type Topic = {
   id: string
+  /** Раздел; у старых тем алгебры поля нет. */
+  subject?: Subject
+  /** Номер темы внутри раздела (0 — тема-повторение). */
   order: number
   title: string
   summary: Rich

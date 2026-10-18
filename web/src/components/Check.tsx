@@ -5,6 +5,7 @@ import { checkAnswer } from '../lib/check'
 import { go, hrefTopic } from '../route'
 import { recordCheck } from '../store/progress'
 import { useProgress } from '../store/useProgress'
+import { Figure } from '../viz'
 import { AnswerInput, varsOf } from './AnswerInput'
 import { Rich } from './Tex'
 
@@ -35,6 +36,7 @@ function QuestionView({
       <p className="q-prompt">
         <Rich text={renderPrompt(q.prompt, q.kind === 'input' ? q.expr : undefined)} />
       </p>
+      {q.fig && <Figure fig={q.fig} />}
       {q.kind === 'choice' ? (
         <div className="options">
           {q.options.map((o, i) => {

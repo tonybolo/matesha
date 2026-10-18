@@ -188,6 +188,16 @@ describe('удобство ввода', () => {
     expect(checkAnswer('x = 7 м', '7', 'expr').status).toBe('correct')
     expect(checkAnswer('69 см', '68', 'expr').status).toBe('wrong')
   })
+  it('градусы и квадратные единицы: 40°, 40 градусов, 24 см², 24 см2, 24 кв. см', () => {
+    for (const a of ['40°', '40 °', '40 градусов', '40 град', 'угол = 40°', '40']) expect(checkAnswer(a, '40', 'expr').status, a).toBe('correct')
+    for (const a of ['24 см²', '24 см2', '24 см^2', '24 кв. см', '24 кв см', '24 м²', 'S = 24 дм2']) expect(checkAnswer(a, '24', 'expr').status, a).toBe('correct')
+    for (const a of ['угол A = 40°', '∠A = 40°', '∠ABC=40', 'AB = 40 см', 'угол 40', 'P = 40', 'E(X) = 40', 'D(X)=40', 'σ = 40', 'дисперсия = 40', 'ожидание: 40']) {
+      expect(checkAnswer(a, '40', 'expr').status, a).toBe('correct')
+    }
+    expect(checkAnswer('E(X) = 3,5', '7/2', 'expr').status).toBe('correct')
+    expect(checkAnswer('41°', '40', 'expr').status).toBe('wrong')
+    expect(checkAnswer('7,5 см', '15/2', 'expr').status).toBe('correct')
+  })
   it('sqrt3 без скобок и ± в корнях', () => {
     expect(checkAnswer('5sqrt3', '5*sqrt(3)', 'expr').status).toBe('correct')
     expect(checkAnswer('sqrt 12', '2*sqrt(3)', 'expr').status).toBe('correct')

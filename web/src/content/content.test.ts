@@ -1,12 +1,15 @@
 import katex from 'katex'
 import { describe, expect, it } from 'vitest'
-import { cheatsheet, cubes, squares } from './cheatsheet'
+import { cheatsheet, cheatsheetGroups, cubes, squares } from './cheatsheet'
 import { equivalent } from '../lib/equivalence'
 import { checkAnswer } from '../lib/check'
 import { tryParse } from '../lib/expr'
 import { mathOf, parseRich } from '../lib/rich'
-import { topics } from './load'
+import { topics, topicsOf } from './load'
 import { renderPrompt } from './prompt'
+import { skills } from './skills'
+import { SUBJECTS } from './subjects'
+import { figRegistry, vizRegistry } from '../viz/registry'
 import type { Block, Rich } from './types'
 
 function richOfBlock(b: Block): Rich[] {
@@ -39,9 +42,18 @@ function texOk(tex: string, where: string) {
 }
 
 describe('контент', () => {
-  it('темы загружены по порядку', () => {
+  it('темы загружены по порядку внутри каждого раздела', () => {
     expect(topics.length).toBeGreaterThanOrEqual(2)
-    expect(topics.map((t) => t.order)).toEqual([...topics.map((t) => t.order)].sort((a, b) => a - b))
+    for (const s of SUBJECTS) {
+      const orders = topicsOf(s.id).map((t) => t.order)
+      expect(orders, s.id).toEqual([...orders].sort((a, b) => a - b))
+      expect(new Set(orders).size, `${s.id}: повторяются номера тем`).toBe(orders.length)
+    }
+    expect(new Set(topics.map((t) => t.id)).size).toBe(topics.length)
+  })
+
+  it('у каждого раздела с темами есть шпаргалка', () => {
+    for (const s of SUBJECTS) if (topicsOf(s.id).length > 0) expect(cheatsheetGroups.some((g) => g.subject === s.id), s.id).toBe(true)
   })
 
   for (const topic of topics) {
@@ -105,6 +117,23 @@ describe('контент', () => {
           const res = checkAnswer(t.answer, t.answer, t.answerKind, { reduce: t.reduce, radical: t.radical, items: t.items })
           expect(res.status, `${t.id}: ${t.answer}`).toBe('correct')
         }
+      })
+
+      it('картинки, рисунки и навыки существуют', () => {
+        for (const s of topic.steps) for (const b of s.blocks) if (b.type === 'viz') expect(vizRegistry[b.id], `${topic.id}/${s.id}: картинки «${b.id}» нет`).toBeTypeOf('function')
+        const figs = [...topic.tasks.map((t) => ({ id: t.id, fig: t.fig })), ...topic.check.map((q) => ({ id: q.id, fig: q.fig }))]
+        for (const f of figs) if (f.fig) expect(figRegistry[f.fig.id], `${f.id}: рисунка «${f.fig.id}» нет`).toBeTypeOf('function')
+        for (const t of topic.tasks) {
+          if (t.group) expect(t.skills?.length ?? 0, `${t.id}: у задачи нет навыков`).toBeGreaterThan(0)
+          for (const id of t.skills ?? []) {
+            expect(skills[id], `${t.id}: навыка «${id}» нет в content/skills/`).toBeDefined()
+            const sk = skills[id]
+            const owner = topics.find((x) => x.id === sk?.topic)
+            expect(owner, `навык ${id}: нет темы ${sk?.topic}`).toBeDefined()
+            expect(sk?.step ?? 0, `навык ${id}: нет шага ${sk?.step}`).toBeLessThan(owner?.steps.length ?? 0)
+          }
+        }
+        if (topic.groups) for (const g of topic.groups) if (g.lessonStep !== undefined) expect(g.lessonStep, `${g.id}: lessonStep`).toBeLessThan(topic.steps.length)
       })
 
       it('в каждом уровне есть задачи', () => {

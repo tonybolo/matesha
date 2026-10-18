@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { cheatsheet, cubes, squares } from '../content/cheatsheet'
+import { cheatsheetGroups, cubes, squares } from '../content/cheatsheet'
 import { Tex } from './Tex'
 
 function Sheet({ onClose }: { onClose: () => void }) {
@@ -30,39 +30,48 @@ function Sheet({ onClose }: { onClose: () => void }) {
           </button>
         </header>
         <div className="sheet-body">
-          {cheatsheet.map((s) => (
-            <section key={s.title}>
-              <h3>{s.title}</h3>
-              <ul className="sheet-list">
-                {s.items.map((it) => (
-                  <li key={it.name}>
-                    <span className="sheet-name">{it.name}</span>
-                    <Tex tex={it.tex} display />
-                  </li>
-                ))}
-              </ul>
-            </section>
+          {cheatsheetGroups.map((g) => (
+            <div key={g.subject} className="sheet-subject">
+              {cheatsheetGroups.length > 1 && <h2 className="sheet-subject-title">{g.title}</h2>}
+              {g.sections.map((s) => (
+                <section key={s.title}>
+                  <h3>{s.title}</h3>
+                  <ul className="sheet-list">
+                    {s.items.map((it) => (
+                      <li key={it.name}>
+                        <span className="sheet-name">{it.name}</span>
+                        <Tex tex={it.tex} display />
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+              {g.subject === 'algebra' && (
+                <>
+                  <section>
+                    <h3>Квадраты чисел</h3>
+                    <div className="num-table" role="table" aria-label="Квадраты чисел от 1 до 20">
+                      {squares.map(({ n, v }) => (
+                        <span key={n} className="num-cell">
+                          <Tex tex={`${n}^2=${v}`} />
+                        </span>
+                      ))}
+                    </div>
+                  </section>
+                  <section>
+                    <h3>Кубы чисел</h3>
+                    <div className="num-table" role="table" aria-label="Кубы чисел от 1 до 10">
+                      {cubes.map(({ n, v }) => (
+                        <span key={n} className="num-cell">
+                          <Tex tex={`${n}^3=${v}`} />
+                        </span>
+                      ))}
+                    </div>
+                  </section>
+                </>
+              )}
+            </div>
           ))}
-          <section>
-            <h3>Квадраты чисел</h3>
-            <div className="num-table" role="table" aria-label="Квадраты чисел от 1 до 20">
-              {squares.map(({ n, v }) => (
-                <span key={n} className="num-cell">
-                  <Tex tex={`${n}^2=${v}`} />
-                </span>
-              ))}
-            </div>
-          </section>
-          <section>
-            <h3>Кубы чисел</h3>
-            <div className="num-table" role="table" aria-label="Кубы чисел от 1 до 10">
-              {cubes.map(({ n, v }) => (
-                <span key={n} className="num-cell">
-                  <Tex tex={`${n}^3=${v}`} />
-                </span>
-              ))}
-            </div>
-          </section>
         </div>
       </div>
     </div>
