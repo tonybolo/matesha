@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react'
 import './parKit.css'
+import { Stepper } from './Stepper'
 import {
   NEIGHBORS,
+  Placer,
   VERTS,
-  angleAt,
-  angleLabelAt,
   arcPath,
   bisectorHit,
   centroid,
@@ -16,9 +16,10 @@ import {
   lerpXY,
   mid,
   parseMark,
+  placeAngle,
+  placeSeg,
   pushOut,
   rightPath,
-  segLabelAt,
   tickPath,
   type Pt,
   type Quad,
@@ -26,6 +27,16 @@ import {
   type View,
   type XY,
 } from './parKit'
+
+/** Число с кнопками «−/+» и коротким подписанным названием (две такие пары помещаются в одну строку телефона). */
+export function Num({ label, aria, value, min, max, step = 1, onChange, format }: { label: string; aria: string; value: number; min: number; max: number; step?: number; onChange: (n: number) => void; format?: (n: number) => string }) {
+  return (
+    <span className="pk-num">
+      <span className="muted">{label}</span>
+      <Stepper compact aria={aria} value={value} min={min} max={max} step={step} onChange={onChange} format={format} />
+    </span>
+  )
+}
 
 /** Подпись в SVG: текст по центру точки at. */
 export function Txt({ at, className, children }: { at: XY; className: string; children: ReactNode }) {
@@ -121,29 +132,6 @@ function parseHit(s: string): Hit | null {
 }
 
 const W = 320
-
-type Box = { x: number; y: number; w: number; h: number }
-const boxOf = (at: XY, text: string, fs = 14): Box => ({ x: at[0], y: at[1], w: Math.max(text.length, 1) * fs * 0.6 + 4, h: fs + 3 })
-const overlap = (a: Box, b: Box): boolean => Math.abs(a.x - b.x) < (a.w + b.w) / 2 && Math.abs(a.y - b.y) < (a.h + b.h) / 2
-
-/** Раскладывает подписи так, чтобы они не налезали друг на друга: берёт первое свободное место из списка. */
-class Placer {
-  boxes: Box[] = []
-  fix(at: XY, text: string) {
-    this.boxes.push(boxOf(at, text))
-  }
-  place(cands: XY[], text: string): XY {
-    for (const c of cands) {
-      const b = boxOf(c, text)
-      if (!this.boxes.some((o) => overlap(o, b))) {
-        this.boxes.push(b)
-        return c
-      }
-    }
-    this.boxes.push(boxOf(cands[0], text))
-    return cands[0]
-  }
-}
 
 /** Универсальный рисунок: четыре вершины и всё, что просит задание. */
 export function GeoFigure({ spec }: { spec: FigSpec }) {
@@ -253,8 +241,8 @@ export function GeoFigure({ spec }: { spec: FigSpec }) {
   const placer = new Placer()
   for (const n of VERTS) placer.fix(pushOut(S(V[n]), c, 13), n)
   if (spec.ticks) {
-    placer.fix(lerpXY(S(V.A), S(V.B), 0.5), '·')
-    placer.fix(lerpXY(S(V.C), S(V.D), 0.5), '·')
+    placer.dot(lerpXY(S(V.A), S(V.B), 0.5))
+    placer.dot(lerpXY(S(V.C), S(V.D), 0.5))
   }
   const dots: [string, Pt][] = []
   if (O) dots.push(['O', O])
@@ -263,7 +251,7 @@ export function GeoFigure({ spec }: { spec: FigSpec }) {
   if (Q) dots.push(['Q', Q])
   for (const h of heightFeet) dots.push([h.name, h.at])
   for (const h of bisHits) dots.push([h.name, h.at])
-  for (const [, p] of dots) placer.fix(S(p), '·')
+  for (const [, p] of dots) placer.dot(S(p))
 
   const pointLabels = dots.map(([name, p]) => {
     const at = S(p)
@@ -286,9 +274,7 @@ export function GeoFigure({ spec }: { spec: FigSpec }) {
       const p = sp(m.name[0])
       const q = sp(m.name[1])
       if (!p || !q) continue
-      const cands: XY[] = []
-      for (const d of [11, 17]) for (const t of [0.5, 0.34, 0.66, 0.22, 0.78]) cands.push(segLabelAt(p, q, c, d, t))
-      const at = placer.place(cands, m.value)
+      const at = placeSeg(placer, p, q, c, m.value)
       markNodes.push(
         <Txt key={raw} at={at} className={`${cls}${inPoly(at, poly) ? ' in' : ''}`}>
           {m.value}
@@ -303,11 +289,9 @@ export function GeoFigure({ spec }: { spec: FigSpec }) {
     if (!px || !po || !py) continue
     const u = dirTo(po, px)
     const v = dirTo(po, py)
-    const theta = (angleAt({ x: px[0], y: px[1] }, { x: po[0], y: po[1] }, { x: py[0], y: py[1] }) * Math.PI) / 180
     const r = m.name.length === 1 ? 19 : 26
     if (!arcNames.has(m.name)) add(<Arc o={po} u={u} v={v} r={r} className={m.unknown ? 'pk-arc c3' : 'pk-arc'} />)
-    const lr = Math.max(r + 15, 8 / Math.max(Math.sin(theta / 2), 0.05))
-    const at = placer.place([lr, lr + 9, lr + 18].map((rr) => angleLabelAt(po, u, v, rr)), m.value)
+    const at = placeAngle(placer, po, u, v, r, m.value)
     markNodes.push(
       <Txt key={raw} at={at} className={`${cls} in`}>
         {m.value}

@@ -63,6 +63,24 @@ export function foot(p: Pt, a: Pt, b: Pt): Pt {
   return add(a, mul(d, t))
 }
 
+/** Как называется трапеция с данным сдвигом s верхнего основания: прямоугольная (угол A или D прямой), равнобедренная или обычная. */
+export function trapezoidKind(a: number, b: number, s: number): 'right' | 'iso' | 'plain' {
+  if (s === 0 || s === a - b) return 'right'
+  if (2 * s === a - b) return 'iso'
+  return 'plain'
+}
+
+/** Параллелограмм по диагоналям AC = d1, BD = d2 и углу φ = ∠AOB между ними: стороны a = AD, b = AB и угол A. */
+export function parFromDiagonals(d1: number, d2: number, phiDeg: number): { a: number; b: number; ang: number } {
+  const p = d1 / 2
+  const q = d2 / 2
+  const r = toRad(phiDeg)
+  const D = P(q * Math.cos(r), q * Math.sin(r))
+  const A = P(-p, 0)
+  const B = P(-D.x, -D.y)
+  return { a: dist(A, D), b: dist(A, B), ang: angleAt(D, A, B) }
+}
+
 /** Соседи вершины в четырёхугольнике ABCD. */
 export const NEIGHBORS: Record<VName, [VName, VName]> = { A: ['D', 'B'], B: ['A', 'C'], C: ['B', 'D'], D: ['C', 'A'] }
 
@@ -85,6 +103,9 @@ export function fmt(n: number, digits = 1): string {
   const s = String(Object.is(v, -0) ? 0 : v).replace('.', ',')
   return s.startsWith('-') ? '−' + s.slice(1) : s
 }
+
+/** Число для формулы TeX: десятичная запятая в фигурных скобках, обычный минус. */
+export const tn = (n: number, digits = 1): string => fmt(n, digits).replace(',', '{,}').replace('−', '-')
 
 /** Число из рисунка (строка «3,5» или «3.5») → число. */
 export function parseNum(s: string): number {
@@ -148,6 +169,23 @@ export function fitView(
   const X = (p: Pt) => ox + (p.x - minX) * k
   const Y = (p: Pt) => o.padTop + (maxY - p.y) * k
   return { w: o.w, h, k, X, Y, S: (p) => [X(p), Y(p)] }
+}
+
+/** Проекция с постоянным масштабом и постоянной высотой SVG: страница не «прыгает», пока ребёнок двигает числа. */
+export function fixedView(pts: Pt[], o: { w: number; h: number; k: number; padBottom: number; padTop?: number; center?: boolean }): View {
+  const xs = pts.map((p) => p.x)
+  const ys = pts.map((p) => p.y)
+  const minX = Math.min(...xs)
+  const maxX = Math.max(...xs)
+  const minY = Math.min(...ys)
+  const maxY = Math.max(...ys)
+  const ox = (o.w - (maxX - minX) * o.k) / 2
+  const padTop = o.padTop ?? 20
+  const X = (p: Pt) => ox + (p.x - minX) * o.k
+  const Y = o.center
+    ? (p: Pt) => padTop + (o.h - padTop - o.padBottom - (maxY - minY) * o.k) / 2 + (maxY - p.y) * o.k
+    : (p: Pt) => o.h - o.padBottom - (p.y - minY) * o.k
+  return { w: o.w, h: o.h, k: o.k, X, Y, S: (p) => [X(p), Y(p)] }
 }
 
 // ---------- примитивы SVG ----------
@@ -259,4 +297,46 @@ export function segLabelAt(p: XY, q: XY, c: XY, d: number, t = 0.5): XY {
 export function centroid(pts: XY[]): XY {
   const n = pts.length
   return [pts.reduce((s, p) => s + p[0], 0) / n, pts.reduce((s, p) => s + p[1], 0) / n]
+}
+
+type Box = { x: number; y: number; w: number; h: number }
+const boxOf = (at: XY, text: string, fs = 14): Box => ({ x: at[0], y: at[1], w: Math.max(text.length, 1) * fs * 0.6 + 4, h: fs + 3 })
+const overlap = (a: Box, b: Box): boolean => Math.abs(a.x - b.x) < (a.w + b.w) / 2 && Math.abs(a.y - b.y) < (a.h + b.h) / 2
+
+/** Раскладывает подписи так, чтобы они не налезали друг на друга: берёт первое свободное место из списка. */
+export class Placer {
+  boxes: Box[] = []
+  /** Занять место подписью (вершины). */
+  fix(at: XY, text = '·'): void {
+    this.boxes.push(boxOf(at, text))
+  }
+  /** Занять место под точкой или чёрточкой: маленький квадрат. */
+  dot(at: XY): void {
+    this.boxes.push({ x: at[0], y: at[1], w: 9, h: 9 })
+  }
+  place(cands: XY[], text: string): XY {
+    for (const c of cands) {
+      const b = boxOf(c, text)
+      if (!this.boxes.some((o) => overlap(o, b))) {
+        this.boxes.push(b)
+        return c
+      }
+    }
+    this.boxes.push(boxOf(cands[0], text))
+    return cands[0]
+  }
+}
+
+/** Место для подписи отрезка pq: снаружи от центра c, по возможности посередине, без наложений. */
+export function placeSeg(pl: Placer, p: XY, q: XY, c: XY, text: string): XY {
+  const cands: XY[] = []
+  for (const d of [11, 17]) for (const t of [0.5, 0.34, 0.66, 0.22, 0.78]) cands.push(segLabelAt(p, q, c, d, t))
+  return pl.place(cands, text)
+}
+
+/** Место для подписи угла в вершине o между направлениями u и v: на биссектрисе, подальше от дуги радиуса r. */
+export function placeAngle(pl: Placer, o: XY, u: XY, v: XY, r: number, text: string): XY {
+  const a = Math.atan2(Math.abs(u[0] * v[1] - u[1] * v[0]), u[0] * v[0] + u[1] * v[1])
+  const lr = Math.max(r + 15, 8 / Math.max(Math.sin(a / 2), 0.05))
+  return pl.place([lr, lr + 9, lr + 18].map((rr) => angleLabelAt(o, u, v, rr)), text)
 }
