@@ -68,6 +68,7 @@ content/cheatsheet/*.yaml        шпаргалка с формулами (по 
 docs/ADDING_TOPICS.md            как добавить тему: файлы, формат, генератор, картинки, проверки
 tools/generators/                генераторы заданий (Python + SymPy) и их независимая проверка
 tools/verify_answers.py          проверка вручную записанных задач через SymPy
+tools/e2e/topic-e2e.mjs           сквозной прогон темы в браузере на телефонном экране (Playwright), см. docs/ADDING_TOPICS.md
 web/src/lib/                     проверка ответов (mathjs), сборка контрольной
 web/src/components/              экраны: главная, урок, проверка, тренажёр, контрольная
 web/src/viz/                     интерактивные картинки уроков (*Viz.tsx) и рисунки к заданиям (fig/*Fig.tsx)
