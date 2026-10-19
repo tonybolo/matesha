@@ -1,0 +1,20 @@
+/* Сумма углов четырёхугольника (AngleSumViz) */
+.as-pad { display: inline-flex; gap: 4px; margin-left: auto; }
+.as-svg { width: 100%; max-width: 360px; height: auto; display: block; margin: 6px auto; color: var(--text); touch-action: manipulation; }
+.as-poly { fill: var(--accent-soft); fill-opacity: 0.55; stroke: var(--accent); stroke-width: 3; stroke-linejoin: round; }
+.as-poly.cut { fill: none; }
+.as-tri.t1 { fill: var(--c1); fill-opacity: 0.2; }
+.as-tri.t2 { fill: var(--c0); fill-opacity: 0.25; }
+.as-diag { stroke: var(--text); stroke-width: 2.5; stroke-dasharray: 7 5; stroke-linecap: round; }
+.as-arc { fill: none; stroke: var(--accent); stroke-width: 2; }
+.as-mark.t1 .as-arc { stroke: var(--c1); }
+.as-mark.t2 .as-arc { stroke: var(--c0); }
+.as-num { font-size: 13px; font-weight: 700; fill: var(--text); paint-order: stroke; stroke: var(--card); stroke-width: 3px; }
+.as-name { font-size: 16px; font-weight: 800; fill: var(--text); }
+.as-dot { fill: var(--accent); stroke: var(--card); stroke-width: 2; }
+.as-dot.sel { fill: var(--accent); stroke: var(--text); stroke-width: 3; }
+.as-hit { fill: transparent; cursor: pointer; }
+.as .viz-calc { font-size: 1.05rem; margin: 3px 0; }
+.as-t1, .as-t2 { padding-left: 8px; border-left: 5px solid var(--c1); }
+.as-t2 { border-left-color: var(--c0); }
+@media (max-width: 480px) { .as-pad { margin-left: 0; } }

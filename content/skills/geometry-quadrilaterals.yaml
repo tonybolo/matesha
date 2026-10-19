@@ -1,0 +1,13 @@
+# Навыки темы «Определения четырёхугольников». По ним приложение замечает слабые места и предлагает, что повторить.
+# topic/step — урок «на пальцах», где навык объясняется (step считается с нуля).
+geo-q-parts:         {title: 'Части четырёхугольника: вершины, стороны, диагонали', topic: 'geo-01-quadrilaterals', step: 0}
+geo-q-perimeter:     {title: 'Периметр четырёхугольника', topic: 'geo-01-quadrilaterals', step: 0}
+geo-q-anglesum:      {title: 'Сумма углов четырёхугольника равна 360°', topic: 'geo-01-quadrilaterals', step: 1}
+geo-q-parallelogram: {title: 'Параллелограмм: определение и углы', topic: 'geo-01-quadrilaterals', step: 2}
+geo-q-rectangle:     {title: 'Прямоугольник', topic: 'geo-01-quadrilaterals', step: 3}
+geo-q-rhombus:       {title: 'Ромб', topic: 'geo-01-quadrilaterals', step: 4}
+geo-q-square:        {title: 'Квадрат', topic: 'geo-01-quadrilaterals', step: 5}
+geo-q-trapezoid:     {title: 'Трапеция, равнобедренная и прямоугольная трапеции', topic: 'geo-01-quadrilaterals', step: 6}
+geo-q-family:        {title: 'Семейное дерево: кто чей «родственник»', topic: 'geo-01-quadrilaterals', step: 7}
+geo-q-coords:        {title: 'Узнать фигуру по координатам вершин', topic: 'geo-01-quadrilaterals', step: 7}
+geo-q-subtle:        {title: 'Тонкие вопросы о четырёхугольниках', topic: 'geo-01-quadrilaterals', step: 8}

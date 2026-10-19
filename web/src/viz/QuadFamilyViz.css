@@ -1,0 +1,25 @@
+/* Игра «Угадай фигуру», семейное дерево и лаборатории (QuadFamilyViz.tsx) */
+.qf-toggles { display: grid; grid-template-columns: 1fr; gap: 6px; margin-bottom: 8px; }
+.qf-toggle { display: flex; align-items: flex-start; gap: 8px; text-align: left; font-size: 0.95rem; line-height: 1.3; padding: 8px 12px; }
+.qf-toggle .qf-check { font-size: 1.15rem; line-height: 1.2; color: var(--accent); }
+.qf-toggle.on { background: var(--accent-soft); }
+.qf-toggle:disabled { opacity: 1; cursor: default; }
+.qf-toggle.auto { border-style: dashed; }
+.qf-fig { display: flex; justify-content: center; margin: 4px 0; min-height: 60px; }
+.qf-fig svg { max-width: 100%; height: auto; display: block; }
+.qf-none { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 100%; min-height: 150px; border: 2px dashed var(--bad); border-radius: 12px; background: var(--bad-soft); color: var(--bad); font-weight: 700; }
+.qf-none span:first-child { font-size: 2rem; }
+
+.qf-tree { position: relative; width: 100%; margin: 8px 0 4px; }
+.qf-edges { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.qf .viz-calc { font-size: 1.05rem; margin: 2px 0; }
+.qf-edge { stroke: var(--muted); stroke-opacity: 0.45; stroke-width: 3; stroke-linecap: round; }
+.qf-edge.on { stroke: var(--ok); stroke-opacity: 1; stroke-width: 4; }
+.qf-node { position: absolute; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px 2px; font: inherit; color: var(--text); background: var(--card); border: 2px solid var(--line); border-radius: 12px; cursor: pointer; min-width: 0; }
+.qf-node.anc { border-color: var(--ok); background: var(--ok-soft); }
+.qf-node.on { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 2px var(--accent); }
+.qf-node:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.qf-label { font-size: 12px; font-weight: 700; line-height: 1.15; text-align: center; white-space: nowrap; }
+.qf-mini { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+.qf-node.on .qf-mini { fill: var(--card); }
+.qf-node.anc .qf-mini { stroke: var(--ok); }

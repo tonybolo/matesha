@@ -1,0 +1,9 @@
+/* Картинка «Площадь» (префикс ac-) */
+.ac-move { transition: transform 0.6s ease; }
+.ac-fade { transition: opacity 0.5s ease; }
+.ac-orig { fill: none; stroke: var(--muted); stroke-width: 1.6; stroke-dasharray: 5 4; transition: opacity 0.5s ease; }
+.ac-grid { stroke: var(--text); stroke-opacity: 0.28; stroke-width: 1; }
+.ac-dim { stroke: var(--muted); stroke-width: 1.6; }
+@media (prefers-reduced-motion: reduce) {
+  .ac-move, .ac-fade, .ac-orig { transition: none; }
+}
